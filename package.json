@@ -1,12 +1,12 @@
 {
-  "name": "PhaserES6Webpack",
+  "name": "PigeonPost",
   "version": "1.0.0",
   "description": "",
   "author": "QWERTY",
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "deploy": "gh-pages -d build",
+    "deploy": "webpack --config webpack.production.config.js",
     "test": "eslint ./src/**/**.js"
   },
   "license": "MIT",
@@ -22,6 +22,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "expose-loader": "^0.7.1",
+    "gh-pages": "^0.12.0",
     "webpack": "^2.2.0"
   },
   "dependencies": {
