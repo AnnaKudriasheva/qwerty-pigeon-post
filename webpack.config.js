@@ -23,7 +23,7 @@ module.exports = {
     output: {
         pathinfo: true,
         path: path.resolve(__dirname, 'dist'),
-        publicPath: './dist/',
+        publicPath: 'https://annakudriasheva.github.io/qwerty-pigeon-post/',
         filename: 'bundle.js'
     },
     watch: true,
