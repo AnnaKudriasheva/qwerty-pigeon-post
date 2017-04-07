@@ -3791,43 +3791,67 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
 /*!*********************!*\
   !*** ./src/main.js ***!
   \*********************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pixi__ = __webpack_require__(/*! pixi */ 87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_pixi___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_pixi__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_p2__ = __webpack_require__(/*! p2 */ 88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_p2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_p2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_phaser__ = __webpack_require__(/*! phaser */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_phaser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_Boot__ = __webpack_require__(/*! ./states/Boot */ 121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__states_Intro__ = __webpack_require__(/*! ./states/Intro */ 123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__states_Start__ = __webpack_require__(/*! ./states/Start */ 125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__states_MainGame__ = __webpack_require__(/*! ./states/MainGame */ 124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__states_GameOver__ = __webpack_require__(/*! ./states/GameOver */ 122);
 
 
+__webpack_require__(/*! pixi */ 87);
 
+__webpack_require__(/*! p2 */ 88);
 
+var _phaser = __webpack_require__(/*! phaser */ 31);
 
+var _phaser2 = _interopRequireDefault(_phaser);
 
+var _Boot = __webpack_require__(/*! ./states/Boot */ 121);
 
+var _Boot2 = _interopRequireDefault(_Boot);
 
+var _Intro = __webpack_require__(/*! ./states/Intro */ 123);
 
+var _Intro2 = _interopRequireDefault(_Intro);
 
-class Game extends __WEBPACK_IMPORTED_MODULE_2_phaser___default.a.Game {
-    constructor() {
-        super(1000, 560, __WEBPACK_IMPORTED_MODULE_2_phaser___default.a.AUTO, '', null);
-        this.state.add('Boot', __WEBPACK_IMPORTED_MODULE_3__states_Boot__["a" /* default */], false);
-        this.state.add('Intro', __WEBPACK_IMPORTED_MODULE_4__states_Intro__["a" /* default */], false);
-        this.state.add('Start', __WEBPACK_IMPORTED_MODULE_5__states_Start__["a" /* default */], false);
-        this.state.add('MainGame', __WEBPACK_IMPORTED_MODULE_6__states_MainGame__["a" /* default */], false);
-        this.state.add('GameOver', __WEBPACK_IMPORTED_MODULE_7__states_GameOver__["a" /* default */], false);
+var _Start = __webpack_require__(/*! ./states/Start */ 125);
 
-        this.state.start('Boot');
+var _Start2 = _interopRequireDefault(_Start);
+
+var _MainGame = __webpack_require__(/*! ./states/MainGame */ 124);
+
+var _MainGame2 = _interopRequireDefault(_MainGame);
+
+var _GameOver = __webpack_require__(/*! ./states/GameOver */ 122);
+
+var _GameOver2 = _interopRequireDefault(_GameOver);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Game = function (_Phaser$Game) {
+    _inherits(Game, _Phaser$Game);
+
+    function Game() {
+        _classCallCheck(this, Game);
+
+        var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, 1000, 560, _phaser2.default.AUTO, '', null));
+
+        _this.state.add('Boot', _Boot2.default, false);
+        _this.state.add('Intro', _Intro2.default, false);
+        _this.state.add('Start', _Start2.default, false);
+        _this.state.add('MainGame', _MainGame2.default, false);
+        _this.state.add('GameOver', _GameOver2.default, false);
+
+        _this.state.start('Boot');
+        return _this;
     }
-}
+
+    return Game;
+}(_phaser2.default.Game);
 
 window.game = new Game();
 
@@ -3874,402 +3898,630 @@ define(String.prototype, "padRight", "".padEnd);
 /***/ }),
 /* 120 */,
 /* 121 */
-/* exports provided: default */
-/* exports used: default */
+/* unknown exports provided */
+/* all exports used */
 /*!****************************!*\
   !*** ./src/states/Boot.js ***!
   \****************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-/* harmony default export */ __webpack_exports__["a"] = (class extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State {
-    init() {
-        this.scale.pageAlignHorizontally = true;
-        this.scale.pageAlignVertically = true;
-    }
-    create() {
-        this.state.start('Intro');
-    }
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'init',
+        value: function init() {
+            this.scale.pageAlignHorizontally = true;
+            this.scale.pageAlignVertically = true;
+        }
+    }, {
+        key: 'create',
+        value: function create() {
+            this.state.start('Intro');
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ }),
 /* 122 */
-/* exports provided: default */
-/* exports used: default */
+/* unknown exports provided */
+/* all exports used */
 /*!********************************!*\
   !*** ./src/states/GameOver.js ***!
   \********************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-let mainMenuBtn;
-let restartBtn;
-
-/* harmony default export */ __webpack_exports__["a"] = (class extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State {
-    preload() {
-        this.load.image('parallax-back', 'assets/img/parallax-back.png');
-        this.load.image('parallax-front', 'assets/img/parallax-front.png');
-        this.load.image('restart-button', 'assets/img/restart.png');
-        this.load.image('main-menu-button', 'assets/img/main-menu.png');
-    }
-
-    create() {
-        this.add.tileSprite(0, 0, 1200, 672, 'parallax-back');
-        this.add.tileSprite(0, 0, 1200, 672, 'parallax-front');
-        restartBtn = this.add.button(250, 200, 'restart-button', this.restartGame, this);
-        mainMenuBtn = this.add.button(550, 200, 'main-menu-button', this.mainMenu, this);
-    }
-
-    restartGame() {
-        this.state.start('MainGame');
-    }
-
-    mainMenu() {
-        location.reload();
-    }
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var mainMenuBtn = void 0;
+var restartBtn = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'preload',
+        value: function preload() {
+            this.load.image('parallax-back', 'assets/img/parallax-back.png');
+            this.load.image('parallax-front', 'assets/img/parallax-front.png');
+            this.load.image('restart-button', 'assets/img/restart.png');
+            this.load.image('main-menu-button', 'assets/img/main-menu.png');
+        }
+    }, {
+        key: 'create',
+        value: function create() {
+            this.add.tileSprite(0, 0, 1200, 672, 'parallax-back');
+            this.add.tileSprite(0, 0, 1200, 672, 'parallax-front');
+            restartBtn = this.add.button(250, 200, 'restart-button', this.restartGame, this);
+            mainMenuBtn = this.add.button(550, 200, 'main-menu-button', this.mainMenu, this);
+        }
+    }, {
+        key: 'restartGame',
+        value: function restartGame() {
+            this.state.start('MainGame');
+        }
+    }, {
+        key: 'mainMenu',
+        value: function mainMenu() {
+            location.reload();
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ }),
 /* 123 */
-/* exports provided: default */
-/* exports used: default */
+/* unknown exports provided */
+/* all exports used */
 /*!*****************************!*\
   !*** ./src/states/Intro.js ***!
   \*****************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-let introBack;
-let introMail;
-let introBtn;
-let btnSound;
-
-/* harmony default export */ __webpack_exports__["a"] = (class extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State {
-    preload() {
-        this.load.image('background', './assets/img/intro-back.png');
-        this.load.image('mail', './assets/img/intro-mail.png');
-        this.load.image('next-btn', './assets/img/next-button.png');
-        this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
-    }
-    create() {
-        btnSound = this.add.audio('button-sound');
-        // left side
-        introMail = this.add.sprite(0, 0, 'mail');
-        introMail.width = this.world.width * 0.43;
-        introMail.height = this.world.height;
-        // right side
-        introBack = this.add.sprite(introMail.width, 0, 'background');
-        introBack.width = this.world.width * 0.57;
-        introBack.height = this.world.height;
-        // next button
-        introBtn = this.add.button(introMail.width / 2 - introMail.width * 0.45 / 2, introMail.height - introMail.height * 0.35, 'next-btn', this.startMainPage, this);
-        introBtn.width = introMail.width * 0.45;
-        introBtn.height = introMail.width * 0.45 * 0.24;
-    }
-    startMainPage() {
-        btnSound.play();
-        this.state.start('Start');
-    }
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var introBack = void 0;
+var introMail = void 0;
+var introBtn = void 0;
+var btnSound = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'preload',
+        value: function preload() {
+            this.load.image('background', './assets/img/intro-back.png');
+            this.load.image('mail', './assets/img/intro-mail.png');
+            this.load.image('next-btn', './assets/img/next-button.png');
+            this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+        }
+    }, {
+        key: 'create',
+        value: function create() {
+            btnSound = this.add.audio('button-sound');
+            // left side
+            introMail = this.add.sprite(0, 0, 'mail');
+            introMail.width = this.world.width * 0.43;
+            introMail.height = this.world.height;
+            // right side
+            introBack = this.add.sprite(introMail.width, 0, 'background');
+            introBack.width = this.world.width * 0.57;
+            introBack.height = this.world.height;
+            // next button
+            introBtn = this.add.button(introMail.width / 2 - introMail.width * 0.45 / 2, introMail.height - introMail.height * 0.35, 'next-btn', this.startMainPage, this);
+            introBtn.width = introMail.width * 0.45;
+            introBtn.height = introMail.width * 0.45 * 0.24;
+        }
+    }, {
+        key: 'startMainPage',
+        value: function startMainPage() {
+            btnSound.play();
+            this.state.start('Start');
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ }),
 /* 124 */
-/* exports provided: default */
-/* exports used: default */
+/* unknown exports provided */
+/* all exports used */
 /*!********************************!*\
   !*** ./src/states/MainGame.js ***!
   \********************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-let startBtnSound;
-let spaceValue = false;
-let cannonball;
-let spacefield;
-let firstaids;
-let scoreText;
-let emitter;
-let cursors;
-let grapes;
-let weapon;
-let apples;
-let memory;
-let letter;
-let plums;
-let pears;
-let score = 0;
-let trees;
-let bird;
-let keys;
-
-/* harmony default export */ __webpack_exports__["a"] = (class extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State {
-    preload() {
-        this.load.image('parallax-back', 'assets/img/parallax-back.png');
-        this.load.image('parallax-front', 'assets/img/parallax-front.png');
-        this.load.image('message', 'assets/img/letter.png');
-        this.load.image('firstaids', 'assets/img/firstaid.png');
-        this.load.image('bullet', 'assets/img/bullet.png');
-        this.load.image('cannonball', 'assets/img/core.png');
-        this.load.image('apples', 'assets/img/apple.png');
-        this.load.image('pears', 'assets/img/pear.png');
-        this.load.image('plums', 'assets/img/plum.png');
-        this.load.image('grapes', 'assets/img/grape.png');
-        this.load.spritesheet('rain', 'assets/img/rain.png');
-        this.load.spritesheet('bird', 'assets/img/pigeon.png', 211, 211);
-        this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
-    }
-
-    create() {
-        this.physics.startSystem(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Physics.ARCADE);
-        this.scale.fullScreenScaleMode = __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.ScaleManager.SHOW_ALL;
-        this.input.onDown.add(() => this.scale.startFullScreen());
-        spacefield = this.add.tileSprite(0, 0, 1200, 672, 'parallax-back');
-        trees = this.add.tileSprite(0, 0, 1200, 672, 'parallax-front');
-
-        // add audio loop
-        startBtnSound = this.add.audio('wings-sound');
-        startBtnSound.loopFull();
-
-        letter = this.add.sprite(170, 65, 'message');
-        this.physics.arcade.enable(letter);
-        letter.scale.set(0.4);
-
-        bird = this.add.sprite(50, 672 / 4, 'bird');
-        bird.scale.set(0.5);
-        this.physics.arcade.enable(bird);
-        bird.animations.add('fly', [0, 1, 2, 3], 8, true);
-        bird.body.collideWorldBounds = true;
-        bird.addChild(letter);
-
-        firstaids = this.add.group();
-
-        apples = this.add.group();
-        pears = this.add.group();
-        plums = this.add.group();
-        grapes = this.add.group();
-
-        memory = {
-            pears,
-            apples,
-            grapes,
-            firstaids,
-            plums
-        };
-
-        keys = Object.keys(memory);
-
-        for (let key in memory) {
-            memory[key].enableBody = true;
-        }
-
-        this.time.events.repeat(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Timer.SECOND * 5, 100, this.fallingSubjects, this, memory);
-        // create rain emitter
-        emitter = this.add.emitter(this.world.centerX, 0, 400);
-        emitter.width = this.world.width;
-        emitter.makeParticles('rain');
-        emitter.minParticleScale = 0.1;
-        emitter.maxParticleScale = 0.3;
-        emitter.setYSpeed(300, 500);
-        emitter.setXSpeed(-5, 5);
-        emitter.minRotation = 0;
-        emitter.maxRotation = 0;
-        emitter.start(false, 1600, 5, 0);
-
-        weapon = this.add.weapon(1, 'bullet');
-        this.time.events.add(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Timer.SECOND * 2, this.addBulletsToWeapon, this);
-
-        cannonball = this.add.weapon(1, 'cannonball');
-        this.time.events.add(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Timer.SECOND * 5, this.addBulletsToCannonBall, this);
-        cursors = this.input.keyboard.createCursorKeys();
-        cursors.space = this.input.keyboard.addKey(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Keyboard.SPACEBAR);
-
-        scoreText = this.add.text(1000 - 200, 20, 'score: 0', {
-            font: '40px Helvetica',
-            fill: 'red'
-        });
-
-        // this.time.events.add(Phaser.Timer.SECOND * 10, this.pigeonDeath, this);
-    }
-
-    update() {
-        for (let key in memory) {
-            this.physics.arcade.overlap(bird, memory[key], this.collectObjects);
-            this.physics.arcade.collide(weapon.bullets, memory[key], (first, second) => second.kill());
-            this.physics.arcade.collide(cannonball.bullets, memory[key], (first, second) => second.kill());
-        }
-
-        this.physics.arcade.collide(bird, weapon.bullets, (first, second) => {
-            first.kill();
-            second.kill();
-            this.pigeonDeath();
-        });
-
-        this.physics.arcade.collide(bird, cannonball.bullets, (first, second) => {
-            first.kill();
-            this.pigeonDeath();
-        });
-
-        this.physics.arcade.collide(weapon.bullets, cannonball.bullets, (weapon, cannonball) => weapon.kill());
-        // if (spaceValue) {
-        //  letter.body.gravity.y = 5000;
-        //  letter.body.velocity.x = -30;
-        //  letter.angle += 1;
-        // } else {
-        //  letter.body.velocity.x = 0;
-        // }
-
-        // letter.body.velocity.y = 0;
-
-        bird.body.velocity.x = 0;
-        bird.body.velocity.y = 0;
-        bird.animations.play('fly');
-        bird.animations.getAnimation('fly').speed = 8;
-        spacefield.tilePosition.x -= 1.5;
-        trees.tilePosition.x -= 2.25;
-        for (let key in memory) {
-            memory[key].setAll('body.velocity.x', -200);
-        }
-        if (cursors.up.isDown) {
-            bird.body.velocity.y = -300;
-            bird.animations.getAnimation('fly').speed = 12;
-        }
-
-        if (cursors.down.isDown) {
-            bird.body.velocity.y = 300;
-            bird.animations.getAnimation('fly').speed = 6;
-        }
-
-        if (cursors.left.isDown) {
-            // bird.body.velocity.x = -150;
-            spacefield.tilePosition.x -= -1;
-            trees.tilePosition.x -= -1.5;
-            for (let key in memory) {
-                memory[key].setAll('body.velocity.x', -120);
-            }
-        }
-
-        if (cursors.right.isDown) {
-            // bird.body.velocity.x = 150;
-            spacefield.tilePosition.x -= 2;
-            trees.tilePosition.x -= 3;
-            bird.animations.getAnimation('fly').speed = 12;
-            for (let key in memory) {
-                memory[key].setAll('body.velocity.x', -280);
-            }
-        }
-
-        if (cursors.space.isDown) {
-            spaceValue = true;
-        }
-
-        weapon.x = Math.random() * 0.8 * 1200 + 0.2 * 1200;
-        cannonball.x = Math.random() * 0.7 * 1200 + 0.3 * 1200;
-    }
-
-    pigeonDeath() {
-        startBtnSound.stop();
-        this.state.start('GameOver');
-        score = 0;
-    }
-
-    fallingSubjects(memory) {
-        let number = Math.floor(Math.random() * keys.length);
-        let example = memory[keys[number]].create(Math.random() * 0.5 * 1200 + 0.2 * 1200, -2, keys[number]);
-        example.body.velocity.y = 150;
-    }
-
-    collectObjects(first, second) {
-        second.kill();
-        score += 10;
-        scoreText.text = 'score: ' + score;
-    }
-
-    addBulletsToCannonBall() {
-        cannonball.bullets.forEach(bul => bul.scale.set(0.25));
-        cannonball.bulletKillType = __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Weapon.KILL_WORLD_BOUNDS;
-        cannonball.bulletSpeed = 700;
-        cannonball.fireRate = 5000;
-        cannonball.fireAngle = 230;
-        cannonball.fireFrom.setTo(this.world.width - this.world.width / 3, this.world.height);
-        cannonball.autofire = true;
-        cannonball.bulletGravity.y = 300;
-    }
-
-    addBulletsToWeapon() {
-        weapon.bullets.forEach(bul => bul.scale.set(0.2));
-        weapon.bulletKillType = __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Weapon.KILL_WORLD_BOUNDS;
-        weapon.bulletSpeed = 700;
-        weapon.fireRate = 1500;
-        weapon.fireAngle = 210;
-        weapon.bulletAngleOffset = 160;
-        weapon.fireFrom.setTo(0, this.world.height);
-        weapon.autofire = true;
-    }
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var startBtnSound = void 0;
+var loadingWidth = void 0;
+var spaceValue = false;
+var cannonball = void 0;
+var spacefield = void 0;
+var firstaids = void 0;
+var scoreText = void 0;
+var progress = void 0;
+var emitter = void 0;
+var cursors = void 0;
+var grapes = void 0;
+var weapon = void 0;
+var apples = void 0;
+var memory = void 0;
+var letter = void 0;
+var plums = void 0;
+var pears = void 0;
+var score = 0;
+var trees = void 0;
+var bird = void 0;
+var keys = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'preload',
+        value: function preload() {
+            this.load.image('parallax-back', 'assets/img/parallax-back.png');
+            this.load.image('parallax-front', 'assets/img/parallax-front.png');
+            this.load.image('message', 'assets/img/letter.png');
+            this.load.image('firstaids', 'assets/img/firstaid.png');
+            this.load.image('bullet', 'assets/img/bullet.png');
+            this.load.image('cannonball', 'assets/img/core.png');
+            this.load.image('apples', 'assets/img/apple.png');
+            this.load.image('pears', 'assets/img/pear.png');
+            this.load.image('plums', 'assets/img/plum.png');
+            this.load.image('grapes', 'assets/img/grape.png');
+            this.load.spritesheet('rain', 'assets/img/rain.png');
+            this.load.spritesheet('bird', 'assets/img/pigeon.png', 211, 211);
+            this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
+        }
+    }, {
+        key: 'create',
+        value: function create() {
+            var _this2 = this;
+
+            this.physics.startSystem(_phaser2.default.Physics.ARCADE);
+            this.scale.fullScreenScaleMode = _phaser2.default.ScaleManager.SHOW_ALL;
+            this.input.onDown.add(function () {
+                return _this2.scale.startFullScreen();
+            });
+            // add audio
+            startBtnSound = this.add.audio('wings-sound');
+            startBtnSound.loopFull();
+
+            spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back');
+            trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front');
+
+            letter = this.add.sprite(170, 65, 'message');
+            this.physics.arcade.enable(letter);
+            letter.scale.set(0.4);
+
+            bird = this.add.sprite(50, 672 / 4, 'bird');
+            bird.scale.set(0.5);
+            this.physics.arcade.enable(bird);
+            bird.animations.add('fly', [0, 1, 2, 3], 8, true);
+            bird.body.collideWorldBounds = true;
+            bird.addChild(letter);
+
+            firstaids = this.add.group();
+            apples = this.add.group();
+            pears = this.add.group();
+            plums = this.add.group();
+            grapes = this.add.group();
+
+            memory = {
+                pears: pears,
+                apples: apples,
+                grapes: grapes,
+                firstaids: firstaids,
+                plums: plums
+            };
+
+            keys = Object.keys(memory);
+
+            for (var key in memory) {
+                memory[key].enableBody = true;
+            }
+
+            this.time.events.repeat(_phaser2.default.Timer.SECOND * 5, 100, this.fallingSubjects, this, memory);
+            // create rain emitter
+            emitter = this.add.emitter(this.world.centerX, 0, 400);
+            emitter.width = this.world.width;
+            emitter.makeParticles('rain');
+            emitter.minParticleScale = 0.1;
+            emitter.maxParticleScale = 0.3;
+            emitter.setYSpeed(300, 500);
+            emitter.setXSpeed(-5, 5);
+            emitter.minRotation = 0;
+            emitter.maxRotation = 0;
+            emitter.start(false, 1600, 5, 0);
+
+            weapon = this.add.weapon(1, 'bullet');
+            this.time.events.add(_phaser2.default.Timer.SECOND * 2, this.addBulletsToWeapon, this);
+
+            cannonball = this.add.weapon(1, 'cannonball');
+            this.time.events.add(_phaser2.default.Timer.SECOND * 5, this.addBulletsToCannonBall, this);
+
+            cursors = this.input.keyboard.createCursorKeys();
+            cursors.space = this.input.keyboard.addKey(_phaser2.default.Keyboard.SPACEBAR);
+
+            // add progress bar
+            progress = this.add.graphics(0, 0);
+            progress.lineStyle(4, '0x00ff06');
+            progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
+            loadingWidth = 296;
+
+            progress.lineStyle(0);
+            progress.beginFill('0xf6ff00');
+            progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+            progress.endFill();
+
+            this.time.events.repeat(_phaser2.default.Timer.SECOND * 0.5, 300, this.loadProgress, this);
+
+            scoreText = this.add.text(this.world.width - 230, 80, 'score: 0', {
+                font: '40px Helvetica',
+                fill: 'red'
+            });
+
+            spaceValue = false;
+            score = 0;
+            // this.time.events.add(Phaser.Timer.SECOND * 10, this.pigeonDeath, this);
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            for (var key in memory) {
+                this.physics.arcade.overlap(bird, memory[key], this.collectObjects);
+                this.physics.arcade.collide(weapon.bullets, memory[key], function (first, second) {
+                    return second.kill();
+                });
+                this.physics.arcade.collide(cannonball.bullets, memory[key], function (first, second) {
+                    return second.kill();
+                });
+            }
+
+            this.physics.arcade.collide(bird, weapon.bullets, function (first, second) {
+                second.kill();
+                loadingWidth -= 0.1 * 296;
+            });
+
+            this.physics.arcade.collide(bird, cannonball.bullets, function (first, second) {
+                return loadingWidth = 0;
+            });
+
+            this.physics.arcade.collide(weapon.bullets, cannonball.bullets, function (weapon, cannonball) {
+                return weapon.kill();
+            });
+
+            // if (spaceValue) {
+            //  letter.body.gravity.y = 5000;
+            //  letter.body.velocity.x = -30;
+            //  letter.angle += 1;
+            // } else {
+            //  letter.body.velocity.x = 0;
+            // }
+
+            // letter.body.velocity.y = 0;
+
+            bird.body.velocity.x = 0;
+            bird.body.velocity.y = 0;
+            bird.animations.play('fly');
+            bird.animations.getAnimation('fly').speed = 8;
+            spacefield.tilePosition.x -= 1.5;
+            trees.tilePosition.x -= 2.25;
+
+            for (var _key in memory) {
+                memory[_key].setAll('body.velocity.x', -200);
+            }
+            if (cursors.up.isDown) {
+                bird.body.velocity.y = -300;
+                bird.animations.getAnimation('fly').speed = 12;
+            }
+            if (cursors.down.isDown) {
+                bird.body.velocity.y = 300;
+                bird.animations.getAnimation('fly').speed = 6;
+            }
+            if (cursors.left.isDown) {
+                spacefield.tilePosition.x -= -1;
+                trees.tilePosition.x -= -1.5;
+                for (var _key2 in memory) {
+                    memory[_key2].setAll('body.velocity.x', -120);
+                }
+            }
+            if (cursors.right.isDown) {
+                spacefield.tilePosition.x -= 2;
+                trees.tilePosition.x -= 3;
+                bird.animations.getAnimation('fly').speed = 12;
+                for (var _key3 in memory) {
+                    memory[_key3].setAll('body.velocity.x', -280);
+                }
+
+                loadingWidth -= 0.01 * 296 / 60;
+            }
+            if (cursors.space.isDown) {
+                spaceValue = true;
+            }
+
+            weapon.x = Math.random() * 0.8 * 1000 + 0.2 * 1000;
+            cannonball.x = Math.random() * 0.7 * 1000 + 0.3 * 1000;
+
+            this.loadProgress();
+        }
+    }, {
+        key: 'pigeonDeath',
+        value: function pigeonDeath() {
+            bird.kill();
+            startBtnSound.stop();
+            this.state.start('GameOver');
+        }
+    }, {
+        key: 'fallingSubjects',
+        value: function fallingSubjects(memory) {
+            var number = Math.floor(Math.random() * keys.length);
+            var example = memory[keys[number]].create(Math.random() * 0.5 * 1000 + 0.2 * 1200, -2, keys[number]);
+            example.body.velocity.y = 150;
+        }
+    }, {
+        key: 'collectObjects',
+        value: function collectObjects(first, second) {
+            second.kill();
+            score += 10;
+            scoreText.text = 'score: ' + score;
+            loadingWidth += 0.05 * 296;
+        }
+    }, {
+        key: 'addBulletsToCannonBall',
+        value: function addBulletsToCannonBall() {
+            cannonball.bullets.forEach(function (bul) {
+                return bul.scale.set(0.25);
+            });
+            cannonball.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
+            cannonball.bulletSpeed = 700;
+            cannonball.fireRate = 5000;
+            cannonball.fireAngle = 230;
+            cannonball.fireFrom.setTo(this.world.width - this.world.width / 3, this.world.height);
+            cannonball.autofire = true;
+            cannonball.bulletGravity.y = 300;
+        }
+    }, {
+        key: 'addBulletsToWeapon',
+        value: function addBulletsToWeapon() {
+            weapon.bullets.forEach(function (bul) {
+                return bul.scale.set(0.2);
+            });
+            weapon.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
+            weapon.bulletSpeed = 700;
+            weapon.fireRate = 1500;
+            weapon.fireAngle = 210;
+            weapon.bulletAngleOffset = 160;
+            weapon.fireFrom.setTo(0, this.world.height);
+            weapon.autofire = true;
+        }
+    }, {
+        key: 'loadProgress',
+        value: function loadProgress() {
+            progress.clear();
+
+            progress.lineStyle(4, '0x00ff06');
+            progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
+
+            progress.lineStyle(0);
+            progress.beginFill('0xf6ff00');
+            progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+            progress.endFill();
+
+            loadingWidth -= 0.01 * 296 / 60;
+
+            if (loadingWidth > 296) {
+                loadingWidth = 296;
+            }
+
+            if (loadingWidth < 0) {
+                this.pigeonDeath();
+            }
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ }),
 /* 125 */
-/* exports provided: default */
-/* exports used: default */
+/* unknown exports provided */
+/* all exports used */
 /*!*****************************!*\
   !*** ./src/states/Start.js ***!
   \*****************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(/*! phaser */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-let startDescription;
-let startBackground;
-let startBtnSound;
-let startWidth;
-let startBtn;
-
-/* harmony default export */ __webpack_exports__["a"] = (class extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State {
-    preload() {
-        this.load.image('background', './assets/img/start-back.png');
-        this.load.image('description', './assets/img/start.png');
-        this.load.image('start', './assets/img/start-btn.png');
-        this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
-    }
-    create() {
-        startBtnSound = game.add.audio('button-sound');
-        startBackground = this.add.sprite(0, 0, 'background');
-        startBackground.width = this.world.width;
-        startBackground.height = this.world.height;
-        // description post
-        startDescription = this.add.sprite(window.innerWidth * 0.12, window.innerHeight * 0.02, 'description');
-        startWidth = this.world.width * 0.35;
-        startDescription.width = this.world.width * 0.35;
-        startDescription.height = startWidth * 1.45;
-        // start game button
-        startBtn = this.add.button(startDescription.x + 70, startDescription.y + startDescription.height - 90, 'start', this.startGame, this);
-        startBtn.width = startDescription.width * 0.6;
-        startBtn.height = startDescription.width * 0.6 * 0.27;
-    }
-    startGame() {
-        startBtnSound.play();
-        this.state.start('MainGame');
-    }
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var startDescription = void 0;
+var startBackground = void 0;
+var startBtnSound = void 0;
+var startWidth = void 0;
+var startBtn = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'preload',
+        value: function preload() {
+            this.load.image('background', './assets/img/start-back.png');
+            this.load.image('description', './assets/img/start.png');
+            this.load.image('start', './assets/img/start-btn.png');
+            this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+        }
+    }, {
+        key: 'create',
+        value: function create() {
+            startBtnSound = game.add.audio('button-sound');
+            startBackground = this.add.sprite(0, 0, 'background');
+            startBackground.width = this.world.width;
+            startBackground.height = this.world.height;
+            // description post
+            startDescription = this.add.sprite(window.innerWidth * 0.12, window.innerHeight * 0.02, 'description');
+            startWidth = this.world.width * 0.35;
+            startDescription.width = this.world.width * 0.35;
+            startDescription.height = startWidth * 1.45;
+            // start game button
+            startBtn = this.add.button(startDescription.x + 70, startDescription.y + startDescription.height - 90, 'start', this.startGame, this);
+            startBtn.width = startDescription.width * 0.6;
+            startBtn.height = startDescription.width * 0.6 * 0.27;
+        }
+    }, {
+        key: 'startGame',
+        value: function startGame() {
+            startBtnSound.play();
+            this.state.start('MainGame');
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ }),
 /* 126 */
