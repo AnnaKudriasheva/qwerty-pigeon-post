@@ -1,5 +1,9 @@
 # Pigeon Post Simple Game
 
+## Play
+
+https://annakudriasheva.github.io/qwerty-pigeon-post/
+
 ## Features
 - ESLINT
 - ES6
