@@ -22,7 +22,7 @@ module.exports = {
     devtool: 'cheap-source-map',
     output: {
         pathinfo: true,
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, './dist'),
         publicPath: 'https://annakudriasheva.github.io/qwerty-pigeon-post/',
         filename: 'bundle.js'
     },
