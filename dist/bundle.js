@@ -3943,11 +3943,6 @@ var _class = function (_Phaser$State) {
             this.scale.pageAlignVertically = true;
         }
     }, {
-        key: 'preload',
-        value: function preload() {
-            this.load.image('progress-bar', './assets/img/loading-bar.gif');
-        }
-    }, {
         key: 'create',
         value: function create() {
             this.state.start('Intro');
@@ -4068,7 +4063,6 @@ var introBack = void 0;
 var introMail = void 0;
 var introBtn = void 0;
 var btnSound = void 0;
-var loadingBar = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4082,10 +4076,6 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
-            loadingBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progress-bar');
-            loadingBar.anchor.setTo(0.5);
-            this.load.setPreloadSprite(loadingBar);
-
             this.load.image('background', './assets/img/intro-back.png');
             this.load.image('mail', './assets/img/intro-mail.png');
             this.load.image('next-btn', './assets/img/next-button.png');
@@ -4491,7 +4481,6 @@ var startBackground = void 0;
 var startBtnSound = void 0;
 var startWidth = void 0;
 var startBtn = void 0;
-var loadingBar = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4505,10 +4494,6 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
-            loadingBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progress-bar');
-            loadingBar.anchor.setTo(0.5);
-            this.load.setPreloadSprite(loadingBar);
-
             this.load.image('background', './assets/img/start-back.png');
             this.load.image('description', './assets/img/start.png');
             this.load.image('start', './assets/img/start-btn.png');
