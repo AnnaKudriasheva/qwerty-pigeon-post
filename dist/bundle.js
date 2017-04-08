@@ -4051,6 +4051,8 @@ var _phaser = __webpack_require__(/*! phaser */ 31);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
+var _utils = __webpack_require__(/*! ../utils */ 313);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4076,6 +4078,7 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
+            (0, _utils.loadingPage)(this);
             this.load.image('background', './assets/img/intro-back.png');
             this.load.image('mail', './assets/img/intro-mail.png');
             this.load.image('next-btn', './assets/img/next-button.png');
@@ -4133,6 +4136,8 @@ var _phaser = __webpack_require__(/*! phaser */ 31);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
+var _utils = __webpack_require__(/*! ../utils */ 313);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4143,7 +4148,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var startBtnSound = void 0;
 var loadingWidth = void 0;
-var loadingBar = void 0;
 var spaceValue = false;
 var cannonball = void 0;
 var spacefield = void 0;
@@ -4176,10 +4180,7 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
-            loadingBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progress-bar');
-            loadingBar.anchor.setTo(0.5);
-            this.load.setPreloadSprite(loadingBar);
-
+            (0, _utils.loadingPage)(this);
             this.load.image('parallax-back', 'assets/img/parallax-back.png');
             this.load.image('parallax-front', 'assets/img/parallax-front.png');
             this.load.image('message', 'assets/img/letter.png');
@@ -4468,6 +4469,8 @@ var _phaser = __webpack_require__(/*! phaser */ 31);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
+var _utils = __webpack_require__(/*! ../utils */ 313);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4494,6 +4497,7 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
+            (0, _utils.loadingPage)(this);
             this.load.image('background', './assets/img/start-back.png');
             this.load.image('description', './assets/img/start.png');
             this.load.image('start', './assets/img/start-btn.png');
@@ -10280,6 +10284,29 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 __webpack_require__(/*! babel-polyfill */119);
 module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
 
+
+/***/ }),
+/* 312 */,
+/* 313 */
+/* unknown exports provided */
+/* all exports used */
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var loadingPage = exports.loadingPage = function loadingPage(obj) {
+    var loadingText = void 0;
+    loadingText = obj.add.text(obj.world.centerX, obj.world.centerY, 'Loading...', { fill: '#484848' });
+    loadingText.anchor.setTo(0.5);
+    obj.load.setPreloadSprite(loadingText);
+};
 
 /***/ })
 ],[311]);

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { loadingPage } from '../utils';
 
 let startDescription;
 let startBackground;
@@ -8,6 +9,7 @@ let startBtn;
 
 export default class extends Phaser.State {
     preload () {
+        loadingPage(this);
         this.load.image('background', './assets/img/start-back.png');
         this.load.image('description', './assets/img/start.png');
         this.load.image('start', './assets/img/start-btn.png');

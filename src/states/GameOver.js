@@ -20,8 +20,6 @@ export default class extends Phaser.State {
             'main-menu-button', this.mainMenu, this);
     }
 
-
-
     restartGame () {
         this.state.start('MainGame');
     }
