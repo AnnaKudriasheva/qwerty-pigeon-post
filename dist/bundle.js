@@ -4153,6 +4153,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var startBtnSound = void 0;
 var loadingWidth = void 0;
+var loadingBar = void 0;
 var spaceValue = false;
 var cannonball = void 0;
 var spacefield = void 0;
@@ -4185,6 +4186,10 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
+            loadingBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progress-bar');
+            loadingBar.anchor.setTo(0.5);
+            this.load.setPreloadSprite(loadingBar);
+
             this.load.image('parallax-back', 'assets/img/parallax-back.png');
             this.load.image('parallax-front', 'assets/img/parallax-front.png');
             this.load.image('message', 'assets/img/letter.png');
@@ -4486,6 +4491,7 @@ var startBackground = void 0;
 var startBtnSound = void 0;
 var startWidth = void 0;
 var startBtn = void 0;
+var loadingBar = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4499,6 +4505,10 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
+            loadingBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progress-bar');
+            loadingBar.anchor.setTo(0.5);
+            this.load.setPreloadSprite(loadingBar);
+
             this.load.image('background', './assets/img/start-back.png');
             this.load.image('description', './assets/img/start.png');
             this.load.image('start', './assets/img/start-btn.png');

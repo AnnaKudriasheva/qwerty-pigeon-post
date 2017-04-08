@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 let startBtnSound;
 let loadingWidth;
+let loadingBar;
 let spaceValue = false;
 let cannonball;
 let spacefield;
@@ -24,6 +25,11 @@ let keys;
 
 export default class extends Phaser.State {
     preload () {
+        loadingBar = this.add.sprite(this.game.world.centerX,
+            this.game.world.centerY, 'progress-bar');
+        loadingBar.anchor.setTo(0.5);
+        this.load.setPreloadSprite(loadingBar);
+
         this.load.image('parallax-back', 'assets/img/parallax-back.png');
         this.load.image('parallax-front', 'assets/img/parallax-front.png');
         this.load.image('message', 'assets/img/letter.png');

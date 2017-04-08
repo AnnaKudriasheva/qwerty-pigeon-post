@@ -5,9 +5,15 @@ let startBackground;
 let startBtnSound;
 let startWidth;
 let startBtn;
+let loadingBar;
 
 export default class extends Phaser.State {
     preload () {
+        loadingBar = this.add.sprite(this.game.world.centerX,
+            this.game.world.centerY, 'progress-bar');
+        loadingBar.anchor.setTo(0.5);
+        this.load.setPreloadSprite(loadingBar);
+
         this.load.image('background', './assets/img/start-back.png');
         this.load.image('description', './assets/img/start.png');
         this.load.image('start', './assets/img/start-btn.png');
