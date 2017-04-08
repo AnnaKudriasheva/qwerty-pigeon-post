@@ -3824,6 +3824,10 @@ var _GameOver = __webpack_require__(/*! ./states/GameOver */ 122);
 
 var _GameOver2 = _interopRequireDefault(_GameOver);
 
+var _Level = __webpack_require__(/*! ./states/Level2 */ 313);
+
+var _Level2 = _interopRequireDefault(_Level);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3845,6 +3849,7 @@ var Game = function (_Phaser$Game) {
         _this.state.add('Start', _Start2.default, false);
         _this.state.add('MainGame', _MainGame2.default, false);
         _this.state.add('GameOver', _GameOver2.default, false);
+        _this.state.add('Level2', _Level2.default, false);
 
         _this.state.start('Boot');
         return _this;
@@ -3938,8 +3943,14 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'init',
         value: function init() {
+            this.stage.backgroundColor = '#f2f2f2';
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
+        }
+    }, {
+        key: 'preload',
+        value: function preload() {
+            this.load.image('progress-bar', './assets/img/loading-bar.gif');
         }
     }, {
         key: 'create',
@@ -4062,6 +4073,7 @@ var introBack = void 0;
 var introMail = void 0;
 var introBtn = void 0;
 var btnSound = void 0;
+var loadingBar = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4075,6 +4087,10 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'preload',
         value: function preload() {
+            loadingBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'progress-bar');
+            loadingBar.anchor.setTo(0.5);
+            this.load.setPreloadSprite(loadingBar);
+
             this.load.image('background', './assets/img/intro-back.png');
             this.load.image('mail', './assets/img/intro-mail.png');
             this.load.image('next-btn', './assets/img/next-button.png');
@@ -4462,6 +4478,8 @@ var _phaser = __webpack_require__(/*! phaser */ 31);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
+var _utils = __webpack_require__(/*! ../utils */ 314);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4492,11 +4510,12 @@ var _class = function (_Phaser$State) {
             this.load.image('description', './assets/img/start.png');
             this.load.image('start', './assets/img/start-btn.png');
             this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+            (0, _utils.loadingBar)(this);
         }
     }, {
         key: 'create',
         value: function create() {
-            startBtnSound = game.add.audio('button-sound');
+            startBtnSound = this.add.audio('button-sound');
             startBackground = this.add.sprite(0, 0, 'background');
             startBackground.width = this.world.width;
             startBackground.height = this.world.height;
@@ -10273,6 +10292,349 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 
 __webpack_require__(/*! babel-polyfill */119);
 module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
+
+
+/***/ }),
+/* 312 */,
+/* 313 */
+/* unknown exports provided */
+/* all exports used */
+/*!******************************!*\
+  !*** ./src/states/Level2.js ***!
+  \******************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 31);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var startBtnSound = void 0;
+var loadingWidth = void 0;
+var spaceValue = false;
+var cannonball = void 0;
+var spacefield = void 0;
+var firstaids = void 0;
+var scoreText = void 0;
+var progress = void 0;
+var emitter = void 0;
+var cursors = void 0;
+var grapes = void 0;
+var weapon = void 0;
+var apples = void 0;
+var memory = void 0;
+var letter = void 0;
+var plums = void 0;
+var pears = void 0;
+var score = 0;
+var trees = void 0;
+var bird = void 0;
+var keys = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'preload',
+        value: function preload() {
+            this.load.image('parallax-back', 'assets/img/level2-back.png');
+            this.load.image('parallax-front', 'assets/img/parallax-front.png');
+            this.load.image('message', 'assets/img/letter.png');
+            this.load.image('firstaids', 'assets/img/firstaid.png');
+            this.load.image('bullet', 'assets/img/bullet.png');
+            this.load.image('cannonball', 'assets/img/core.png');
+            this.load.image('apples', 'assets/img/apple.png');
+            this.load.image('pears', 'assets/img/pear.png');
+            this.load.image('plums', 'assets/img/plum.png');
+            this.load.image('grapes', 'assets/img/grape.png');
+            this.load.spritesheet('rain', 'assets/img/rain-drop.png');
+            this.load.spritesheet('bird', 'assets/img/pigeon.png', 211, 211);
+            this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
+        }
+    }, {
+        key: 'create',
+        value: function create() {
+            var _this2 = this;
+
+            this.physics.startSystem(_phaser2.default.Physics.ARCADE);
+            this.scale.fullScreenScaleMode = _phaser2.default.ScaleManager.SHOW_ALL;
+            this.input.onDown.add(function () {
+                return _this2.scale.startFullScreen();
+            });
+            // add audio
+            startBtnSound = this.add.audio('wings-sound');
+            startBtnSound.loopFull();
+
+            spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back');
+            trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front');
+
+            letter = this.add.sprite(170, 65, 'message');
+            this.physics.arcade.enable(letter);
+            letter.scale.set(0.4);
+
+            bird = this.add.sprite(50, 672 / 4, 'bird');
+            bird.scale.set(0.5);
+            this.physics.arcade.enable(bird);
+            bird.animations.add('fly', [0, 1, 2, 3], 8, true);
+            bird.body.collideWorldBounds = true;
+            bird.addChild(letter);
+
+            firstaids = this.add.group();
+            apples = this.add.group();
+            pears = this.add.group();
+            plums = this.add.group();
+            grapes = this.add.group();
+
+            memory = {
+                pears: pears,
+                apples: apples,
+                grapes: grapes,
+                firstaids: firstaids,
+                plums: plums
+            };
+
+            keys = Object.keys(memory);
+
+            for (var key in memory) {
+                memory[key].enableBody = true;
+            }
+
+            this.time.events.repeat(_phaser2.default.Timer.SECOND * 5, 100, this.fallingSubjects, this, memory);
+            // create rain emitter
+            emitter = this.add.emitter(this.world.centerX, 0, 800);
+            emitter.width = this.world.width;
+            emitter.makeParticles('rain');
+            emitter.minParticleScale = 0.3;
+            emitter.maxParticleScale = 0.5;
+            emitter.setYSpeed(300, 500);
+            emitter.setXSpeed(-5, 5);
+            emitter.minRotation = 0;
+            emitter.maxRotation = 0;
+            emitter.start(false, 1000, 10, 0);
+
+            weapon = this.add.weapon(1, 'bullet');
+            this.time.events.add(_phaser2.default.Timer.SECOND * 2, this.addBulletsToWeapon, this);
+
+            cannonball = this.add.weapon(1, 'cannonball');
+            this.time.events.add(_phaser2.default.Timer.SECOND * 5, this.addBulletsToCannonBall, this);
+
+            cursors = this.input.keyboard.createCursorKeys();
+            cursors.space = this.input.keyboard.addKey(_phaser2.default.Keyboard.SPACEBAR);
+
+            // add progress bar
+            progress = this.add.graphics(0, 0);
+            progress.lineStyle(4, '0x00ff06');
+            progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
+            loadingWidth = 296;
+
+            progress.lineStyle(0);
+            progress.beginFill('0xf6ff00');
+            progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+            progress.endFill();
+
+            this.time.events.repeat(_phaser2.default.Timer.SECOND * 0.5, 300, this.loadProgress, this);
+
+            scoreText = this.add.text(this.world.width - 230, 80, 'score: 0', {
+                font: '40px Helvetica',
+                fill: 'red'
+            });
+
+            spaceValue = false;
+            score = 0;
+            // this.time.events.add(Phaser.Timer.SECOND * 10, this.pigeonDeath, this);
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            for (var key in memory) {
+                this.physics.arcade.overlap(bird, memory[key], this.collectObjects);
+                this.physics.arcade.collide(weapon.bullets, memory[key], function (first, second) {
+                    return second.kill();
+                });
+                this.physics.arcade.collide(cannonball.bullets, memory[key], function (first, second) {
+                    return second.kill();
+                });
+            }
+
+            this.physics.arcade.collide(bird, weapon.bullets, function (first, second) {
+                second.kill();
+                loadingWidth -= 0.1 * 296;
+            });
+
+            this.physics.arcade.collide(bird, cannonball.bullets, function (first, second) {
+                return loadingWidth = 0;
+            });
+
+            this.physics.arcade.collide(weapon.bullets, cannonball.bullets, function (weapon, cannonball) {
+                return weapon.kill();
+            });
+
+            // if (spaceValue) {
+            //  letter.body.gravity.y = 5000;
+            //  letter.body.velocity.x = -30;
+            //  letter.angle += 1;
+            // } else {
+            //  letter.body.velocity.x = 0;
+            // }
+
+            // letter.body.velocity.y = 0;
+
+            bird.body.velocity.x = 0;
+            bird.body.velocity.y = 0;
+            bird.animations.play('fly');
+            bird.animations.getAnimation('fly').speed = 8;
+            spacefield.tilePosition.x -= 1.5;
+            trees.tilePosition.x -= 2.25;
+
+            for (var _key in memory) {
+                memory[_key].setAll('body.velocity.x', -200);
+            }
+            if (cursors.up.isDown) {
+                bird.body.velocity.y = -300;
+                bird.animations.getAnimation('fly').speed = 12;
+            }
+            if (cursors.down.isDown) {
+                bird.body.velocity.y = 300;
+                bird.animations.getAnimation('fly').speed = 6;
+            }
+            if (cursors.left.isDown) {
+                spacefield.tilePosition.x -= -1;
+                trees.tilePosition.x -= -1.5;
+                for (var _key2 in memory) {
+                    memory[_key2].setAll('body.velocity.x', -120);
+                }
+            }
+            if (cursors.right.isDown) {
+                spacefield.tilePosition.x -= 2;
+                trees.tilePosition.x -= 3;
+                bird.animations.getAnimation('fly').speed = 12;
+                for (var _key3 in memory) {
+                    memory[_key3].setAll('body.velocity.x', -280);
+                }
+
+                loadingWidth -= 0.01 * 296 / 60;
+            }
+            if (cursors.space.isDown) {
+                spaceValue = true;
+            }
+
+            weapon.x = Math.random() * 0.8 * 1000 + 0.2 * 1000;
+            cannonball.x = Math.random() * 0.7 * 1000 + 0.3 * 1000;
+
+            this.loadProgress();
+        }
+    }, {
+        key: 'pigeonDeath',
+        value: function pigeonDeath() {
+            bird.kill();
+            startBtnSound.stop();
+            this.state.start('GameOver');
+        }
+    }, {
+        key: 'fallingSubjects',
+        value: function fallingSubjects(memory) {
+            var number = Math.floor(Math.random() * keys.length);
+            var example = memory[keys[number]].create(Math.random() * 0.5 * 1000 + 0.2 * 1200, -2, keys[number]);
+            example.body.velocity.y = 150;
+        }
+    }, {
+        key: 'collectObjects',
+        value: function collectObjects(first, second) {
+            second.kill();
+            score += 10;
+            scoreText.text = 'score: ' + score;
+            loadingWidth += 0.05 * 296;
+        }
+    }, {
+        key: 'addBulletsToCannonBall',
+        value: function addBulletsToCannonBall() {
+            cannonball.bullets.forEach(function (bul) {
+                return bul.scale.set(0.25);
+            });
+            cannonball.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
+            cannonball.bulletSpeed = 700;
+            cannonball.fireRate = 5000;
+            cannonball.fireAngle = 230;
+            cannonball.fireFrom.setTo(this.world.width - this.world.width / 3, this.world.height);
+            cannonball.autofire = true;
+            cannonball.bulletGravity.y = 300;
+        }
+    }, {
+        key: 'addBulletsToWeapon',
+        value: function addBulletsToWeapon() {
+            weapon.bullets.forEach(function (bul) {
+                return bul.scale.set(0.2);
+            });
+            weapon.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
+            weapon.bulletSpeed = 700;
+            weapon.fireRate = 1500;
+            weapon.fireAngle = 210;
+            weapon.bulletAngleOffset = 160;
+            weapon.fireFrom.setTo(0, this.world.height);
+            weapon.autofire = true;
+        }
+    }, {
+        key: 'loadProgress',
+        value: function loadProgress() {
+            progress.clear();
+
+            progress.lineStyle(4, '0x00ff06');
+            progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
+
+            progress.lineStyle(0);
+            progress.beginFill('0xf6ff00');
+            progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+            progress.endFill();
+
+            loadingWidth -= 0.01 * 296 / 60;
+
+            if (loadingWidth > 296) {
+                loadingWidth = 296;
+            }
+
+            if (loadingWidth < 0) {
+                this.pigeonDeath();
+            }
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
+
+/***/ }),
+/* 314 */
+/* unknown exports provided */
+/* all exports used */
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 /***/ })

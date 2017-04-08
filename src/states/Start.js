@@ -11,10 +11,10 @@ export default class extends Phaser.State {
         this.load.image('background', './assets/img/start-back.png');
         this.load.image('description', './assets/img/start.png');
         this.load.image('start', './assets/img/start-btn.png');
-        this.load.audio('button-sound', './assets/sounds/button-sound.mp3')
+        this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
     }
     create () {
-        startBtnSound = game.add.audio('button-sound');
+        startBtnSound = this.add.audio('button-sound');
         startBackground = this.add.sprite(0, 0, 'background');
         startBackground.width = this.world.width;
         startBackground.height = this.world.height;

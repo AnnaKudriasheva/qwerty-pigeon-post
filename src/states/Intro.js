@@ -4,9 +4,15 @@ let introBack;
 let introMail;
 let introBtn;
 let btnSound;
+let loadingBar;
 
 export default class extends Phaser.State {
     preload () {
+        loadingBar = this.add.sprite(this.game.world.centerX,
+            this.game.world.centerY, 'progress-bar');
+        loadingBar.anchor.setTo(0.5);
+        this.load.setPreloadSprite(loadingBar);
+
         this.load.image('background', './assets/img/intro-back.png');
         this.load.image('mail', './assets/img/intro-mail.png');
         this.load.image('next-btn', './assets/img/next-button.png');
