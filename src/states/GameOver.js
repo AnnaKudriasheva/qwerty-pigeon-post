@@ -4,13 +4,6 @@ let mainMenuBtn;
 let restartBtn;
 
 export default class extends Phaser.State {
-    preload () {
-        this.load.image('parallax-back', 'assets/img/parallax-back.png');
-        this.load.image('parallax-front', 'assets/img/parallax-front.png');
-        this.load.image('restart-button', 'assets/img/restart.png');
-        this.load.image('main-menu-button', 'assets/img/main-menu.png');
-    }
-
     create () {
         this.add.tileSprite(0, 0, 1200, 672, 'parallax-back');
         this.add.tileSprite(0, 0, 1200, 672, 'parallax-front');
@@ -21,7 +14,7 @@ export default class extends Phaser.State {
     }
 
     restartGame () {
-        this.state.start('MainGame');
+        this.state.start('MainGame', true, false, 1);
     }
 
     mainMenu () {

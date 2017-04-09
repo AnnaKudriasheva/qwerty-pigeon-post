@@ -1,9 +1,8 @@
 import Phaser from 'phaser';
-import { loadingPage } from '../utils';
 
 let startBtnSound;
 let loadingWidth;
-let spaceValue = false;
+let spaceValue;
 let cannonball;
 let spacefield;
 let firstaids;
@@ -18,37 +17,25 @@ let memory;
 let letter;
 let plums;
 let pears;
-let score = 0;
+let score;
 let trees;
 let bird;
 let keys;
+let level;
 
 export default class extends Phaser.State {
-    preload () {
-        loadingPage(this);
-        this.load.image('parallax-back', 'assets/img/parallax-back.png');
-        this.load.image('parallax-front', 'assets/img/parallax-front.png');
-        this.load.image('message', 'assets/img/letter.png');
-        this.load.image('firstaids', 'assets/img/firstaid.png');
-        this.load.image('bullet', 'assets/img/bullet.png');
-        this.load.image('cannonball', 'assets/img/core.png');
-        this.load.image('apples', 'assets/img/apple.png');
-        this.load.image('pears', 'assets/img/pear.png');
-        this.load.image('plums', 'assets/img/plum.png');
-        this.load.image('grapes', 'assets/img/grape.png');
-        this.load.spritesheet('rain', 'assets/img/rain.png');
-        this.load.spritesheet('bird', 'assets/img/pigeon.png', 211, 211);
-        this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
+    init (levelNumber) {
+        level = levelNumber;
     }
 
     create () {
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.input.onDown.add(() => this.scale.startFullScreen());
-        // add audio
+        // audio
         startBtnSound = this.add.audio('wings-sound');
         startBtnSound.loopFull();
-
+        // level background
         spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back');
         trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front');
 
@@ -83,44 +70,40 @@ export default class extends Phaser.State {
             memory[key].enableBody = true;
         }
 
-        this.time.events.repeat(Phaser.Timer.SECOND * 5, 100,
+        this.time.events.repeat(3000 * level, 100,
             this.fallingSubjects, this, memory);
-        // create rain emitter
-        emitter = this.add.emitter(this.world.centerX, 0, 400);
-        emitter.width = this.world.width;
-        emitter.makeParticles('rain');
-        emitter.minParticleScale = 0.1;
-        emitter.maxParticleScale = 0.3;
-        emitter.setYSpeed(300, 500);
-        emitter.setXSpeed(-5, 5);
-        emitter.minRotation = 0;
-        emitter.maxRotation = 0;
-        emitter.start(false, 1600, 5, 0);
+
+        if (level === 2) {
+            // create rain emitter
+            emitter = this.add.emitter(this.world.centerX, 0, 400);
+            emitter.width = this.world.width;
+            emitter.makeParticles('rain');
+            emitter.minParticleScale = 0.1;
+            emitter.maxParticleScale = 0.5;
+            emitter.setYSpeed(300, 500);
+            emitter.setXSpeed(-5, 0);
+            emitter.minRotation = 0;
+            emitter.maxRotation = 0;
+            emitter.start(false, 1000, 10, 0);
+        }
 
         weapon = this.add.weapon(1, 'bullet');
-        this.time.events.add(Phaser.Timer.SECOND * 2,
-            this.addBulletsToWeapon, this);
+        this.time.events.add(3000, this.addBulletsToWeapon, this);
 
         cannonball = this.add.weapon(1, 'cannonball');
-        this.time.events.add(Phaser.Timer.SECOND * 5,
-            this.addBulletsToCannonBall, this);
+        this.time.events.add(5000, this.addBulletsToCannonBall, this);
 
         cursors = this.input.keyboard.createCursorKeys();
         cursors.space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
         // add progress bar
         progress = this.add.graphics(0, 0);
         progress.lineStyle(4, '0x00ff06');
         progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
         loadingWidth = 296;
-
         progress.lineStyle(0);
         progress.beginFill('0xf6ff00');
         progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
         progress.endFill();
-
-        this.time.events.repeat(Phaser.Timer.SECOND * 0.5, 300,
-            this.loadProgress, this);
 
         scoreText = this.add.text(this.world.width - 230, 80, 'score: 0', {
             font: '40px Helvetica',
@@ -129,7 +112,6 @@ export default class extends Phaser.State {
 
         spaceValue = false;
         score = 0;
-        // this.time.events.add(Phaser.Timer.SECOND * 10, this.pigeonDeath, this);
     }
 
     update () {
@@ -164,39 +146,45 @@ export default class extends Phaser.State {
 
         bird.body.velocity.x = 0;
         bird.body.velocity.y = 0;
+
         bird.animations.play('fly');
         bird.animations.getAnimation('fly').speed = 8;
-        spacefield.tilePosition.x -= 1.5;
-        trees.tilePosition.x -= 2.25;
+        spacefield.tilePosition.x -= 1.5 * level;
+        trees.tilePosition.x -= 2.25 * level * 0.8;
 
         for (let key in memory) {
-            memory[key].setAll('body.velocity.x', -200);
+            memory[key].setAll('body.velocity.x', -150 * level * 0.8);
         }
+
         if (cursors.up.isDown) {
-            bird.body.velocity.y = -300;
-            bird.animations.getAnimation('fly').speed = 12;
+            bird.body.velocity.y = -200 * level * 0.5;
+            bird.animations.getAnimation('fly').speed = 12 * level * 0.5;
         }
+
         if (cursors.down.isDown) {
-            bird.body.velocity.y = 300;
-            bird.animations.getAnimation('fly').speed = 6;
+            bird.body.velocity.y = 200 * level * 0.5;
+            bird.animations.getAnimation('fly').speed = 6 * level * 0.5;
         }
-        if (cursors.left.isDown) {
-            spacefield.tilePosition.x -= -1;
-            trees.tilePosition.x -= -1.5;
-            for (let key in memory) {
-                memory[key].setAll('body.velocity.x', -120);
-            }
-        }
+
+        // if (cursors.left.isDown) {
+        //     spacefield.tilePosition.x -= -1 * level * 0.6;
+        //     trees.tilePosition.x -= -1.5 * level * 0.6;
+        //     for (let key in memory) {
+        //         memory[key].setAll('body.velocity.x', -100 * level * 0.5);
+        //     }
+        // }
+
         if (cursors.right.isDown) {
-            spacefield.tilePosition.x -= 2;
-            trees.tilePosition.x -= 3;
-            bird.animations.getAnimation('fly').speed = 12;
+            spacefield.tilePosition.x -= 2 * level;
+            trees.tilePosition.x -= 3 * level;
+            bird.animations.getAnimation('fly').speed = 12 * level * 0.5;
             for (let key in memory) {
-                memory[key].setAll('body.velocity.x', -280);
+                memory[key].setAll('body.velocity.x', -250 * level * 0.8);
             }
 
             loadingWidth -= 0.01 * 296 / 60;
         }
+
         if (cursors.space.isDown) {
             spaceValue = true;
         }
@@ -217,7 +205,7 @@ export default class extends Phaser.State {
         let number = Math.floor(Math.random() * keys.length);
         let example = memory[keys[number]].create((Math.random() * 0.5 * 1000) +
             0.2 * 1200, -2, keys[number]);
-        example.body.velocity.y = 150;
+        example.body.velocity.y = 100 * level * 0.5;
     }
 
     collectObjects (first, second) {
@@ -230,20 +218,20 @@ export default class extends Phaser.State {
     addBulletsToCannonBall () {
         cannonball.bullets.forEach((bul) => bul.scale.set(0.25));
         cannonball.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-        cannonball.bulletSpeed = 700;
-        cannonball.fireRate = 5000;
+        cannonball.bulletSpeed = 600 * level * 0.7;
+        cannonball.fireRate = 10000 * 0.6 / level;
         cannonball.fireAngle = 230;
         cannonball.fireFrom.setTo(this.world.width - this.world.width / 3,
             this.world.height);
         cannonball.autofire = true;
-        cannonball.bulletGravity.y = 300;
+        cannonball.bulletGravity.y = 400 * level * 0.7;
     }
 
     addBulletsToWeapon () {
         weapon.bullets.forEach((bul) => bul.scale.set(0.2));
         weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-        weapon.bulletSpeed = 700;
-        weapon.fireRate = 1500;
+        weapon.bulletSpeed = 600 * level * 0.6;
+        weapon.fireRate = 5000 / level * 0.6;
         weapon.fireAngle = 210;
         weapon.bulletAngleOffset = 160;
         weapon.fireFrom.setTo(0, this.world.height);
