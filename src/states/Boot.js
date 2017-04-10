@@ -36,8 +36,8 @@ export default class extends Phaser.State {
         this.load.image(`parallax-back2`, 'assets/img/parallax-back2.png');
         this.load.image(`parallax-front2`, 'assets/img/parallax-front2.png');
         // level 3
-        this.load.image(`parallax-back3`, 'assets/img/parallax-back2.png');
-        this.load.image(`parallax-front3`, 'assets/img/parallax-front2.png');
+        this.load.image(`parallax-back3`, 'assets/img/parallax-back3.png');
+        this.load.image(`parallax-front3`, 'assets/img/parallax-front3.png');
         // other resources
         this.load.image('message', 'assets/img/letter.png');
         this.load.image('firstaids', 'assets/img/firstaid.png');
@@ -51,9 +51,21 @@ export default class extends Phaser.State {
         this.load.spritesheet('bird', 'assets/img/pigeon.png', 211, 211);
         this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
         // GameOver
-        this.load.image('restart-button', 'assets/img/restart.png');
+        this.load.image('restart-button', './assets/img/restart.png');
         this.load.image('main-menu-button', 'assets/img/main-menu.png');
         this.load.audio('game-over-sound', './assets/sounds/game-over.mp3');
+        // Puzzle1
+        this.load.image('center', './assets/img/center.png');
+        this.load.image('1', './assets/img/1.png');
+        this.load.image('2', './assets/img/2.png');
+        this.load.image('3', './assets/img/3.png');
+        this.load.image('4', './assets/img/4.png');
+        this.load.image('5', './assets/img/5.png');
+        this.load.image('5', './assetsimg/5.png');
+        this.load.image('pigeon', './assets/img/pigeon.jpg');
+        this.load.image('decipher', './assets/img/decipher.png');
+        this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png', 'assets/fonts/fira-sans.fnt');
+        this.load.bitmapFont('Playfair', './assets/fonts/playfair.png', 'assets/fonts/playfair.fnt');
     }
     create () {
         this.state.start('Intro');

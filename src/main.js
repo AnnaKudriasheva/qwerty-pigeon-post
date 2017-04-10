@@ -7,6 +7,7 @@ import Intro from './states/Intro';
 import Start from './states/Start';
 import MainGame from './states/MainGame';
 import GameOver from './states/GameOver';
+import Puzzle1 from './states/Puzzle1';
 
 class Game extends Phaser.Game {
     constructor () {
@@ -16,6 +17,7 @@ class Game extends Phaser.Game {
         this.state.add('Start', Start, false);
         this.state.add('MainGame', MainGame, false);
         this.state.add('GameOver', GameOver, false);
+        this.state.add('Puzzle1', Puzzle1, false);
 
         this.state.start('Boot');
     }

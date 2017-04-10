@@ -46,7 +46,7 @@ export default class extends Phaser.State {
             timer.milliseconds = 90 * 1000;
             timer.value = '01:30';
             distance = 1000;
-            birdSpeed = 12
+            birdSpeed = 12;
         } else {
             factor = 2;
             timer.milliseconds = 45 * 1000;
@@ -153,8 +153,10 @@ export default class extends Phaser.State {
             fill: 'blue'
         });
 
-        eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
-        eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
+        eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer,
+            this, timer));
+        eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance,
+            this));
     }
 
     update () {
@@ -296,7 +298,6 @@ export default class extends Phaser.State {
     }
 
     changeTimer (timer) {
-
         timer.milliseconds -= 1000;
         let date = new Date(timer.milliseconds);
         let minutes = date.getMinutes();
@@ -310,7 +311,7 @@ export default class extends Phaser.State {
 
         timerText.text = `${minutes}:${seconds}`;
 
-        if (minutes == 0 && seconds == 0) {
+        if (minutes === 0 && seconds === 0) {
             setTimeout(() => alert('Game over'), 500);
         }
     }
@@ -333,7 +334,7 @@ export default class extends Phaser.State {
             letter.body.gravity.y = 300;
             letter.body.gravity.x = -150;
 
-            setTimeout(() => alert('Congratulations!!!'), 3000); // for a while, untill add new state
+            setTimeout(() => this.state.start('Puzzle1'), 3000);
         }
     }
 }
