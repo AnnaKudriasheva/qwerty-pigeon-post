@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+let introSound;
 let introBack;
 let introMail;
 let introBtn;
@@ -7,7 +8,11 @@ let btnSound;
 
 export default class extends Phaser.State {
     create () {
+        // sounds
         btnSound = this.add.audio('button-sound');
+        introSound = this.add.audio('intro-sound');
+        introSound.loopFull();
+        introSound.volume = 0.1;
         // left side
         introMail = this.add.sprite(0, 0, 'mail');
         introMail.width = this.world.width * 0.43;
@@ -26,6 +31,7 @@ export default class extends Phaser.State {
     }
     startMainPage () {
         btnSound.play();
+        introSound.stop();
         this.state.start('Start');
     }
 }

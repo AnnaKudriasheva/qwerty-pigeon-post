@@ -1,15 +1,21 @@
 import Phaser from 'phaser';
 
-let mainMenuBtn;
-let restartBtn;
+let gameOverSound;
+let level;
 
 export default class extends Phaser.State {
+    init (levelNumber) {
+        level = levelNumber;
+    }
     create () {
-        this.add.tileSprite(0, 0, 1200, 672, 'parallax-back');
-        this.add.tileSprite(0, 0, 1200, 672, 'parallax-front');
-        restartBtn = this.add.button(250, 200,
+        gameOverSound = this.add.audio('game-over-sound');
+        gameOverSound.volume = 0.2;
+        gameOverSound.play();
+        this.add.tileSprite(0, 0, 1000, 560, `parallax-back${level}`);
+        this.add.tileSprite(0, 0, 1000, 560, `parallax-front${level}`);
+        this.add.button(250, 200,
             'restart-button', this.restartGame, this);
-        mainMenuBtn = this.add.button(550, 200,
+        this.add.button(550, 200,
             'main-menu-button', this.mainMenu, this);
     }
 

@@ -7,21 +7,38 @@ export default class extends Phaser.State {
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
     }
+
     preload () {
         loadingPage(this);
+        // load fonts
+        WebFont.load({
+            google: {
+                families: ['Montserrat']
+            }
+        });
         // Intro
         this.load.image('background', './assets/img/intro-back.png');
         this.load.image('mail', './assets/img/intro-mail.png');
         this.load.image('next-btn', './assets/img/next-button.png');
         this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+        this.load.audio('intro-sound', './assets/sounds/intro.mp3');
         // Start
         this.load.image('start-background', './assets/img/start-back.png');
         this.load.image('description', './assets/img/start.png');
         this.load.image('start', './assets/img/start-btn.png');
         this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
         // MainGame
-        this.load.image('parallax-back', 'assets/img/parallax-back.png');
-        this.load.image('parallax-front', 'assets/img/parallax-front.png');
+        this.load.audio('collect-sound', './assets/sounds/collect-obj.mp3');
+        // level 1
+        this.load.image(`parallax-back1`, 'assets/img/parallax-back1.png');
+        this.load.image(`parallax-front1`, 'assets/img/parallax-front1.png');
+        // level 2
+        this.load.image(`parallax-back2`, 'assets/img/parallax-back2.png');
+        this.load.image(`parallax-front2`, 'assets/img/parallax-front2.png');
+        // level 3
+        this.load.image(`parallax-back3`, 'assets/img/parallax-back2.png');
+        this.load.image(`parallax-front3`, 'assets/img/parallax-front2.png');
+        // other resources
         this.load.image('message', 'assets/img/letter.png');
         this.load.image('firstaids', 'assets/img/firstaid.png');
         this.load.image('bullet', 'assets/img/bullet.png');
@@ -36,6 +53,7 @@ export default class extends Phaser.State {
         // GameOver
         this.load.image('restart-button', 'assets/img/restart.png');
         this.load.image('main-menu-button', 'assets/img/main-menu.png');
+        this.load.audio('game-over-sound', './assets/sounds/game-over.mp3');
     }
     create () {
         this.state.start('Intro');

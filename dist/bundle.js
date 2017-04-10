@@ -3948,19 +3948,35 @@ var _class = function (_Phaser$State) {
         key: 'preload',
         value: function preload() {
             (0, _utils.loadingPage)(this);
+            // load fonts
+            WebFont.load({
+                google: {
+                    families: ['Montserrat']
+                }
+            });
             // Intro
             this.load.image('background', './assets/img/intro-back.png');
             this.load.image('mail', './assets/img/intro-mail.png');
             this.load.image('next-btn', './assets/img/next-button.png');
             this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+            this.load.audio('intro-sound', './assets/sounds/intro.mp3');
             // Start
             this.load.image('start-background', './assets/img/start-back.png');
             this.load.image('description', './assets/img/start.png');
             this.load.image('start', './assets/img/start-btn.png');
             this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
             // MainGame
-            this.load.image('parallax-back', 'assets/img/parallax-back.png');
-            this.load.image('parallax-front', 'assets/img/parallax-front.png');
+            this.load.audio('collect-sound', './assets/sounds/collect-obj.mp3');
+            // level 1
+            this.load.image('parallax-back1', 'assets/img/parallax-back1.png');
+            this.load.image('parallax-front1', 'assets/img/parallax-front1.png');
+            // level 2
+            this.load.image('parallax-back2', 'assets/img/parallax-back2.png');
+            this.load.image('parallax-front2', 'assets/img/parallax-front2.png');
+            // level 3
+            this.load.image('parallax-back3', 'assets/img/parallax-back2.png');
+            this.load.image('parallax-front3', 'assets/img/parallax-front2.png');
+            // other resources
             this.load.image('message', 'assets/img/letter.png');
             this.load.image('firstaids', 'assets/img/firstaid.png');
             this.load.image('bullet', 'assets/img/bullet.png');
@@ -3975,6 +3991,7 @@ var _class = function (_Phaser$State) {
             // GameOver
             this.load.image('restart-button', 'assets/img/restart.png');
             this.load.image('main-menu-button', 'assets/img/main-menu.png');
+            this.load.audio('game-over-sound', './assets/sounds/game-over.mp3');
         }
     }, {
         key: 'create',
@@ -4018,8 +4035,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var mainMenuBtn = void 0;
-var restartBtn = void 0;
+var gameOverSound = void 0;
+var level = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4031,12 +4048,20 @@ var _class = function (_Phaser$State) {
     }
 
     _createClass(_class, [{
+        key: 'init',
+        value: function init(levelNumber) {
+            level = levelNumber;
+        }
+    }, {
         key: 'create',
         value: function create() {
-            this.add.tileSprite(0, 0, 1200, 672, 'parallax-back');
-            this.add.tileSprite(0, 0, 1200, 672, 'parallax-front');
-            restartBtn = this.add.button(250, 200, 'restart-button', this.restartGame, this);
-            mainMenuBtn = this.add.button(550, 200, 'main-menu-button', this.mainMenu, this);
+            gameOverSound = this.add.audio('game-over-sound');
+            gameOverSound.volume = 0.2;
+            gameOverSound.play();
+            this.add.tileSprite(0, 0, 1000, 560, 'parallax-back' + level);
+            this.add.tileSprite(0, 0, 1000, 560, 'parallax-front' + level);
+            this.add.button(250, 200, 'restart-button', this.restartGame, this);
+            this.add.button(550, 200, 'main-menu-button', this.mainMenu, this);
         }
     }, {
         key: 'restartGame',
@@ -4085,6 +4110,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var introSound = void 0;
 var introBack = void 0;
 var introMail = void 0;
 var introBtn = void 0;
@@ -4102,7 +4128,11 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
+            // sounds
             btnSound = this.add.audio('button-sound');
+            introSound = this.add.audio('intro-sound');
+            introSound.loopFull();
+            introSound.volume = 0.1;
             // left side
             introMail = this.add.sprite(0, 0, 'mail');
             introMail.width = this.world.width * 0.43;
@@ -4120,6 +4150,7 @@ var _class = function (_Phaser$State) {
         key: 'startMainPage',
         value: function startMainPage() {
             btnSound.play();
+            introSound.stop();
             this.state.start('Start');
         }
     }]);
@@ -4160,13 +4191,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var startBtnSound = void 0;
+var distanceText = void 0;
 var loadingWidth = void 0;
+var collectSound = void 0;
+var eventsMemory = [];
 var spaceValue = void 0;
 var cannonball = void 0;
 var spacefield = void 0;
 var firstaids = void 0;
+var birdSpeed = void 0;
 var scoreText = void 0;
+var timerText = void 0;
 var progress = void 0;
+var distance = void 0;
 var emitter = void 0;
 var cursors = void 0;
 var grapes = void 0;
@@ -4181,6 +4218,8 @@ var trees = void 0;
 var bird = void 0;
 var keys = void 0;
 var level = void 0;
+var factor = void 0;
+var timer = {};
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4195,6 +4234,26 @@ var _class = function (_Phaser$State) {
         key: 'init',
         value: function init(levelNumber) {
             level = levelNumber;
+
+            if (level === 1) {
+                factor = 1;
+                timer.milliseconds = 180 * 1000;
+                timer.value = '03:00';
+                distance = 500;
+                birdSpeed = 4.2;
+            } else if (level === 2) {
+                factor = 1.5;
+                timer.milliseconds = 90 * 1000;
+                timer.value = '01:30';
+                distance = 1000;
+                birdSpeed = 12;
+            } else {
+                factor = 2;
+                timer.milliseconds = 45 * 1000;
+                timer.value = '00:45';
+                distance = 1500;
+                birdSpeed = 27;
+            }
         }
     }, {
         key: 'create',
@@ -4208,10 +4267,12 @@ var _class = function (_Phaser$State) {
             });
             // audio
             startBtnSound = this.add.audio('wings-sound');
+            collectSound = this.add.audio('collect-sound');
+            collectSound.volume = 0.2;
             startBtnSound.loopFull();
             // level background
-            spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back');
-            trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front');
+            spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back' + level);
+            trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front' + level);
 
             letter = this.add.sprite(170, 65, 'message');
             this.physics.arcade.enable(letter);
@@ -4244,7 +4305,7 @@ var _class = function (_Phaser$State) {
                 memory[key].enableBody = true;
             }
 
-            this.time.events.repeat(3000 * level, 100, this.fallingSubjects, this, memory);
+            eventsMemory.push(this.time.events.repeat(3000 * level, 100, this.fallingSubjects, this, memory));
 
             if (level === 2) {
                 // create rain emitter
@@ -4279,12 +4340,25 @@ var _class = function (_Phaser$State) {
             progress.endFill();
 
             scoreText = this.add.text(this.world.width - 230, 80, 'score: 0', {
-                font: '40px Helvetica',
+                font: '40px Montserrat',
                 fill: 'red'
             });
 
             spaceValue = false;
             score = 0;
+
+            timerText = this.add.text(250, 25, timer.value, {
+                font: '40px Montserrat',
+                fill: 'green'
+            });
+
+            distanceText = this.add.text(450, 25, distance + 'm', {
+                font: '40px Montserrat',
+                fill: 'blue'
+            });
+
+            eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
+            eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
         }
     }, {
         key: 'update',
@@ -4312,84 +4386,76 @@ var _class = function (_Phaser$State) {
                 return weapon.kill();
             });
 
-            // if (spaceValue) {
-            //  letter.body.gravity.y = 5000;
-            //  letter.body.velocity.x = -30;
-            //  letter.angle += 1;
-            // } else {
-            //  letter.body.velocity.x = 0;
-            // }
-
-            // letter.body.velocity.y = 0;
-
-            bird.body.velocity.x = 0;
+            // bird.body.velocity.x = 0;
             bird.body.velocity.y = 0;
 
             bird.animations.play('fly');
-            bird.animations.getAnimation('fly').speed = 8;
-            spacefield.tilePosition.x -= 1.5 * level;
-            trees.tilePosition.x -= 2.25 * level * 0.8;
+            bird.animations.getAnimation('fly').speed = 8 * factor / 1.25;
+            spacefield.tilePosition.x -= 1.5 * factor;
+            trees.tilePosition.x -= 2.25 * factor;
 
             for (var _key in memory) {
-                memory[_key].setAll('body.velocity.x', -150 * level * 0.8);
+                memory[_key].setAll('body.velocity.x', -150 * factor);
             }
 
             if (cursors.up.isDown) {
-                bird.body.velocity.y = -200 * level * 0.5;
-                bird.animations.getAnimation('fly').speed = 12 * level * 0.5;
+                bird.body.velocity.y = -200 * factor;
+                bird.animations.getAnimation('fly').speed = 10 * factor;
             }
 
             if (cursors.down.isDown) {
-                bird.body.velocity.y = 200 * level * 0.5;
-                bird.animations.getAnimation('fly').speed = 6 * level * 0.5;
+                bird.body.velocity.y = 200 * factor;
+                bird.animations.getAnimation('fly').speed = 6 * factor;
             }
 
             // if (cursors.left.isDown) {
-            //     spacefield.tilePosition.x -= -1 * level * 0.6;
-            //     trees.tilePosition.x -= -1.5 * level * 0.6;
+            //     spacefield.tilePosition.x -= -1 * factor * 0.6;
+            //     trees.tilePosition.x -= -1.5 * factor * 0.6;
             //     for (let key in memory) {
-            //         memory[key].setAll('body.velocity.x', -100 * level * 0.5);
+            //         memory[key].setAll('body.velocity.x', -100 * factor * 0.5);
             //     }
             // }
 
             if (cursors.right.isDown) {
-                spacefield.tilePosition.x -= 2 * level;
-                trees.tilePosition.x -= 3 * level;
-                bird.animations.getAnimation('fly').speed = 12 * level * 0.5;
+                spacefield.tilePosition.x -= 1.8 * factor;
+                trees.tilePosition.x -= 2.7 * factor;
+                bird.animations.getAnimation('fly').speed = 10 * factor;
                 for (var _key2 in memory) {
-                    memory[_key2].setAll('body.velocity.x', -250 * level * 0.8);
+                    memory[_key2].setAll('body.velocity.x', -250 * factor);
                 }
 
                 loadingWidth -= 0.01 * 296 / 60;
-            }
-
-            if (cursors.space.isDown) {
-                spaceValue = true;
+                distance -= 0.5 * birdSpeed / 60;
             }
 
             weapon.x = Math.random() * 0.8 * 1000 + 0.2 * 1000;
             cannonball.x = Math.random() * 0.7 * 1000 + 0.3 * 1000;
 
             this.loadProgress();
+
+            if (spaceValue) {
+                letter.angle += 1;
+            }
         }
     }, {
         key: 'pigeonDeath',
         value: function pigeonDeath() {
             bird.kill();
             startBtnSound.stop();
-            this.state.start('GameOver');
+            this.state.start('GameOver', true, false, level);
         }
     }, {
         key: 'fallingSubjects',
         value: function fallingSubjects(memory) {
             var number = Math.floor(Math.random() * keys.length);
             var example = memory[keys[number]].create(Math.random() * 0.5 * 1000 + 0.2 * 1200, -2, keys[number]);
-            example.body.velocity.y = 100 * level * 0.5;
+            example.body.velocity.y = 100 * factor;
         }
     }, {
         key: 'collectObjects',
         value: function collectObjects(first, second) {
             second.kill();
+            collectSound.play();
             score += 10;
             scoreText.text = 'score: ' + score;
             loadingWidth += 0.05 * 296;
@@ -4401,12 +4467,12 @@ var _class = function (_Phaser$State) {
                 return bul.scale.set(0.25);
             });
             cannonball.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
-            cannonball.bulletSpeed = 600 * level * 0.7;
-            cannonball.fireRate = 10000 * 0.6 / level;
+            cannonball.bulletSpeed = 600 * factor;
+            cannonball.fireRate = 10000 / factor;
             cannonball.fireAngle = 230;
             cannonball.fireFrom.setTo(this.world.width - this.world.width / 3, this.world.height);
             cannonball.autofire = true;
-            cannonball.bulletGravity.y = 400 * level * 0.7;
+            cannonball.bulletGravity.y = 400 * factor;
         }
     }, {
         key: 'addBulletsToWeapon',
@@ -4415,8 +4481,8 @@ var _class = function (_Phaser$State) {
                 return bul.scale.set(0.2);
             });
             weapon.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
-            weapon.bulletSpeed = 600 * level * 0.6;
-            weapon.fireRate = 5000 / level * 0.6;
+            weapon.bulletSpeed = 500 * factor;
+            weapon.fireRate = 5000 / factor;
             weapon.fireAngle = 210;
             weapon.bulletAngleOffset = 160;
             weapon.fireFrom.setTo(0, this.world.height);
@@ -4441,8 +4507,58 @@ var _class = function (_Phaser$State) {
                 loadingWidth = 296;
             }
 
-            if (loadingWidth < 0) {
+            if (loadingWidth <= 0) {
                 this.pigeonDeath();
+            }
+        }
+    }, {
+        key: 'changeTimer',
+        value: function changeTimer(timer) {
+
+            timer.milliseconds -= 1000;
+            var date = new Date(timer.milliseconds);
+            var minutes = date.getMinutes();
+            if (String(minutes).length < 2) {
+                minutes = '0' + minutes;
+            }
+            var seconds = date.getSeconds();
+            if (String(seconds).length < 2) {
+                seconds = '0' + seconds;
+            }
+
+            timerText.text = minutes + ':' + seconds;
+
+            if (minutes == 0 && seconds == 0) {
+                setTimeout(function () {
+                    return alert('Game over');
+                }, 500);
+            }
+        }
+    }, {
+        key: 'changeDistance',
+        value: function changeDistance() {
+            distance -= birdSpeed / 5;
+            distanceText.text = parseInt(distance) + 'm';
+            // letter.body.velocity.y = 0;
+            if (distance <= 0 && timer.milliseconds >= 0) {
+                bird.body.velocity.x = 200;
+
+                var that = this;
+                eventsMemory.forEach(function (event) {
+                    return that.time.events.remove(event);
+                });
+                distanceText.text = '';
+                timerText.text = '';
+                cannonball.autofire = false;
+                weapon.autofire = false;
+
+                spaceValue = true;
+                letter.body.gravity.y = 300;
+                letter.body.gravity.x = -150;
+
+                setTimeout(function () {
+                    return alert('Congratulations!!!');
+                }, 3000); // for a while, untill add new state
             }
         }
     }]);
