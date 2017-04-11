@@ -5,6 +5,7 @@ let distanceText;
 let loadingWidth;
 let collectSound;
 let eventsMemory = [];
+let checkFinish;
 let spaceValue;
 let spacefield;
 let firstaids;
@@ -36,9 +37,9 @@ export default class extends Phaser.State {
 
         if (level === 1) {
             factor = 1;
-            timer.milliseconds = 180 * 1000;
-            timer.value = '03:00';
-            distance = 500;
+            timer.milliseconds = 90 * 1000;
+            timer.value = '01:30';
+            distance = 250;
             birdSpeed = 4.2;
         } else if (level === 2) {
             factor = 1.5;
@@ -82,7 +83,7 @@ export default class extends Phaser.State {
         hawks = this.add.group();
         hawks.enableBody = true;
 
-        eventsMemory.push(this.time.events.repeat(9000 / factor, 200,
+        eventsMemory.push(this.time.events.repeat(9000 / level, 200,
             this.emitHawks, this));
 
         firstaids = this.add.group();
@@ -155,6 +156,8 @@ export default class extends Phaser.State {
             fill: '#85983c'
         });
 
+        checkFinish = false;
+
         eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
         eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
     }
@@ -170,7 +173,7 @@ export default class extends Phaser.State {
 
         this.physics.arcade.collide(bird, weapon.bullets, (first, second) => {
             second.kill();
-            loadingWidth -= 0.1 * 196;
+            loadingWidth -= 0.3 * 196;
         });
 
         this.physics.arcade.collide(hawks, weapon.bullets,
@@ -185,6 +188,7 @@ export default class extends Phaser.State {
         trees.tilePosition.x -= 2.25 * factor;
 
         hawks.callAll('play', null, 'flyHawk');
+        hawks.setAll('body.velocity.x', -250 * factor);
 
         for (let key in memory) {
             memory[key].setAll('body.velocity.x', -150 * factor);
@@ -212,6 +216,7 @@ export default class extends Phaser.State {
             spacefield.tilePosition.x -= 1.8 * factor;
             trees.tilePosition.x -= 2.7 * factor;
             bird.animations.getAnimation('fly').speed = 10 * factor;
+            hawks.setAll('body.velocity.x', -500 * factor);
             for (let key in memory) {
                 memory[key].setAll('body.velocity.x', -250 * factor);
             }
@@ -219,6 +224,7 @@ export default class extends Phaser.State {
             loadingWidth -= 0.01 * 196 / 60;
             distance -= 0.5 * birdSpeed / 60;
         }
+
         weapon.x = (Math.random() * 0.8 * 1000) + 0.2 * 1000;
         this.loadProgress();
         if (spaceValue) {
@@ -229,7 +235,9 @@ export default class extends Phaser.State {
     pigeonDeath () {
         bird.kill();
         startBtnSound.stop();
-        this.state.start('GameOver', true, false, level);
+        if (!checkFinish) {
+            this.state.start('GameOver', true, false, level);
+        } 
     }
 
     fallingSubjects (memory) {
@@ -273,7 +281,7 @@ export default class extends Phaser.State {
             loadingWidth = 196;
         }
 
-        if (loadingWidth <= 0) {
+        if (loadingWidth <= 10) {
             this.pigeonDeath();
         }
     }
@@ -293,7 +301,7 @@ export default class extends Phaser.State {
         timerText.text = `${minutes}:${seconds}`;
 
         if (minutes === 0 && seconds === 0) {
-            setTimeout(() => alert('Game over'), 500);
+            this.pigeonDeath();
         }
     }
 
@@ -306,10 +314,11 @@ export default class extends Phaser.State {
 
             let that = this;
             eventsMemory.forEach((event) => that.time.events.remove(event));
+            loadingWidth = 196;
             distanceText.text = '';
             timerText.text = '';
             weapon.autofire = false;
-
+            checkFinish = true;
             spaceValue = true;
             letter.body.gravity.y = 900;
             letter.body.gravity.x = -700;
@@ -323,7 +332,7 @@ export default class extends Phaser.State {
     emitHawks () {
         let hawk = hawks.create(this.world.width, (Math.random() * 0.6 *
             this.world.height) + 0.2 * this.world.height, 'hawk');
-        hawk.body.velocity.x = -200 * factor;
-        hawk.animations.add('flyHawk', [0, 1, 2, 3, 4, 5, 6], 10, true);
+        hawk.body.velocity.x = -250 * factor;
+        hawk.animations.add('flyHawk', [0, 1, 2, 3, 4, 5, 6], 10 * factor, true);
     }
 }
