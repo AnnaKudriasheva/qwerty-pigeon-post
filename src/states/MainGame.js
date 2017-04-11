@@ -6,11 +6,9 @@ let loadingWidth;
 let collectSound;
 let eventsMemory = [];
 let spaceValue;
-let cannonball;
 let spacefield;
 let firstaids;
 let birdSpeed;
-let scoreText;
 let timerText;
 let progress;
 let distance;
@@ -23,7 +21,8 @@ let memory;
 let letter;
 let plums;
 let pears;
-let score;
+let hawks;
+let heart;
 let trees;
 let bird;
 let keys;
@@ -69,16 +68,22 @@ export default class extends Phaser.State {
         spacefield = this.add.tileSprite(0, 0, 1000, 560, `parallax-back${level}`);
         trees = this.add.tileSprite(0, 0, 1000, 560, `parallax-front${level}`);
 
-        letter = this.add.sprite(170, 65, 'message');
+        letter = this.add.sprite(607, 140, 'message');
         this.physics.arcade.enable(letter);
-        letter.scale.set(0.4);
 
         bird = this.add.sprite(50, 672 / 4, 'bird');
-        bird.scale.set(0.5);
+        bird.scale.set(0.2);
         this.physics.arcade.enable(bird);
         bird.animations.add('fly', [0, 1, 2, 3], 8, true);
         bird.body.collideWorldBounds = true;
         bird.addChild(letter);
+        bird.body.immovable = true;
+
+        hawks = this.add.group();
+        hawks.enableBody = true;
+
+        eventsMemory.push(this.time.events.repeat(9000 / factor, 200,
+            this.emitHawks, this));
 
         firstaids = this.add.group();
         apples = this.add.group();
@@ -119,44 +124,39 @@ export default class extends Phaser.State {
 
         weapon = this.add.weapon(1, 'bullet');
         this.time.events.add(3000, this.addBulletsToWeapon, this);
-
-        cannonball = this.add.weapon(1, 'cannonball');
-        this.time.events.add(5000, this.addBulletsToCannonBall, this);
-
         cursors = this.input.keyboard.createCursorKeys();
         cursors.space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        cursors.W = this.input.keyboard.addKey(Phaser.Keyboard.W);
+        cursors.D = this.input.keyboard.addKey(Phaser.Keyboard.D);
+        cursors.S = this.input.keyboard.addKey(Phaser.Keyboard.S);
+
+        heart = this.add.sprite(this.world.width - 275, 33, 'heart');
+        heart.scale.set(0.06);
+
         // add progress bar
         progress = this.add.graphics(0, 0);
-        progress.lineStyle(4, '0x00ff06');
-        progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
-        loadingWidth = 296;
+        progress.lineStyle(2, '0xffffff');
+        progress.drawRoundedRect(this.world.width - 229, 38, 198, 20, 9);
+        loadingWidth = 196;
         progress.lineStyle(0);
-        progress.beginFill('0xf6ff00');
-        progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+        progress.beginFill('0xf95731');
+        progress.drawRoundedRect(this.world.width - 228, 40, loadingWidth, 16, 9);
         progress.endFill();
 
-        scoreText = this.add.text(this.world.width - 230, 80, 'score: 0', {
-            font: '40px Montserrat',
-            fill: 'red'
-        });
-
         spaceValue = false;
-        score = 0;
 
-        timerText = this.add.text(250, 25, timer.value, {
+        timerText = this.add.text(350, 25, timer.value, {
             font: '40px Montserrat',
-            fill: 'green'
+            fill: '#fb8f6b'
         });
 
-        distanceText = this.add.text(450, 25, `${distance}m`, {
+        distanceText = this.add.text(525, 25, `${distance}m`, {
             font: '40px Montserrat',
-            fill: 'blue'
+            fill: '#85983c'
         });
 
-        eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer,
-            this, timer));
-        eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance,
-            this));
+        eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
+        eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
     }
 
     update () {
@@ -164,22 +164,19 @@ export default class extends Phaser.State {
             this.physics.arcade.overlap(bird, memory[key], this.collectObjects);
             this.physics.arcade.collide(weapon.bullets, memory[key],
                 (first, second) => second.kill());
-            this.physics.arcade.collide(cannonball.bullets, memory[key],
+            this.physics.arcade.collide(hawks, memory[key],
                 (first, second) => second.kill());
         }
 
         this.physics.arcade.collide(bird, weapon.bullets, (first, second) => {
             second.kill();
-            loadingWidth -= 0.1 * 296;
+            loadingWidth -= 0.1 * 196;
         });
 
-        this.physics.arcade.collide(bird, cannonball.bullets,
+        this.physics.arcade.collide(hawks, weapon.bullets,
+            (first, second) => first.kill());
+        this.physics.arcade.collide(bird, hawks,
             (first, second) => loadingWidth = 0);
-
-        this.physics.arcade.collide(weapon.bullets, cannonball.bullets,
-            (weapon, cannonball) => weapon.kill());
-
-        // bird.body.velocity.x = 0;
         bird.body.velocity.y = 0;
 
         bird.animations.play('fly');
@@ -187,16 +184,18 @@ export default class extends Phaser.State {
         spacefield.tilePosition.x -= 1.5 * factor;
         trees.tilePosition.x -= 2.25 * factor;
 
+        hawks.callAll('play', null, 'flyHawk');
+
         for (let key in memory) {
             memory[key].setAll('body.velocity.x', -150 * factor);
         }
 
-        if (cursors.up.isDown) {
+        if (cursors.up.isDown || cursors.W.isDown) {
             bird.body.velocity.y = -200 * factor;
             bird.animations.getAnimation('fly').speed = 10 * factor;
         }
 
-        if (cursors.down.isDown) {
+        if (cursors.down.isDown || cursors.S.isDown) {
             bird.body.velocity.y = 200 * factor;
             bird.animations.getAnimation('fly').speed = 6 * factor;
         }
@@ -209,7 +208,7 @@ export default class extends Phaser.State {
         //     }
         // }
 
-        if (cursors.right.isDown) {
+        if (cursors.right.isDown || cursors.D.isDown) {
             spacefield.tilePosition.x -= 1.8 * factor;
             trees.tilePosition.x -= 2.7 * factor;
             bird.animations.getAnimation('fly').speed = 10 * factor;
@@ -217,15 +216,11 @@ export default class extends Phaser.State {
                 memory[key].setAll('body.velocity.x', -250 * factor);
             }
 
-            loadingWidth -= 0.01 * 296 / 60;
-            distance -= 0.5 * birdSpeed / 60
+            loadingWidth -= 0.01 * 196 / 60;
+            distance -= 0.5 * birdSpeed / 60;
         }
-
         weapon.x = (Math.random() * 0.8 * 1000) + 0.2 * 1000;
-        cannonball.x = (Math.random() * 0.7 * 1000) + 0.3 * 1000;
-
         this.loadProgress();
-
         if (spaceValue) {
             letter.angle += 1;
         }
@@ -234,7 +229,7 @@ export default class extends Phaser.State {
     pigeonDeath () {
         bird.kill();
         startBtnSound.stop();
-        this.state.start('GameOver', true, false , level);
+        this.state.start('GameOver', true, false, level);
     }
 
     fallingSubjects (memory) {
@@ -247,21 +242,7 @@ export default class extends Phaser.State {
     collectObjects (first, second) {
         second.kill();
         collectSound.play();
-        score += 10;
-        scoreText.text = 'score: ' + score;
-        loadingWidth += 0.05 * 296;
-    }
-
-    addBulletsToCannonBall () {
-        cannonball.bullets.forEach((bul) => bul.scale.set(0.25));
-        cannonball.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-        cannonball.bulletSpeed = 600 * factor;
-        cannonball.fireRate = 10000 / factor;
-        cannonball.fireAngle = 230;
-        cannonball.fireFrom.setTo(this.world.width - this.world.width / 3,
-            this.world.height);
-        cannonball.autofire = true;
-        cannonball.bulletGravity.y = 400 * factor;
+        loadingWidth += 0.05 * 196;
     }
 
     addBulletsToWeapon () {
@@ -278,18 +259,18 @@ export default class extends Phaser.State {
     loadProgress () {
         progress.clear();
 
-        progress.lineStyle(4, '0x00ff06');
-        progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
+        progress.lineStyle(2, '0xffffff');
+        progress.drawRoundedRect(this.world.width - 229, 38, 198, 20, 9);
 
         progress.lineStyle(0);
-        progress.beginFill('0xf6ff00');
-        progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+        progress.beginFill('0xf95731');
+        progress.drawRoundedRect(this.world.width - 228, 40, loadingWidth, 16, 9);
         progress.endFill();
 
-        loadingWidth -= 0.01 * 296 / 60;
+        loadingWidth -= 0.01 * 196 / 60;
 
-        if (loadingWidth > 296) {
-            loadingWidth = 296;
+        if (loadingWidth > 196) {
+            loadingWidth = 196;
         }
 
         if (loadingWidth <= 0) {
@@ -327,14 +308,22 @@ export default class extends Phaser.State {
             eventsMemory.forEach((event) => that.time.events.remove(event));
             distanceText.text = '';
             timerText.text = '';
-            cannonball.autofire = false;
             weapon.autofire = false;
 
             spaceValue = true;
-            letter.body.gravity.y = 300;
-            letter.body.gravity.x = -150;
-
-            setTimeout(() => this.state.start('Puzzle1'), 3000);
+            letter.body.gravity.y = 900;
+            letter.body.gravity.x = -700;
+            setTimeout(() => {
+                this.state.start('Puzzle1');
+                startBtnSound.stop();
+            }, 3000);
         }
+    }
+
+    emitHawks () {
+        let hawk = hawks.create(this.world.width, (Math.random() * 0.6 *
+            this.world.height) + 0.2 * this.world.height, 'hawk');
+        hawk.body.velocity.x = -200 * factor;
+        hawk.animations.add('flyHawk', [0, 1, 2, 3, 4, 5, 6], 10, true);
     }
 }

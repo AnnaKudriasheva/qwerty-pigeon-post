@@ -3812,9 +3812,21 @@ var _Intro = __webpack_require__(/*! ./states/Intro */ 123);
 
 var _Intro2 = _interopRequireDefault(_Intro);
 
-var _Start = __webpack_require__(/*! ./states/Start */ 126);
+var _IntroLVL = __webpack_require__(/*! ./states/IntroLVL1 */ 316);
 
-var _Start2 = _interopRequireDefault(_Start);
+var _IntroLVL2 = _interopRequireDefault(_IntroLVL);
+
+var _IntroLVL3 = __webpack_require__(/*! ./states/IntroLVL2 */ 317);
+
+var _IntroLVL4 = _interopRequireDefault(_IntroLVL3);
+
+var _IntroLVL5 = __webpack_require__(/*! ./states/IntroLVL3 */ 318);
+
+var _IntroLVL6 = _interopRequireDefault(_IntroLVL5);
+
+var _HowToPlay = __webpack_require__(/*! ./states/HowToPlay */ 315);
+
+var _HowToPlay2 = _interopRequireDefault(_HowToPlay);
 
 var _MainGame = __webpack_require__(/*! ./states/MainGame */ 124);
 
@@ -3827,6 +3839,14 @@ var _GameOver2 = _interopRequireDefault(_GameOver);
 var _Puzzle = __webpack_require__(/*! ./states/Puzzle1 */ 125);
 
 var _Puzzle2 = _interopRequireDefault(_Puzzle);
+
+var _Puzzle3 = __webpack_require__(/*! ./states/Puzzle2 */ 319);
+
+var _Puzzle4 = _interopRequireDefault(_Puzzle3);
+
+var _Puzzle5 = __webpack_require__(/*! ./states/Puzzle3 */ 320);
+
+var _Puzzle6 = _interopRequireDefault(_Puzzle5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3846,10 +3866,15 @@ var Game = function (_Phaser$Game) {
 
         _this.state.add('Boot', _Boot2.default, false);
         _this.state.add('Intro', _Intro2.default, false);
-        _this.state.add('Start', _Start2.default, false);
+        _this.state.add('IntroLVL1', _IntroLVL2.default, false);
+        _this.state.add('IntroLVL2', _IntroLVL4.default, false);
+        _this.state.add('IntroLVL3', _IntroLVL6.default, false);
+        _this.state.add('HowToPlay', _HowToPlay2.default, false);
         _this.state.add('MainGame', _MainGame2.default, false);
         _this.state.add('GameOver', _GameOver2.default, false);
         _this.state.add('Puzzle1', _Puzzle2.default, false);
+        _this.state.add('Puzzle2', _Puzzle4.default, false);
+        _this.state.add('Puzzle3', _Puzzle6.default, false);
 
         _this.state.start('Boot');
         return _this;
@@ -3945,7 +3970,7 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'init',
         value: function init() {
-            this.stage.backgroundColor = '#f2f2f2';
+            this.stage.backgroundColor = '#eff4dd';
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
         }
@@ -3960,38 +3985,44 @@ var _class = function (_Phaser$State) {
                 }
             });
             // Intro
-            this.load.image('background', './assets/img/intro-back.png');
-            this.load.image('mail', './assets/img/intro-mail.png');
-            this.load.image('next-btn', './assets/img/next-button.png');
-            this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+            this.load.image('intro-center', './assets/img/intro-img/center.png');
+            this.load.image('left-corner', './assets/img/intro-img/left-corner.png');
+            this.load.image('right-corner', './assets/img/intro-img/right-corner.png');
+            this.load.image('play-button', './assets/img/intro-img/play-button.png');
             this.load.audio('intro-sound', './assets/sounds/intro.mp3');
-            // Start
-            this.load.image('start-background', './assets/img/start-back.png');
-            this.load.image('description', './assets/img/start.png');
-            this.load.image('start', './assets/img/start-btn.png');
+            // Intro LVL 1
+            this.load.image('pigeon-right', './assets/img/intro-1-img/pigeons-right-corner.png');
+            this.load.image('map', './assets/img/intro-1-img/map.png');
+            this.load.image('next-button', './assets/img/intro-1-img/next-button.png');
             this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+            // Intro LVL 2
+            this.load.image('cher-ami', './assets/img/intro-2-img/cher-ami.png');
+            // Intro LVL 3
+            this.load.image('lost', './assets/img/intro-3-img/lost.png');
             // MainGame
             this.load.audio('collect-sound', './assets/sounds/collect-obj.mp3');
             // level 1
-            this.load.image('parallax-back1', 'assets/img/parallax-back1.png');
-            this.load.image('parallax-front1', 'assets/img/parallax-front1.png');
+            this.load.image('parallax-back1', './assets/img/parallax-back1.png');
+            this.load.image('parallax-front1', './assets/img/parallax-front1.png');
             // level 2
-            this.load.image('parallax-back2', 'assets/img/parallax-back2.png');
-            this.load.image('parallax-front2', 'assets/img/parallax-front2.png');
+            this.load.image('parallax-back2', './assets/img/parallax-back2.png');
+            this.load.image('parallax-front2', './assets/img/parallax-front2.png');
             // level 3
-            this.load.image('parallax-back3', 'assets/img/parallax-back3.png');
-            this.load.image('parallax-front3', 'assets/img/parallax-front3.png');
+            this.load.image('parallax-back3', './assets/img/parallax-back3.png');
+            this.load.image('parallax-front3', './assets/img/parallax-front3.png');
             // other resources
-            this.load.image('message', 'assets/img/letter.png');
-            this.load.image('firstaids', 'assets/img/firstaid.png');
-            this.load.image('bullet', 'assets/img/bullet.png');
-            this.load.image('cannonball', 'assets/img/core.png');
-            this.load.image('apples', 'assets/img/apple.png');
-            this.load.image('pears', 'assets/img/pear.png');
-            this.load.image('plums', 'assets/img/plum.png');
-            this.load.image('grapes', 'assets/img/grape.png');
-            this.load.spritesheet('rain', 'assets/img/rain-drop.png');
-            this.load.spritesheet('bird', 'assets/img/pigeon.png', 211, 211);
+            this.load.image('message', './assets/img/letter.png');
+            this.load.image('firstaids', './assets/img/firstaid.png');
+            this.load.image('bullet', './assets/img/bullet.png');
+            this.load.image('cannonball', './assets/img/core.png');
+            this.load.image('apples', './assets/img/apple.png');
+            this.load.image('pears', './assets/img/pear.png');
+            this.load.image('plums', './assets/img/plum.png');
+            this.load.image('grapes', './assets/img/grape.png');
+            this.load.spritesheet('rain', './assets/img/rain-drop.png');
+            this.load.spritesheet('bird', './assets/img/bird.png', 632, 552);
+            this.load.spritesheet('hawk', './assets/img/hawk.png', 131, 144);
+            this.load.image('heart', './assets/img/heart.png');
             this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
             // GameOver
             this.load.image('restart-button', './assets/img/restart.png');
@@ -4007,6 +4038,9 @@ var _class = function (_Phaser$State) {
             this.load.image('5', './assetsimg/5.png');
             this.load.image('pigeon', './assets/img/pigeon.jpg');
             this.load.image('decipher', './assets/img/decipher.png');
+            // Puzzle2
+            // Puzzle3
+            // Fonts
             this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png', 'assets/fonts/fira-sans.fnt');
             this.load.bitmapFont('Playfair', './assets/fonts/playfair.png', 'assets/fonts/playfair.fnt');
         }
@@ -4083,7 +4117,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'restartGame',
         value: function restartGame() {
-            this.state.start('MainGame', true, false, 1);
+            this.state.start('MainGame', true, false, level);
         }
     }, {
         key: 'mainMenu',
@@ -4127,11 +4161,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var introSound = void 0;
-var introBack = void 0;
-var introMail = void 0;
-var introBtn = void 0;
+var title = void 0;
+var arrow = void 0;
+var playButton = void 0;
+var circleOuter = void 0;
+var circleMiddle = void 0;
+var circleInner = void 0;
+var imageCenter = void 0;
 var btnSound = void 0;
+var introSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4150,25 +4188,42 @@ var _class = function (_Phaser$State) {
             introSound = this.add.audio('intro-sound');
             introSound.loopFull();
             introSound.volume = 0.1;
-            // left side
-            introMail = this.add.sprite(0, 0, 'mail');
-            introMail.width = this.world.width * 0.43;
-            introMail.height = this.world.height;
-            // right side
-            introBack = this.add.sprite(introMail.width, 0, 'background');
-            introBack.width = this.world.width * 0.57;
-            introBack.height = this.world.height;
-            // next button
-            introBtn = this.add.button(introMail.width / 2 - introMail.width * 0.45 / 2, introMail.height - introMail.height * 0.35, 'next-btn', this.startMainPage, this);
-            introBtn.width = introMail.width * 0.45;
-            introBtn.height = introMail.width * 0.45 * 0.24;
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(this.world.width - 400, 0, 'right-corner');
+            this.add.sprite(0, this.world.height - 226, 'left-corner');
+
+            // add title and button
+            title = this.add.bitmapText(270, 40, 'Fira', 'PIGEON EXPRESS', 45);
+            arrow = this.add.graphics(0, 0);
+            arrow.beginFill(0xffffff);
+            arrow.drawRect(270, 100, 5, 200);
+            arrow.endFill();
+
+            playButton = this.add.button(270, this.world.centerY + 100, 'play-button', this.startMainPage, this);
+            playButton.anchor.setTo(0.5, 0.5);
+
+            // add center circles
+            circleOuter = this.add.graphics(0, 0);
+            circleOuter.beginFill(0x618a8c, 1);
+            circleOuter.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.64);
+
+            circleMiddle = this.add.graphics(0, 0);
+            circleMiddle.beginFill(0xeff4dd, 1);
+            circleMiddle.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.475);
+
+            imageCenter = this.add.sprite(this.world.centerX - 25, this.world.centerY, 'intro-center');
+            imageCenter.anchor.setTo(0.5, 0.5);
+            circleInner = this.add.graphics(0, 0);
+            circleInner.beginFill(0xeff4dd, 1);
+            circleInner.drawCircle(this.world.centerX, this.world.centerY, 170);
+            imageCenter.mask = circleInner;
         }
     }, {
         key: 'startMainPage',
         value: function startMainPage() {
             btnSound.play();
             introSound.stop();
-            this.state.start('Start');
+            this.state.start('IntroLVL1');
         }
     }]);
 
@@ -4213,11 +4268,9 @@ var loadingWidth = void 0;
 var collectSound = void 0;
 var eventsMemory = [];
 var spaceValue = void 0;
-var cannonball = void 0;
 var spacefield = void 0;
 var firstaids = void 0;
 var birdSpeed = void 0;
-var scoreText = void 0;
 var timerText = void 0;
 var progress = void 0;
 var distance = void 0;
@@ -4230,7 +4283,8 @@ var memory = void 0;
 var letter = void 0;
 var plums = void 0;
 var pears = void 0;
-var score = void 0;
+var hawks = void 0;
+var heart = void 0;
 var trees = void 0;
 var bird = void 0;
 var keys = void 0;
@@ -4291,16 +4345,21 @@ var _class = function (_Phaser$State) {
             spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back' + level);
             trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front' + level);
 
-            letter = this.add.sprite(170, 65, 'message');
+            letter = this.add.sprite(607, 140, 'message');
             this.physics.arcade.enable(letter);
-            letter.scale.set(0.4);
 
             bird = this.add.sprite(50, 672 / 4, 'bird');
-            bird.scale.set(0.5);
+            bird.scale.set(0.2);
             this.physics.arcade.enable(bird);
             bird.animations.add('fly', [0, 1, 2, 3], 8, true);
             bird.body.collideWorldBounds = true;
             bird.addChild(letter);
+            bird.body.immovable = true;
+
+            hawks = this.add.group();
+            hawks.enableBody = true;
+
+            eventsMemory.push(this.time.events.repeat(9000 / factor, 200, this.emitHawks, this));
 
             firstaids = this.add.group();
             apples = this.add.group();
@@ -4340,38 +4399,35 @@ var _class = function (_Phaser$State) {
 
             weapon = this.add.weapon(1, 'bullet');
             this.time.events.add(3000, this.addBulletsToWeapon, this);
-
-            cannonball = this.add.weapon(1, 'cannonball');
-            this.time.events.add(5000, this.addBulletsToCannonBall, this);
-
             cursors = this.input.keyboard.createCursorKeys();
             cursors.space = this.input.keyboard.addKey(_phaser2.default.Keyboard.SPACEBAR);
+            cursors.W = this.input.keyboard.addKey(_phaser2.default.Keyboard.W);
+            cursors.D = this.input.keyboard.addKey(_phaser2.default.Keyboard.D);
+            cursors.S = this.input.keyboard.addKey(_phaser2.default.Keyboard.S);
+
+            heart = this.add.sprite(this.world.width - 275, 33, 'heart');
+            heart.scale.set(0.06);
+
             // add progress bar
             progress = this.add.graphics(0, 0);
-            progress.lineStyle(4, '0x00ff06');
-            progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
-            loadingWidth = 296;
+            progress.lineStyle(2, '0xffffff');
+            progress.drawRoundedRect(this.world.width - 229, 38, 198, 20, 9);
+            loadingWidth = 196;
             progress.lineStyle(0);
-            progress.beginFill('0xf6ff00');
-            progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+            progress.beginFill('0xf95731');
+            progress.drawRoundedRect(this.world.width - 228, 40, loadingWidth, 16, 9);
             progress.endFill();
 
-            scoreText = this.add.text(this.world.width - 230, 80, 'score: 0', {
-                font: '40px Montserrat',
-                fill: 'red'
-            });
-
             spaceValue = false;
-            score = 0;
 
-            timerText = this.add.text(250, 25, timer.value, {
+            timerText = this.add.text(350, 25, timer.value, {
                 font: '40px Montserrat',
-                fill: 'green'
+                fill: '#fb8f6b'
             });
 
-            distanceText = this.add.text(450, 25, distance + 'm', {
+            distanceText = this.add.text(525, 25, distance + 'm', {
                 font: '40px Montserrat',
-                fill: 'blue'
+                fill: '#85983c'
             });
 
             eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
@@ -4385,25 +4441,22 @@ var _class = function (_Phaser$State) {
                 this.physics.arcade.collide(weapon.bullets, memory[key], function (first, second) {
                     return second.kill();
                 });
-                this.physics.arcade.collide(cannonball.bullets, memory[key], function (first, second) {
+                this.physics.arcade.collide(hawks, memory[key], function (first, second) {
                     return second.kill();
                 });
             }
 
             this.physics.arcade.collide(bird, weapon.bullets, function (first, second) {
                 second.kill();
-                loadingWidth -= 0.1 * 296;
+                loadingWidth -= 0.1 * 196;
             });
 
-            this.physics.arcade.collide(bird, cannonball.bullets, function (first, second) {
+            this.physics.arcade.collide(hawks, weapon.bullets, function (first, second) {
+                return first.kill();
+            });
+            this.physics.arcade.collide(bird, hawks, function (first, second) {
                 return loadingWidth = 0;
             });
-
-            this.physics.arcade.collide(weapon.bullets, cannonball.bullets, function (weapon, cannonball) {
-                return weapon.kill();
-            });
-
-            // bird.body.velocity.x = 0;
             bird.body.velocity.y = 0;
 
             bird.animations.play('fly');
@@ -4411,16 +4464,18 @@ var _class = function (_Phaser$State) {
             spacefield.tilePosition.x -= 1.5 * factor;
             trees.tilePosition.x -= 2.25 * factor;
 
+            hawks.callAll('play', null, 'flyHawk');
+
             for (var _key in memory) {
                 memory[_key].setAll('body.velocity.x', -150 * factor);
             }
 
-            if (cursors.up.isDown) {
+            if (cursors.up.isDown || cursors.W.isDown) {
                 bird.body.velocity.y = -200 * factor;
                 bird.animations.getAnimation('fly').speed = 10 * factor;
             }
 
-            if (cursors.down.isDown) {
+            if (cursors.down.isDown || cursors.S.isDown) {
                 bird.body.velocity.y = 200 * factor;
                 bird.animations.getAnimation('fly').speed = 6 * factor;
             }
@@ -4433,7 +4488,7 @@ var _class = function (_Phaser$State) {
             //     }
             // }
 
-            if (cursors.right.isDown) {
+            if (cursors.right.isDown || cursors.D.isDown) {
                 spacefield.tilePosition.x -= 1.8 * factor;
                 trees.tilePosition.x -= 2.7 * factor;
                 bird.animations.getAnimation('fly').speed = 10 * factor;
@@ -4441,15 +4496,11 @@ var _class = function (_Phaser$State) {
                     memory[_key2].setAll('body.velocity.x', -250 * factor);
                 }
 
-                loadingWidth -= 0.01 * 296 / 60;
+                loadingWidth -= 0.01 * 196 / 60;
                 distance -= 0.5 * birdSpeed / 60;
             }
-
             weapon.x = Math.random() * 0.8 * 1000 + 0.2 * 1000;
-            cannonball.x = Math.random() * 0.7 * 1000 + 0.3 * 1000;
-
             this.loadProgress();
-
             if (spaceValue) {
                 letter.angle += 1;
             }
@@ -4473,23 +4524,7 @@ var _class = function (_Phaser$State) {
         value: function collectObjects(first, second) {
             second.kill();
             collectSound.play();
-            score += 10;
-            scoreText.text = 'score: ' + score;
-            loadingWidth += 0.05 * 296;
-        }
-    }, {
-        key: 'addBulletsToCannonBall',
-        value: function addBulletsToCannonBall() {
-            cannonball.bullets.forEach(function (bul) {
-                return bul.scale.set(0.25);
-            });
-            cannonball.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
-            cannonball.bulletSpeed = 600 * factor;
-            cannonball.fireRate = 10000 / factor;
-            cannonball.fireAngle = 230;
-            cannonball.fireFrom.setTo(this.world.width - this.world.width / 3, this.world.height);
-            cannonball.autofire = true;
-            cannonball.bulletGravity.y = 400 * factor;
+            loadingWidth += 0.05 * 196;
         }
     }, {
         key: 'addBulletsToWeapon',
@@ -4510,18 +4545,18 @@ var _class = function (_Phaser$State) {
         value: function loadProgress() {
             progress.clear();
 
-            progress.lineStyle(4, '0x00ff06');
-            progress.drawRoundedRect(this.world.width - 330, 30, 300, 30, 9);
+            progress.lineStyle(2, '0xffffff');
+            progress.drawRoundedRect(this.world.width - 229, 38, 198, 20, 9);
 
             progress.lineStyle(0);
-            progress.beginFill('0xf6ff00');
-            progress.drawRoundedRect(this.world.width - 328, 32, loadingWidth, 26, 9);
+            progress.beginFill('0xf95731');
+            progress.drawRoundedRect(this.world.width - 228, 40, loadingWidth, 16, 9);
             progress.endFill();
 
-            loadingWidth -= 0.01 * 296 / 60;
+            loadingWidth -= 0.01 * 196 / 60;
 
-            if (loadingWidth > 296) {
-                loadingWidth = 296;
+            if (loadingWidth > 196) {
+                loadingWidth = 196;
             }
 
             if (loadingWidth <= 0) {
@@ -4567,17 +4602,23 @@ var _class = function (_Phaser$State) {
                 });
                 distanceText.text = '';
                 timerText.text = '';
-                cannonball.autofire = false;
                 weapon.autofire = false;
 
                 spaceValue = true;
-                letter.body.gravity.y = 300;
-                letter.body.gravity.x = -150;
-
+                letter.body.gravity.y = 900;
+                letter.body.gravity.x = -700;
                 setTimeout(function () {
-                    return _this3.state.start('Puzzle1');
+                    _this3.state.start('Puzzle1');
+                    startBtnSound.stop();
                 }, 3000);
             }
+        }
+    }, {
+        key: 'emitHawks',
+        value: function emitHawks() {
+            var hawk = hawks.create(this.world.width, Math.random() * 0.6 * this.world.height + 0.2 * this.world.height, 'hawk');
+            hawk.body.velocity.x = -200 * factor;
+            hawk.animations.add('flyHawk', [0, 1, 2, 3, 4, 5, 6], 10, true);
         }
     }]);
 
@@ -4622,7 +4663,6 @@ var circle3 = void 0;
 var circle4 = void 0;
 var circle5 = void 0;
 var center = void 0;
-var decipher = void 0;
 var title = void 0;
 var textarea = void 0;
 var cipheredMessage = void 0;
@@ -4704,19 +4744,22 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'isFinished',
         value: function isFinished() {
+            var _this2 = this;
+
             if (circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0) {
-                this.add.tween(decipher).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                this.add.tween(decipheredMessage).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                setTimeout(function () {
+                    _this2.state.start('IntroLVL2');
+                }, 3000);
             }
             return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
         }
     }, {
         key: 'rotateCircle',
         value: function rotateCircle(circle) {
-            if (this.isFinished() === true) {
-                circle.angle = circle.angle;
-            } else {
+            if (!this.isFinished()) {
                 this.input.mouse.capture = true;
                 if (this.input.activePointer.leftButton.isDown === true) {
                     circle.angle = Math.round(circle.angle + 30);
@@ -4729,11 +4772,9 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'rotateCircle1',
         value: function rotateCircle1(circle) {
-            if (this.isFinished() === true) {
-                circle.angle = circle.angle;
-            } else {
+            if (!this.isFinished()) {
                 this.input.mouse.capture = true;
-                if (this.input.activePointer.leftButton.isDown == true) {
+                if (this.input.activePointer.leftButton.isDown) {
                     circle1.angle = Math.round(circle1.angle + 30);
                     circle3.angle = Math.round(circle3.angle - 30);
                 } else {
@@ -4746,11 +4787,9 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'rotateCircle2',
         value: function rotateCircle2(circle) {
-            if (this.isFinished() === true) {
-                circle.angle = circle.angle;
-            } else {
+            if (!this.isFinished()) {
                 this.input.mouse.capture = true;
-                if (this.input.activePointer.leftButton.isDown == true) {
+                if (this.input.activePointer.leftButton.isDown) {
                     circle2.angle = Math.round(circle2.angle + 30);
                     circle5.angle = Math.round(circle5.angle - 30);
                 } else {
@@ -4778,81 +4817,7 @@ var _class = function (_Phaser$State) {
 exports.default = _class;
 
 /***/ }),
-/* 126 */
-/* unknown exports provided */
-/* all exports used */
-/*!*****************************!*\
-  !*** ./src/states/Start.js ***!
-  \*****************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _phaser = __webpack_require__(/*! phaser */ 28);
-
-var _phaser2 = _interopRequireDefault(_phaser);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var startDescription = void 0;
-var startBackground = void 0;
-var startBtnSound = void 0;
-var startWidth = void 0;
-var startBtn = void 0;
-
-var _class = function (_Phaser$State) {
-    _inherits(_class, _Phaser$State);
-
-    function _class() {
-        _classCallCheck(this, _class);
-
-        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
-    }
-
-    _createClass(_class, [{
-        key: 'create',
-        value: function create() {
-            startBtnSound = this.add.audio('button-sound');
-            startBackground = this.add.sprite(0, 0, 'start-background');
-            startBackground.width = this.world.width;
-            startBackground.height = this.world.height;
-            // description post
-            startDescription = this.add.sprite(window.innerWidth * 0.12, window.innerHeight * 0.02, 'description');
-            startWidth = this.world.width * 0.35;
-            startDescription.width = this.world.width * 0.35;
-            startDescription.height = startWidth * 1.45;
-            // start game button
-            startBtn = this.add.button(startDescription.x + 70, startDescription.y + startDescription.height - 90, 'start', this.startGame, this);
-            startBtn.width = startDescription.width * 0.6;
-            startBtn.height = startDescription.width * 0.6 * 0.27;
-        }
-    }, {
-        key: 'startGame',
-        value: function startGame() {
-            startBtnSound.play();
-            this.state.start('MainGame', true, false, 1);
-        }
-    }]);
-
-    return _class;
-}(_phaser2.default.State);
-
-exports.default = _class;
-
-/***/ }),
+/* 126 */,
 /* 127 */
 /* unknown exports provided */
 /* all exports used */
@@ -10625,6 +10590,704 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 24);
 __webpack_require__(/*! babel-polyfill */119);
 module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
 
+
+/***/ }),
+/* 314 */,
+/* 315 */
+/* unknown exports provided */
+/* all exports used */
+/*!*********************************!*\
+  !*** ./src/states/HowToPlay.js ***!
+  \*********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 28);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var startBtnSound = void 0;
+var intro = void 0;
+var title = void 0;
+var textarea = void 0;
+var introText = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            startBtnSound = this.add.audio('button-sound');
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(this.world.width - 450, 0, 'pigeon-right');
+            this.add.sprite(this.world.width - 450, this.world.height - 300, 'map');
+
+            title = this.add.bitmapText(10, 10, 'Fira', 'HOW TO PLAY', 50);
+            title.tint = 0x000000;
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(10, 80, 540, 300);
+            textarea.endFill();
+
+            intro = 'Your task is to deliver a message over given time. \n' + 'Use arrow keys or «W A S D» to control the bird. To increase ' + 'pigeon’s speed, hold «D», but look out - acceleration reduces ' + 'your power. If power is low, pigeon will get tired and unable ' + 'to deliver a message. Collect fruits and first aid kits to regain' + ' it.\n Avoid bullets and war hawks - a little pigeon can’t survive' + ' serious damage.';
+            introText = this.add.bitmapText(15, 85, 'Playfair', intro, 24);
+            introText.maxWidth = 530;
+            introText.tint = 0x000000;
+
+            this.add.button(322, 350, 'next-button', this.startGame, this);
+        }
+    }, {
+        key: 'startGame',
+        value: function startGame() {
+            startBtnSound.play();
+            this.state.start('MainGame', true, false, 1);
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
+
+/***/ }),
+/* 316 */
+/* unknown exports provided */
+/* all exports used */
+/*!*********************************!*\
+  !*** ./src/states/IntroLVL1.js ***!
+  \*********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 28);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var startBtnSound = void 0;
+var intro = void 0;
+var title = void 0;
+var textarea = void 0;
+var introText = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            startBtnSound = this.add.audio('button-sound');
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(this.world.width - 450, 0, 'pigeon-right');
+            this.add.sprite(this.world.width - 450, this.world.height - 300, 'map');
+
+            title = this.add.bitmapText(10, 10, 'Fira', 'WAR PIGEONS', 50);
+            title.tint = 0x000000;
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(10, 80, 450, 250);
+            textarea.endFill();
+
+            intro = 'During the First and Second World Wars, pigeons were used to ' + 'transport messages.\nA carrier pigeon\'s job was dangerous.' + ' Nearby enemy soldiers often tried to shoot them down, knowing ' + 'that birds were carrying important messages.';
+            introText = this.add.bitmapText(15, 85, 'Playfair', intro, 24);
+            introText.maxWidth = 420;
+            introText.tint = 0x000000;
+
+            this.add.button(322, 350, 'next-button', this.startInstructions, this);
+        }
+    }, {
+        key: 'startInstructions',
+        value: function startInstructions() {
+            startBtnSound.play();
+            this.state.start('HowToPlay');
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
+
+/***/ }),
+/* 317 */
+/* unknown exports provided */
+/* all exports used */
+/*!*********************************!*\
+  !*** ./src/states/IntroLVL2.js ***!
+  \*********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 28);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var intro = void 0;
+var title = void 0;
+var startBtnSound = void 0;
+var textarea = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            startBtnSound = this.add.audio('button-sound');
+            this.stage.backgroundColor = '#f95732';
+
+            this.add.sprite(350, 10, 'cher-ami');
+
+            title = this.add.bitmapText(10, 10, 'Fira', 'CHER AMI', 50);
+            title.tint = 0x000000;
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(10, 80, 540, 300);
+            textarea.endFill();
+
+            intro = 'Cher Ami is a little pigeon trained as war messenger.' + ' Her task for today is to deliver a message from the main quarters' + ' of American Expeditionary Force to 77th batallion located in' + ' the Argon forest.';
+            intro = this.add.bitmapText(15, 85, 'Playfair', intro, 24);
+            intro.maxWidth = 530;
+            intro.tint = 0x000000;
+            this.add.button(322, 350, 'next-button', this.startLVL2, this);
+        }
+    }, {
+        key: 'startLVL2',
+        value: function startLVL2() {
+            startBtnSound.play();
+            this.state.start('MainGame', true, false, 2);
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
+
+/***/ }),
+/* 318 */
+/* unknown exports provided */
+/* all exports used */
+/*!*********************************!*\
+  !*** ./src/states/IntroLVL3.js ***!
+  \*********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 28);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var intro = void 0;
+var title = void 0;
+var textarea = void 0;
+var startBtnSound = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            startBtnSound = this.add.audio('button-sound');
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(540, 50, 'lost');
+
+            title = this.add.bitmapText(10, 10, 'Fira', 'LOST BATALLION', 50);
+            title.tint = 0x000000;
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(10, 80, 540, 300);
+            textarea.endFill();
+
+            intro = 'Oh, no! The 77th batallion Cher Ami served have trapped in the Argon forest behind enemy lines without food and ammunition. Moreover, they are starting to receive friendly fire from allied troops who did not know their location.\n77th batallion have already sent two pigeons, but all messengers were shooted, and now Cher Ami is their last hope to receive help.';
+            intro = this.add.bitmapText(15, 85, 'Playfair', intro, 24);
+            intro.maxWidth = 530;
+            intro.tint = 0x000000;
+            this.add.button(420, 390, 'next-button', this.startLVL3, this);
+        }
+    }, {
+        key: 'startLVL3',
+        value: function startLVL3() {
+            startBtnSound.play();
+            this.state.start('MainGame', true, false, 3);
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
+
+/***/ }),
+/* 319 */
+/* unknown exports provided */
+/* all exports used */
+/*!*******************************!*\
+  !*** ./src/states/Puzzle2.js ***!
+  \*******************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 28);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var circle1 = void 0;
+var circle2 = void 0;
+var circle3 = void 0;
+var circle4 = void 0;
+var circle5 = void 0;
+var center = void 0;
+var title = void 0;
+var textarea = void 0;
+var cipheredMessage = void 0;
+var cipheredText = void 0;
+var decipheredMessage = void 0;
+var decipheredText = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            this.stage.backgroundColor = '#f95732';
+            title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
+            title.tint = 0x000000;
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(10, 100, 420, this.world.height * 0.75);
+            textarea.endFill();
+
+            this.add.sprite(200, 300, 'pigeon');
+
+            cipheredMessage = 'Nggnpxba Zbagsnhpbaq Netbaarjvyyf gnegngunyscnf ' + 'gsvirczorernql';
+            cipheredText = this.add.bitmapText(15, 105, 'Playfair', cipheredMessage, 24);
+            cipheredText.maxWidth = 400;
+            cipheredText.tint = 0x000000;
+
+            decipheredMessage = 'Attack on Montfaucon-d\'Argonne will start at' + ' half past five pm be \nready';
+            decipheredText = this.add.bitmapText(15, 105, 'Playfair', decipheredMessage, 24);
+            decipheredText.maxWidth = 400;
+            decipheredText.tint = 0x000000;
+            decipheredText.alpha = 0;
+
+            circle1 = this.createCircle('1');
+            circle2 = this.createCircle('2');
+            circle3 = this.createCircle('3');
+            circle4 = this.createCircle('4');
+            circle5 = this.createCircle('5');
+            center = this.createCircle('center');
+        }
+    }, {
+        key: 'createCircle',
+        value: function createCircle(name) {
+            var circle = this.add.sprite(this.world.centerX * 1.43, this.world.centerY, name);
+            circle.anchor.setTo(0.5, 0.5);
+            circle.inputEnabled = true;
+            if (name !== 'center') {
+                circle.angle = this.getRandomAngle();
+                circle.events.onInputOver.add(this.mouseOver, this);
+                circle.events.onInputOut.add(this.mouseOut, this);
+                circle.tint = 0xcacaca;
+            }
+            if (name !== '1' && name !== '2') {
+                circle.events.onInputDown.add(this.rotateCircle, this);
+            }
+            if (name === '1') {
+                circle.events.onInputDown.add(this.rotateCircle1, this);
+            }
+            if (name === '2') {
+                circle.events.onInputDown.add(this.rotateCircle2, this);
+            }
+            return circle;
+        }
+    }, {
+        key: 'getRandomAngle',
+        value: function getRandomAngle() {
+            var possiblePositions = [30, 60, 90, 120, 150, -180, -150, -120, -90, -60, -30];
+            var randomPosition = Math.floor(Math.random() * possiblePositions.length);
+            return possiblePositions[randomPosition];
+        }
+    }, {
+        key: 'isFinished',
+        value: function isFinished() {
+            var _this2 = this;
+
+            if (circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0) {
+                this.add.tween(decipheredMessage).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                setTimeout(function () {
+                    _this2.state.start('IntroLVL3');
+                }, 3000);
+            }
+            return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
+        }
+    }, {
+        key: 'rotateCircle',
+        value: function rotateCircle(circle) {
+            if (!this.isFinished()) {
+                this.input.mouse.capture = true;
+                if (this.input.activePointer.leftButton.isDown === true) {
+                    circle.angle = Math.round(circle.angle + 30);
+                } else {
+                    circle.angle = Math.round(circle.angle - 30);
+                }
+                this.isFinished();
+            }
+        }
+    }, {
+        key: 'rotateCircle1',
+        value: function rotateCircle1(circle) {
+            if (!this.isFinished()) {
+                this.input.mouse.capture = true;
+                if (this.input.activePointer.leftButton.isDown) {
+                    circle1.angle = Math.round(circle1.angle + 30);
+                    circle3.angle = Math.round(circle3.angle - 30);
+                } else {
+                    circle1.angle = Math.round(circle1.angle - 30);
+                    circle3.angle = Math.round(circle3.angle + 30);
+                }
+                this.isFinished();
+            }
+        }
+    }, {
+        key: 'rotateCircle2',
+        value: function rotateCircle2(circle) {
+            if (!this.isFinished()) {
+                this.input.mouse.capture = true;
+                if (this.input.activePointer.leftButton.isDown) {
+                    circle2.angle = Math.round(circle2.angle + 30);
+                    circle5.angle = Math.round(circle5.angle - 30);
+                } else {
+                    circle2.angle = Math.round(circle2.angle - 30);
+                    circle5.angle = Math.round(circle5.angle + 30);
+                }
+                this.isFinished();
+            }
+        }
+    }, {
+        key: 'mouseOver',
+        value: function mouseOver(sprite) {
+            sprite.tint = 0xffffff;
+        }
+    }, {
+        key: 'mouseOut',
+        value: function mouseOut(sprite) {
+            sprite.angle === 0 ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
+
+/***/ }),
+/* 320 */
+/* unknown exports provided */
+/* all exports used */
+/*!*******************************!*\
+  !*** ./src/states/Puzzle3.js ***!
+  \*******************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 28);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var circle1 = void 0;
+var circle2 = void 0;
+var circle3 = void 0;
+var circle4 = void 0;
+var circle5 = void 0;
+var center = void 0;
+var title = void 0;
+var textarea = void 0;
+var cipheredMessage = void 0;
+var cipheredText = void 0;
+var decipheredMessage = void 0;
+var decipheredText = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            this.stage.backgroundColor = '#f95732';
+            title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
+            title.tint = 0x000000;
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(10, 100, 420, this.world.height * 0.75);
+            textarea.endFill();
+
+            this.add.sprite(200, 300, 'pigeon');
+
+            cipheredMessage = 'Nggnpxba Zbagsnhpbaq Netbaarjvyyf gnegngunyscnf ' + 'gsvirczorernql';
+            cipheredText = this.add.bitmapText(15, 105, 'Playfair', cipheredMessage, 24);
+            cipheredText.maxWidth = 400;
+            cipheredText.tint = 0x000000;
+
+            decipheredMessage = 'Attack on Montfaucon-d\'Argonne will start at' + ' half past five pm be \nready';
+            decipheredText = this.add.bitmapText(15, 105, 'Playfair', decipheredMessage, 24);
+            decipheredText.maxWidth = 400;
+            decipheredText.tint = 0x000000;
+            decipheredText.alpha = 0;
+
+            circle1 = this.createCircle('1');
+            circle2 = this.createCircle('2');
+            circle3 = this.createCircle('3');
+            circle4 = this.createCircle('4');
+            circle5 = this.createCircle('5');
+            center = this.createCircle('center');
+        }
+    }, {
+        key: 'createCircle',
+        value: function createCircle(name) {
+            var circle = this.add.sprite(this.world.centerX * 1.43, this.world.centerY, name);
+            circle.anchor.setTo(0.5, 0.5);
+            circle.inputEnabled = true;
+            if (name !== 'center') {
+                circle.angle = this.getRandomAngle();
+                circle.events.onInputOver.add(this.mouseOver, this);
+                circle.events.onInputOut.add(this.mouseOut, this);
+                circle.tint = 0xcacaca;
+            }
+            if (name !== '1' && name !== '2') {
+                circle.events.onInputDown.add(this.rotateCircle, this);
+            }
+            if (name === '1') {
+                circle.events.onInputDown.add(this.rotateCircle1, this);
+            }
+            if (name === '2') {
+                circle.events.onInputDown.add(this.rotateCircle2, this);
+            }
+            return circle;
+        }
+    }, {
+        key: 'getRandomAngle',
+        value: function getRandomAngle() {
+            var possiblePositions = [30, 60, 90, 120, 150, -180, -150, -120, -90, -60, -30];
+            var randomPosition = Math.floor(Math.random() * possiblePositions.length);
+            return possiblePositions[randomPosition];
+        }
+    }, {
+        key: 'isFinished',
+        value: function isFinished() {
+            var _this2 = this;
+
+            if (circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0) {
+                this.add.tween(decipheredMessage).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                setTimeout(function () {
+                    _this2.state.start('Intro');
+                }, 3000);
+            }
+            return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
+        }
+    }, {
+        key: 'rotateCircle',
+        value: function rotateCircle(circle) {
+            if (!this.isFinished()) {
+                this.input.mouse.capture = true;
+                if (this.input.activePointer.leftButton.isDown === true) {
+                    circle.angle = Math.round(circle.angle + 30);
+                } else {
+                    circle.angle = Math.round(circle.angle - 30);
+                }
+                this.isFinished();
+            }
+        }
+    }, {
+        key: 'rotateCircle1',
+        value: function rotateCircle1(circle) {
+            if (!this.isFinished()) {
+                this.input.mouse.capture = true;
+                if (this.input.activePointer.leftButton.isDown) {
+                    circle1.angle = Math.round(circle1.angle + 30);
+                    circle3.angle = Math.round(circle3.angle - 30);
+                } else {
+                    circle1.angle = Math.round(circle1.angle - 30);
+                    circle3.angle = Math.round(circle3.angle + 30);
+                }
+                this.isFinished();
+            }
+        }
+    }, {
+        key: 'rotateCircle2',
+        value: function rotateCircle2(circle) {
+            if (!this.isFinished()) {
+                this.input.mouse.capture = true;
+                if (this.input.activePointer.leftButton.isDown) {
+                    circle2.angle = Math.round(circle2.angle + 30);
+                    circle5.angle = Math.round(circle5.angle - 30);
+                } else {
+                    circle2.angle = Math.round(circle2.angle - 30);
+                    circle5.angle = Math.round(circle5.angle + 30);
+                }
+                this.isFinished();
+            }
+        }
+    }, {
+        key: 'mouseOver',
+        value: function mouseOver(sprite) {
+            sprite.tint = 0xffffff;
+        }
+    }, {
+        key: 'mouseOut',
+        value: function mouseOut(sprite) {
+            sprite.angle === 0 ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ })
 ],[313]);

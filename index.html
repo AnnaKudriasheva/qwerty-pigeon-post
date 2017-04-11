@@ -14,6 +14,27 @@
         body {
             margin: 0;
             padding: 0;
+            position: relative;
+        }
+        .fixed-sidebar {
+            position: fixed;
+            top: 200px;
+            right: 10px;
+            width: 100px;
+        }
+        ul {
+            list-style-type: none;
+            text-align: center;
+        }
+        .fixed-sidebar li {
+            background-color: #eff4dd;
+            border-radius: 50%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .fixed-sidebar li img {
+            width: 31px;
+            margin-top: 3px;
         }
     </style>
 </head>
@@ -21,6 +42,26 @@
 <body style="background: url('./assets/img/pigeon-post-back.jpg');
             background-size: 100%;">
     <div id="content"></div>
+    <div class="fixed-sidebar">
+        <ul>
+            <li>
+                <a href="https://github.com/AnnaKudriasheva/qwerty-pigeon-post"
+                target="_blank">
+                    <img src="assets/img/github.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/img/slides.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <img src="assets/img/landing.png">
+                </a>
+            </li>
+        </ul>
+    </div>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
 </body>

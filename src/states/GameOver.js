@@ -20,7 +20,7 @@ export default class extends Phaser.State {
     }
 
     restartGame () {
-        this.state.start('MainGame', true, false, 1);
+        this.state.start('MainGame', true, false, level);
     }
 
     mainMenu () {
