@@ -23,7 +23,8 @@ export default class extends Phaser.State {
         this.load.image('play-button', './assets/img/intro-img/play-button.png');
         this.load.audio('intro-sound', './assets/sounds/intro.mp3');
         // Intro LVL 1
-        this.load.image('pigeon-right', './assets/img/intro-1-img/pigeons-right-corner.png');
+        this.load.image('pigeon-right',
+            './assets/img/intro-1-img/pigeons-right-corner.png');
         this.load.image('map', './assets/img/intro-1-img/map.png');
         this.load.image('next-button', './assets/img/intro-1-img/next-button.png');
         this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
@@ -56,9 +57,13 @@ export default class extends Phaser.State {
         this.load.spritesheet('hawk', './assets/img/hawk.png', 131, 144);
         this.load.image('heart', './assets/img/heart.png');
         this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
+        this.load.audio('hawk-sound', './assets/sounds/hawk.mp3');
+        this.load.audio('bullet-sound', './assets/sounds/bullet-sound.mp3');
         // GameOver
-        this.load.image('restart-button', './assets/img/restart.png');
-        this.load.image('main-menu-button', 'assets/img/main-menu.png');
+        this.load.image('forest', './assets/img/game-over-img/forest.jpg');
+        this.load.image('play-again',
+            './assets/img/game-over-img/play-again.png');
+        this.load.image('to-menu', './assets/img/game-over-img/to-menu.png');
         this.load.audio('game-over-sound', './assets/sounds/game-over.mp3');
         // Puzzle1
         this.load.image('center', './assets/img/center.png');
@@ -72,9 +77,16 @@ export default class extends Phaser.State {
         this.load.image('decipher', './assets/img/decipher.png');
         // Puzzle2
         // Puzzle3
+        // GameVictory
+        this.load.image('flowers', './assets/img/victory-img/flowers.jpg');
+        this.load.image('watch-credits',
+            './assets/img/victory-img/watch-credits.png');
+        this.load.image('to-menu', './assets/img/victory-img/to-menu.png');
         // Fonts
-        this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png', 'assets/fonts/fira-sans.fnt');
-        this.load.bitmapFont('Playfair', './assets/fonts/playfair.png', 'assets/fonts/playfair.fnt');
+        this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png',
+            'assets/fonts/fira-sans.fnt');
+        this.load.bitmapFont('Playfair', './assets/fonts/playfair.png',
+            'assets/fonts/playfair.fnt');
     }
     create () {
         this.state.start('Intro');

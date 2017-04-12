@@ -89,7 +89,7 @@ export default class extends Phaser.State {
             this.add.tween(decipheredText).to({alpha: 1}, 2000,
                 Phaser.Easing.Linear.None, true);
             setTimeout(() => {
-                this.state.start('Intro');
+                this.state.start('GameVictory');
             }, 9000);
         }
         return (circle1.angle === 0 && circle2.angle === 0 &&

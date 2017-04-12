@@ -6,9 +6,11 @@ let loadingWidth;
 let collectSound;
 let eventsMemory = [];
 let checkFinish;
+let bulletSound;
 let spaceValue;
 let spacefield;
 let firstaids;
+let hawkSound;
 let birdSpeed;
 let timerText;
 let progress;
@@ -61,10 +63,14 @@ export default class extends Phaser.State {
         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.input.onDown.add(() => this.scale.startFullScreen());
         // audio
+        bulletSound = this.add.audio('bullet-sound');
+        bulletSound.volume = 0.2;
         startBtnSound = this.add.audio('wings-sound');
+        startBtnSound.loopFull();
         collectSound = this.add.audio('collect-sound');
         collectSound.volume = 0.2;
-        startBtnSound.loopFull();
+        hawkSound = this.add.audio('hawk-sound');
+        hawkSound.volume = 0.2;
         // level background
         spacefield = this.add.tileSprite(0, 0, 1000, 560, `parallax-back${level}`);
         trees = this.add.tileSprite(0, 0, 1000, 560, `parallax-front${level}`);
@@ -173,6 +179,7 @@ export default class extends Phaser.State {
 
         this.physics.arcade.collide(bird, weapon.bullets, (first, second) => {
             second.kill();
+            bulletSound.play();
             loadingWidth -= 0.3 * 196;
         });
 
@@ -323,13 +330,20 @@ export default class extends Phaser.State {
             letter.body.gravity.y = 900;
             letter.body.gravity.x = -700;
             setTimeout(() => {
-                this.state.start('Puzzle1');
+                if (level === 1) {
+                    this.state.start('Puzzle1');
+                } else if (level === 2) {
+                    this.state.start('Puzzle2');
+                } else {
+                    this.state.start('Puzzle3');
+                }
                 startBtnSound.stop();
             }, 3000);
         }
     }
 
     emitHawks () {
+        hawkSound.play();
         let hawk = hawks.create(this.world.width, (Math.random() * 0.6 *
             this.world.height) + 0.2 * this.world.height, 'hawk');
         hawk.body.velocity.x = -250 * factor;

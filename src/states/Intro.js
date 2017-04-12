@@ -35,17 +35,20 @@ export default class extends Phaser.State {
         // add center circles
         circleOuter = this.add.graphics(0, 0);
         circleOuter.beginFill(0x618a8c, 1);
-        circleOuter.drawCircle(this.world.centerX, this.world.centerY,  this.world.height * 0.64);
+        circleOuter.drawCircle(this.world.centerX, this.world.centerY,
+            this.world.height * 0.64);
 
         circleMiddle = this.add.graphics(0, 0);
         circleMiddle.beginFill(0xeff4dd, 1);
-        circleMiddle.drawCircle(this.world.centerX, this.world.centerY,  this.world.height * 0.475);
+        circleMiddle.drawCircle(this.world.centerX, this.world.centerY,
+            this.world.height * 0.475);
 
-        imageCenter = this.add.sprite(this.world.centerX - 25, this.world.centerY, 'intro-center');
+        imageCenter = this.add.sprite(this.world.centerX - 25,
+            this.world.centerY, 'intro-center');
         imageCenter.anchor.setTo(0.5, 0.5);
         circleInner = this.add.graphics(0, 0);
         circleInner.beginFill(0xeff4dd, 1);
-        circleInner.drawCircle(this.world.centerX, this.world.centerY,  170);
+        circleInner.drawCircle(this.world.centerX, this.world.centerY, 170);
         imageCenter.mask = circleInner;
     }
     startMainPage () {

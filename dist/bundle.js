@@ -3848,6 +3848,10 @@ var _Puzzle5 = __webpack_require__(/*! ./states/Puzzle3 */ 131);
 
 var _Puzzle6 = _interopRequireDefault(_Puzzle5);
 
+var _GameVictory = __webpack_require__(/*! ./states/GameVictory */ 320);
+
+var _GameVictory2 = _interopRequireDefault(_GameVictory);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3875,6 +3879,7 @@ var Game = function (_Phaser$Game) {
         _this.state.add('Puzzle1', _Puzzle2.default, false);
         _this.state.add('Puzzle2', _Puzzle4.default, false);
         _this.state.add('Puzzle3', _Puzzle6.default, false);
+        _this.state.add('GameVictory', _GameVictory2.default, false);
 
         _this.state.start('Boot');
         return _this;
@@ -4024,9 +4029,12 @@ var _class = function (_Phaser$State) {
             this.load.spritesheet('hawk', './assets/img/hawk.png', 131, 144);
             this.load.image('heart', './assets/img/heart.png');
             this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
+            this.load.audio('hawk-sound', './assets/sounds/hawk.mp3');
+            this.load.audio('bullet-sound', './assets/sounds/bullet-sound.mp3');
             // GameOver
-            this.load.image('restart-button', './assets/img/restart.png');
-            this.load.image('main-menu-button', 'assets/img/main-menu.png');
+            this.load.image('forest', './assets/img/game-over-img/forest.jpg');
+            this.load.image('play-again', './assets/img/game-over-img/play-again.png');
+            this.load.image('to-menu', './assets/img/game-over-img/to-menu.png');
             this.load.audio('game-over-sound', './assets/sounds/game-over.mp3');
             // Puzzle1
             this.load.image('center', './assets/img/center.png');
@@ -4040,6 +4048,10 @@ var _class = function (_Phaser$State) {
             this.load.image('decipher', './assets/img/decipher.png');
             // Puzzle2
             // Puzzle3
+            // GameVictory
+            this.load.image('flowers', './assets/img/victory-img/flowers.jpg');
+            this.load.image('watch-credits', './assets/img/victory-img/watch-credits.png');
+            this.load.image('to-menu', './assets/img/victory-img/to-menu.png');
             // Fonts
             this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png', 'assets/fonts/fira-sans.fnt');
             this.load.bitmapFont('Playfair', './assets/fonts/playfair.png', 'assets/fonts/playfair.fnt');
@@ -4088,6 +4100,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var gameOverSound = void 0;
 var level = void 0;
+var title = void 0;
+var play = void 0;
+var menu = void 0;
+var btnSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4106,22 +4122,31 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'create',
         value: function create() {
+            btnSound = this.add.audio('button-sound');
             gameOverSound = this.add.audio('game-over-sound');
             gameOverSound.volume = 0.2;
             gameOverSound.play();
-            this.add.tileSprite(0, 0, 1000, 560, 'parallax-back' + level);
-            this.add.tileSprite(0, 0, 1000, 560, 'parallax-front' + level);
-            this.add.button(250, 200, 'restart-button', this.restartGame, this);
-            this.add.button(550, 200, 'main-menu-button', this.mainMenu, this);
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(0, 0, 'forest');
+
+            title = this.add.bitmapText(this.world.centerX, this.world.centerY - 120, 'Playfair', 'Oh, no! Messenger died. Try again?', 35);
+            title.anchor.setTo(0.5, 0.5);
+
+            play = this.add.button(this.world.centerX - 105, this.world.centerY, 'play-again', this.restartGame, this, 2, 1, 0);
+            menu = this.add.button(this.world.centerX + 105, this.world.centerY, 'to-menu', this.mainMenu, this, 2, 1, 0);
+            play.anchor.setTo(0.5, 0.5);
+            menu.anchor.setTo(0.5, 0.5);
         }
     }, {
         key: 'restartGame',
         value: function restartGame() {
+            btnSound.play();
             this.state.start('MainGame', true, false, level);
         }
     }, {
         key: 'mainMenu',
         value: function mainMenu() {
+            btnSound.play();
             location.reload();
         }
     }]);
@@ -4587,9 +4612,11 @@ var loadingWidth = void 0;
 var collectSound = void 0;
 var eventsMemory = [];
 var checkFinish = void 0;
+var bulletSound = void 0;
 var spaceValue = void 0;
 var spacefield = void 0;
 var firstaids = void 0;
+var hawkSound = void 0;
 var birdSpeed = void 0;
 var timerText = void 0;
 var progress = void 0;
@@ -4657,10 +4684,14 @@ var _class = function (_Phaser$State) {
                 return _this2.scale.startFullScreen();
             });
             // audio
+            bulletSound = this.add.audio('bullet-sound');
+            bulletSound.volume = 0.2;
             startBtnSound = this.add.audio('wings-sound');
+            startBtnSound.loopFull();
             collectSound = this.add.audio('collect-sound');
             collectSound.volume = 0.2;
-            startBtnSound.loopFull();
+            hawkSound = this.add.audio('hawk-sound');
+            hawkSound.volume = 0.2;
             // level background
             spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back' + level);
             trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front' + level);
@@ -4770,6 +4801,7 @@ var _class = function (_Phaser$State) {
 
             this.physics.arcade.collide(bird, weapon.bullets, function (first, second) {
                 second.kill();
+                bulletSound.play();
                 loadingWidth -= 0.3 * 196;
             });
 
@@ -4934,7 +4966,13 @@ var _class = function (_Phaser$State) {
                 letter.body.gravity.y = 900;
                 letter.body.gravity.x = -700;
                 setTimeout(function () {
-                    _this3.state.start('Puzzle1');
+                    if (level === 1) {
+                        _this3.state.start('Puzzle1');
+                    } else if (level === 2) {
+                        _this3.state.start('Puzzle2');
+                    } else {
+                        _this3.state.start('Puzzle3');
+                    }
                     startBtnSound.stop();
                 }, 3000);
             }
@@ -4942,6 +4980,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'emitHawks',
         value: function emitHawks() {
+            hawkSound.play();
             var hawk = hawks.create(this.world.width, Math.random() * 0.6 * this.world.height + 0.2 * this.world.height, 'hawk');
             hawk.body.velocity.x = -250 * factor;
             hawk.animations.add('flyHawk', [0, 1, 2, 3, 4, 5, 6], 10 * factor, true);
@@ -5455,7 +5494,7 @@ var _class = function (_Phaser$State) {
                 this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 setTimeout(function () {
-                    _this2.state.start('Intro');
+                    _this2.state.start('GameVictory');
                 }, 9000);
             }
             return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
@@ -11293,6 +11332,99 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 __webpack_require__(/*! babel-polyfill */119);
 module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
 
+
+/***/ }),
+/* 319 */,
+/* 320 */
+/* unknown exports provided */
+/* all exports used */
+/*!***********************************!*\
+  !*** ./src/states/GameVictory.js ***!
+  \***********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _phaser = __webpack_require__(/*! phaser */ 11);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var intro = void 0;
+var title = void 0;
+var textarea = void 0;
+var introText = void 0;
+var credits = void 0;
+var menu = void 0;
+var btnSound = void 0;
+
+var _class = function (_Phaser$State) {
+    _inherits(_class, _Phaser$State);
+
+    function _class() {
+        _classCallCheck(this, _class);
+
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            btnSound = this.add.audio('button-sound');
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(0, this.world.height - 400, 'flowers');
+
+            title = this.add.bitmapText(this.world.centerX, 50, 'Fira', 'YOU DID IT!', 50);
+            title.tint = 0x000000;
+            title.anchor.setTo(0.5, 0.5);
+
+            textarea = this.add.graphics(0, 0);
+            textarea.beginFill(0xffffff);
+            textarea.drawRect(this.world.centerX - 300, 80, 600, 280);
+            textarea.endFill();
+
+            intro = 'Cher Ami became the hero of the war.\nWhile delivering Lost' + ' Batallion’s message, she was shot down but managed to take' + ' flight again. She arrived back at her loft at division ' + 'headquarters 40 km to the rear in just 25 minutes, helping ' + 'to save the lives of the 194 survivors.\nThe pigeon was awarded' + ' the Croix de Guerre Medal with a palm Oak Leaf Cluster for her' + ' heroic service.';
+            introText = this.add.bitmapText(this.world.centerX - 285, 85, 'Playfair', intro, 24);
+            introText.maxWidth = 580;
+            introText.tint = 0x000000;
+
+            credits = this.add.button(this.world.centerX - 105, this.world.height - 100, 'watch-credits', this.watchCredits, this, 2, 1, 0);
+            menu = this.add.button(this.world.centerX + 105, this.world.height - 100, 'to-menu', this.mainMenu, this, 2, 1, 0);
+            credits.anchor.setTo(0.5, 0.5);
+            menu.anchor.setTo(0.5, 0.5);
+        }
+    }, {
+        key: 'watchCredits',
+        value: function watchCredits() {
+            btnSound.play();
+            this.state.start('Intro');
+        }
+    }, {
+        key: 'mainMenu',
+        value: function mainMenu() {
+            btnSound.play();
+            this.state.start('Intro');
+        }
+    }]);
+
+    return _class;
+}(_phaser2.default.State);
+
+exports.default = _class;
 
 /***/ })
 ],[318]);
