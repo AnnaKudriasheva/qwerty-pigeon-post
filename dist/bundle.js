@@ -4784,7 +4784,6 @@ var distanceText = void 0;
 var loadingWidth = void 0;
 var collectSound = void 0;
 var eventsMemory = [];
-var checkFinish = void 0;
 var bulletSound = void 0;
 var spaceValue = void 0;
 var spacefield = void 0;
@@ -4954,8 +4953,6 @@ var _class = function (_Phaser$State) {
                 fill: '#85983c'
             });
 
-            checkFinish = false;
-
             eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
             eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
         }
@@ -4982,7 +4979,7 @@ var _class = function (_Phaser$State) {
                 return first.kill();
             });
             this.physics.arcade.collide(bird, hawks, function (first, second) {
-                return loadingWidth = 0;
+                loadingWidth = 0;
             });
             bird.body.velocity.y = 0;
 
@@ -5017,8 +5014,8 @@ var _class = function (_Phaser$State) {
             // }
 
             if (cursors.right.isDown || cursors.D.isDown) {
-                spacefield.tilePosition.x -= 1.8 * factor;
-                trees.tilePosition.x -= 2.7 * factor;
+                spacefield.tilePosition.x -= 1.5 * factor;
+                trees.tilePosition.x -= 2.25 * factor;
                 bird.animations.getAnimation('fly').speed = 10 * factor;
                 hawks.setAll('body.velocity.x', -500 * factor);
                 for (var _key2 in memory) {
@@ -5026,10 +5023,10 @@ var _class = function (_Phaser$State) {
                 }
 
                 loadingWidth -= 0.01 * 196 / 60;
-                distance -= 0.5 * birdSpeed / 60;
+                distance -= birdSpeed / 60;
             }
 
-            weapon.x = Math.random() * 0.8 * 1000 + 0.2 * 1000;
+            weapon.x = Math.random() * 0.6 * 1000 + 0.4 * 1000;
             this.loadProgress();
             if (spaceValue) {
                 letter.angle += 1;
@@ -5040,7 +5037,7 @@ var _class = function (_Phaser$State) {
         value: function pigeonDeath() {
             bird.kill();
             startBtnSound.stop();
-            if (!checkFinish) {
+            if (!spaceValue) {
                 this.state.start('GameOver', true, false, level);
             }
         }
@@ -5134,7 +5131,6 @@ var _class = function (_Phaser$State) {
                 distanceText.text = '';
                 timerText.text = '';
                 weapon.autofire = false;
-                checkFinish = true;
                 spaceValue = true;
                 letter.body.gravity.y = 900;
                 letter.body.gravity.x = -700;
@@ -11503,7 +11499,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */119);
-module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
+module.exports = __webpack_require__(/*! C:\Users\Filipochka\Desktop\qwerty-pigeon-post\src\main.js */118);
 
 
 /***/ })

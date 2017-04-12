@@ -5,7 +5,6 @@ let distanceText;
 let loadingWidth;
 let collectSound;
 let eventsMemory = [];
-let checkFinish;
 let bulletSound;
 let spaceValue;
 let spacefield;
@@ -162,8 +161,6 @@ export default class extends Phaser.State {
             fill: '#85983c'
         });
 
-        checkFinish = false;
-
         eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
         eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
     }
@@ -185,8 +182,9 @@ export default class extends Phaser.State {
 
         this.physics.arcade.collide(hawks, weapon.bullets,
             (first, second) => first.kill());
-        this.physics.arcade.collide(bird, hawks,
-            (first, second) => loadingWidth = 0);
+        this.physics.arcade.collide(bird, hawks, (first, second) => {
+            loadingWidth = 0;
+        });
         bird.body.velocity.y = 0;
 
         bird.animations.play('fly');
@@ -220,8 +218,8 @@ export default class extends Phaser.State {
         // }
 
         if (cursors.right.isDown || cursors.D.isDown) {
-            spacefield.tilePosition.x -= 1.8 * factor;
-            trees.tilePosition.x -= 2.7 * factor;
+            spacefield.tilePosition.x -= 1.5 * factor;
+            trees.tilePosition.x -= 2.25 * factor;
             bird.animations.getAnimation('fly').speed = 10 * factor;
             hawks.setAll('body.velocity.x', -500 * factor);
             for (let key in memory) {
@@ -229,10 +227,10 @@ export default class extends Phaser.State {
             }
 
             loadingWidth -= 0.01 * 196 / 60;
-            distance -= 0.5 * birdSpeed / 60;
+            distance -= birdSpeed / 60;
         }
 
-        weapon.x = (Math.random() * 0.8 * 1000) + 0.2 * 1000;
+        weapon.x = (Math.random() * 0.6 * 1000) + 0.4 * 1000;
         this.loadProgress();
         if (spaceValue) {
             letter.angle += 1;
@@ -242,7 +240,7 @@ export default class extends Phaser.State {
     pigeonDeath () {
         bird.kill();
         startBtnSound.stop();
-        if (!checkFinish) {
+        if (!spaceValue) {
             this.state.start('GameOver', true, false, level);
         }
     }
@@ -325,7 +323,6 @@ export default class extends Phaser.State {
             distanceText.text = '';
             timerText.text = '';
             weapon.autofire = false;
-            checkFinish = true;
             spaceValue = true;
             letter.body.gravity.y = 900;
             letter.body.gravity.x = -700;
