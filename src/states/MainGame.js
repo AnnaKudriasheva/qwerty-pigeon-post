@@ -237,7 +237,7 @@ export default class extends Phaser.State {
         startBtnSound.stop();
         if (!checkFinish) {
             this.state.start('GameOver', true, false, level);
-        } 
+        }
     }
 
     fallingSubjects (memory) {

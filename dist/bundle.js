@@ -4225,7 +4225,7 @@ exports.default = _class;
 
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -4253,62 +4253,62 @@ var btnSound = void 0;
 var introSound = void 0;
 
 var _class = function (_Phaser$State) {
-        _inherits(_class, _Phaser$State);
+    _inherits(_class, _Phaser$State);
 
-        function _class() {
-                _classCallCheck(this, _class);
+    function _class() {
+        _classCallCheck(this, _class);
 
-                return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
+    }
+
+    _createClass(_class, [{
+        key: 'create',
+        value: function create() {
+            // sounds
+            btnSound = this.add.audio('button-sound');
+            introSound = this.add.audio('intro-sound');
+            introSound.loopFull();
+            introSound.volume = 0.1;
+            this.stage.backgroundColor = '#f95732';
+            this.add.sprite(this.world.width - 400, 0, 'right-corner');
+            this.add.sprite(0, this.world.height - 226, 'left-corner');
+
+            // add title and button
+            title = this.add.bitmapText(270, 40, 'Fira', 'PIGEON EXPRESS', 45);
+            arrow = this.add.graphics(0, 0);
+            arrow.beginFill(0xffffff);
+            arrow.drawRect(270, 100, 5, 200);
+            arrow.endFill();
+
+            playButton = this.add.button(270, this.world.centerY + 100, 'play-button', this.startMainPage, this);
+            playButton.anchor.setTo(0.5, 0.5);
+
+            // add center circles
+            circleOuter = this.add.graphics(0, 0);
+            circleOuter.beginFill(0x618a8c, 1);
+            circleOuter.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.64);
+
+            circleMiddle = this.add.graphics(0, 0);
+            circleMiddle.beginFill(0xeff4dd, 1);
+            circleMiddle.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.475);
+
+            imageCenter = this.add.sprite(this.world.centerX - 25, this.world.centerY, 'intro-center');
+            imageCenter.anchor.setTo(0.5, 0.5);
+            circleInner = this.add.graphics(0, 0);
+            circleInner.beginFill(0xeff4dd, 1);
+            circleInner.drawCircle(this.world.centerX, this.world.centerY, 170);
+            imageCenter.mask = circleInner;
         }
+    }, {
+        key: 'startMainPage',
+        value: function startMainPage() {
+            btnSound.play();
+            introSound.stop();
+            this.state.start('IntroLVL1');
+        }
+    }]);
 
-        _createClass(_class, [{
-                key: 'create',
-                value: function create() {
-                        // sounds
-                        btnSound = this.add.audio('button-sound');
-                        introSound = this.add.audio('intro-sound');
-                        introSound.loopFull();
-                        introSound.volume = 0.1;
-                        this.stage.backgroundColor = '#f95732';
-                        this.add.sprite(this.world.width - 400, 0, 'right-corner');
-                        this.add.sprite(0, this.world.height - 226, 'left-corner');
-
-                        // add title and button
-                        title = this.add.bitmapText(270, 40, 'Fira', 'PIGEON EXPRESS', 45);
-                        arrow = this.add.graphics(0, 0);
-                        arrow.beginFill(0xffffff);
-                        arrow.drawRect(270, 100, 5, 200);
-                        arrow.endFill();
-
-                        playButton = this.add.button(270, this.world.centerY + 100, 'play-button', this.startMainPage, this);
-                        playButton.anchor.setTo(0.5, 0.5);
-
-                        // add center circles
-                        circleOuter = this.add.graphics(0, 0);
-                        circleOuter.beginFill(0x618a8c, 1);
-                        circleOuter.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.64);
-
-                        circleMiddle = this.add.graphics(0, 0);
-                        circleMiddle.beginFill(0xeff4dd, 1);
-                        circleMiddle.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.475);
-
-                        imageCenter = this.add.sprite(this.world.centerX - 25, this.world.centerY, 'intro-center');
-                        imageCenter.anchor.setTo(0.5, 0.5);
-                        circleInner = this.add.graphics(0, 0);
-                        circleInner.beginFill(0xeff4dd, 1);
-                        circleInner.drawCircle(this.world.centerX, this.world.centerY, 170);
-                        imageCenter.mask = circleInner;
-                }
-        }, {
-                key: 'startMainPage',
-                value: function startMainPage() {
-                        btnSound.play();
-                        introSound.stop();
-                        this.state.start('IntroLVL1');
-                }
-        }]);
-
-        return _class;
+    return _class;
 }(_phaser2.default.State);
 
 exports.default = _class;
@@ -5048,15 +5048,15 @@ var _class = function (_Phaser$State) {
                 circle.events.onInputOver.add(this.mouseOver, this);
                 circle.events.onInputOut.add(this.mouseOut, this);
                 circle.tint = 0xcacaca;
-            }
-            if (name !== '1' && name !== '2') {
-                circle.events.onInputDown.add(this.rotateCircle, this);
-            }
-            if (name === '1') {
-                circle.events.onInputDown.add(this.rotateCircle1, this);
-            }
-            if (name === '2') {
-                circle.events.onInputDown.add(this.rotateCircle2, this);
+                if (name !== '1' && name !== '2') {
+                    circle.events.onInputDown.add(this.rotateCircle, this);
+                }
+                if (name === '1') {
+                    circle.events.onInputDown.add(this.rotateCircle1, this);
+                }
+                if (name === '2') {
+                    circle.events.onInputDown.add(this.rotateCircle2, this);
+                }
             }
             return circle;
         }
@@ -5078,7 +5078,7 @@ var _class = function (_Phaser$State) {
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 setTimeout(function () {
                     _this2.state.start('IntroLVL2');
-                }, 3000);
+                }, 9000);
             }
             return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
         }
@@ -5237,15 +5237,15 @@ var _class = function (_Phaser$State) {
                 circle.events.onInputOver.add(this.mouseOver, this);
                 circle.events.onInputOut.add(this.mouseOut, this);
                 circle.tint = 0xcacaca;
-            }
-            if (name !== '1' && name !== '2') {
-                circle.events.onInputDown.add(this.rotateCircle, this);
-            }
-            if (name === '1') {
-                circle.events.onInputDown.add(this.rotateCircle1, this);
-            }
-            if (name === '2') {
-                circle.events.onInputDown.add(this.rotateCircle2, this);
+                if (name !== '1' && name !== '2') {
+                    circle.events.onInputDown.add(this.rotateCircle, this);
+                }
+                if (name === '1') {
+                    circle.events.onInputDown.add(this.rotateCircle1, this);
+                }
+                if (name === '2') {
+                    circle.events.onInputDown.add(this.rotateCircle2, this);
+                }
             }
             return circle;
         }
@@ -5267,7 +5267,7 @@ var _class = function (_Phaser$State) {
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 setTimeout(function () {
                     _this2.state.start('IntroLVL3');
-                }, 3000);
+                }, 9000);
             }
             return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
         }
@@ -5426,15 +5426,15 @@ var _class = function (_Phaser$State) {
                 circle.events.onInputOver.add(this.mouseOver, this);
                 circle.events.onInputOut.add(this.mouseOut, this);
                 circle.tint = 0xcacaca;
-            }
-            if (name !== '1' && name !== '2') {
-                circle.events.onInputDown.add(this.rotateCircle, this);
-            }
-            if (name === '1') {
-                circle.events.onInputDown.add(this.rotateCircle1, this);
-            }
-            if (name === '2') {
-                circle.events.onInputDown.add(this.rotateCircle2, this);
+                if (name !== '1' && name !== '2') {
+                    circle.events.onInputDown.add(this.rotateCircle, this);
+                }
+                if (name === '1') {
+                    circle.events.onInputDown.add(this.rotateCircle1, this);
+                }
+                if (name === '2') {
+                    circle.events.onInputDown.add(this.rotateCircle2, this);
+                }
             }
             return circle;
         }
@@ -5456,7 +5456,7 @@ var _class = function (_Phaser$State) {
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 setTimeout(function () {
                     _this2.state.start('Intro');
-                }, 3000);
+                }, 9000);
             }
             return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
         }
@@ -11291,7 +11291,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */119);
-module.exports = __webpack_require__(/*! C:\Users\Filipochka\Desktop\qwerty-pigeon-post\src\main.js */118);
+module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
 
 
 /***/ })

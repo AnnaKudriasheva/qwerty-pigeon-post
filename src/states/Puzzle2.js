@@ -59,15 +59,15 @@ export default class extends Phaser.State {
             circle.events.onInputOver.add(this.mouseOver, this);
             circle.events.onInputOut.add(this.mouseOut, this);
             circle.tint = 0xcacaca;
-        }
-        if (name !== '1' && name !== '2') {
-            circle.events.onInputDown.add(this.rotateCircle, this);
-        }
-        if (name === '1') {
-            circle.events.onInputDown.add(this.rotateCircle1, this);
-        }
-        if (name === '2') {
-            circle.events.onInputDown.add(this.rotateCircle2, this);
+            if (name !== '1' && name !== '2') {
+                circle.events.onInputDown.add(this.rotateCircle, this);
+            }
+            if (name === '1') {
+                circle.events.onInputDown.add(this.rotateCircle1, this);
+            }
+            if (name === '2') {
+                circle.events.onInputDown.add(this.rotateCircle2, this);
+            }
         }
         return circle;
     }
@@ -90,7 +90,7 @@ export default class extends Phaser.State {
                 Phaser.Easing.Linear.None, true);
             setTimeout(() => {
                 this.state.start('IntroLVL3');
-            }, 3000);
+            }, 9000);
         }
         return (circle1.angle === 0 && circle2.angle === 0 &&
         circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0);
