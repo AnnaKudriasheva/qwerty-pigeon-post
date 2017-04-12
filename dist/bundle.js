@@ -4026,7 +4026,6 @@ var _class = function (_Phaser$State) {
             this.load.image('message', './assets/img/letter.png');
             this.load.image('firstaids', './assets/img/firstaid.png');
             this.load.image('bullet', './assets/img/bullet.png');
-            this.load.image('cannonball', './assets/img/core.png');
             this.load.image('apples', './assets/img/apple.png');
             this.load.image('pears', './assets/img/pear.png');
             this.load.image('plums', './assets/img/plum.png');
