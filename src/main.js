@@ -14,6 +14,7 @@ import Puzzle1 from './states/Puzzle1';
 import Puzzle2 from './states/Puzzle2';
 import Puzzle3 from './states/Puzzle3';
 import GameVictory from './states/GameVictory';
+import GameCredits from './states/GameCredits';
 
 class Game extends Phaser.Game {
     constructor () {
@@ -30,6 +31,7 @@ class Game extends Phaser.Game {
         this.state.add('Puzzle2', Puzzle2, false);
         this.state.add('Puzzle3', Puzzle3, false);
         this.state.add('GameVictory', GameVictory, false);
+        this.state.add('GameCredits', GameCredits, false);
 
         this.state.start('Boot');
     }

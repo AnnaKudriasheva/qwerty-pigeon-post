@@ -82,6 +82,11 @@ export default class extends Phaser.State {
         this.load.image('watch-credits',
             './assets/img/victory-img/watch-credits.png');
         this.load.image('to-menu', './assets/img/victory-img/to-menu.png');
+        // GameCredits
+        this.load.image('flowers', './assets/img/credits-img/flowers.jpg');
+        this.load.image('credits', './assets/img/credits-img/credits.png');
+        this.load.image('cher-ami', './assets/img/credits-img/flower-cher-ami.jpg');
+        this.load.image('to-menu', './assets/img/credits-img/to-menu.png');
         // Fonts
         this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png',
             'assets/fonts/fira-sans.fnt');

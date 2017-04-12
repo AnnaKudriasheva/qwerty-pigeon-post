@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 
-let title;
 let arrow;
 let playButton;
 let circleOuter;
@@ -22,7 +21,7 @@ export default class extends Phaser.State {
         this.add.sprite(0, this.world.height - 226, 'left-corner');
 
         // add title and button
-        title = this.add.bitmapText(270, 40, 'Fira', 'PIGEON EXPRESS', 45);
+        this.add.bitmapText(270, 40, 'Fira', 'PIGEON POST', 45);
         arrow = this.add.graphics(0, 0);
         arrow.beginFill(0xffffff);
         arrow.drawRect(270, 100, 5, 200);
