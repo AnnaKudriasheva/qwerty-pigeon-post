@@ -4981,7 +4981,11 @@ var _class = function (_Phaser$State) {
             this.physics.arcade.collide(bird, weapon.bullets, function (first, second) {
                 second.kill();
                 bulletSound.play();
-                loadingWidth -= 0.3 * 196;
+                if (loadingWidth - 0.3 * 196 < 10) {
+                    loadingWidth = 15;
+                } else {
+                    loadingWidth -= 0.3 * 196;
+                }
             });
 
             this.physics.arcade.collide(hawks, weapon.bullets, function (first, second) {
@@ -5013,14 +5017,6 @@ var _class = function (_Phaser$State) {
                 bird.body.velocity.y = 200 * factor;
                 bird.animations.getAnimation('fly').speed = 6 * factor;
             }
-
-            // if (cursors.left.isDown) {
-            //     spacefield.tilePosition.x -= -1 * factor * 0.6;
-            //     trees.tilePosition.x -= -1.5 * factor * 0.6;
-            //     for (let key in memory) {
-            //         memory[key].setAll('body.velocity.x', -100 * factor * 0.5);
-            //     }
-            // }
 
             if (cursors.right.isDown || cursors.D.isDown) {
                 spacefield.tilePosition.x -= 1.5 * factor;
@@ -5062,19 +5058,20 @@ var _class = function (_Phaser$State) {
         value: function collectObjects(first, second) {
             second.kill();
             collectSound.play();
-            loadingWidth += 0.05 * 196;
+            if (loadingWidth + 0.15 * 196 > 196) {
+                loadingWidth = 196;
+            } else {
+                loadingWidth += 0.15 * 196;
+            }
         }
     }, {
         key: 'addBulletsToWeapon',
         value: function addBulletsToWeapon() {
-            weapon.bullets.forEach(function (bul) {
-                return bul.scale.set(0.2);
-            });
             weapon.bulletKillType = _phaser2.default.Weapon.KILL_WORLD_BOUNDS;
-            weapon.bulletSpeed = 500 * factor;
+            weapon.bulletSpeed = 450 * factor;
             weapon.fireRate = 5000 / factor;
             weapon.fireAngle = 210;
-            weapon.bulletAngleOffset = 160;
+            weapon.bulletAngleOffset = 95;
             weapon.fireFrom.setTo(0, this.world.height);
             weapon.autofire = true;
         }
@@ -5097,7 +5094,7 @@ var _class = function (_Phaser$State) {
                 loadingWidth = 196;
             }
 
-            if (loadingWidth <= 10) {
+            if (loadingWidth <= 15) {
                 this.pigeonDeath();
             }
         }
@@ -5128,7 +5125,6 @@ var _class = function (_Phaser$State) {
 
             distance -= birdSpeed / 5;
             distanceText.text = parseInt(distance) + 'm';
-            // letter.body.velocity.y = 0;
             if (distance <= 0 && timer.milliseconds >= 0) {
                 bird.body.velocity.x = 200;
 
@@ -11549,7 +11545,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */119);
-module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
+module.exports = __webpack_require__(/*! C:\Users\Filipochka\Desktop\qwerty-pigeon-post\src\main.js */118);
 
 
 /***/ })

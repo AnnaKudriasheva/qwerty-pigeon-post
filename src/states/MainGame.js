@@ -177,7 +177,11 @@ export default class extends Phaser.State {
         this.physics.arcade.collide(bird, weapon.bullets, (first, second) => {
             second.kill();
             bulletSound.play();
-            loadingWidth -= 0.3 * 196;
+            if ((loadingWidth - 0.3 * 196) < 10) {
+                loadingWidth = 15;
+            } else {
+                loadingWidth -= 0.3 * 196;
+            }
         });
 
         this.physics.arcade.collide(hawks, weapon.bullets,
@@ -208,14 +212,6 @@ export default class extends Phaser.State {
             bird.body.velocity.y = 200 * factor;
             bird.animations.getAnimation('fly').speed = 6 * factor;
         }
-
-        // if (cursors.left.isDown) {
-        //     spacefield.tilePosition.x -= -1 * factor * 0.6;
-        //     trees.tilePosition.x -= -1.5 * factor * 0.6;
-        //     for (let key in memory) {
-        //         memory[key].setAll('body.velocity.x', -100 * factor * 0.5);
-        //     }
-        // }
 
         if (cursors.right.isDown || cursors.D.isDown) {
             spacefield.tilePosition.x -= 1.5 * factor;
@@ -255,16 +251,19 @@ export default class extends Phaser.State {
     collectObjects (first, second) {
         second.kill();
         collectSound.play();
-        loadingWidth += 0.05 * 196;
+        if ((loadingWidth + 0.15 * 196) > 196) {
+            loadingWidth = 196;
+        } else {
+            loadingWidth += 0.15 * 196;
+        }
     }
 
     addBulletsToWeapon () {
-        weapon.bullets.forEach((bul) => bul.scale.set(0.2));
         weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-        weapon.bulletSpeed = 500 * factor;
+        weapon.bulletSpeed = 450 * factor;
         weapon.fireRate = 5000 / factor;
         weapon.fireAngle = 210;
-        weapon.bulletAngleOffset = 160;
+        weapon.bulletAngleOffset = 95;
         weapon.fireFrom.setTo(0, this.world.height);
         weapon.autofire = true;
     }
@@ -286,7 +285,7 @@ export default class extends Phaser.State {
             loadingWidth = 196;
         }
 
-        if (loadingWidth <= 10) {
+        if (loadingWidth <= 15) {
             this.pigeonDeath();
         }
     }
@@ -313,7 +312,6 @@ export default class extends Phaser.State {
     changeDistance () {
         distance -= (birdSpeed / 5);
         distanceText.text = `${parseInt(distance)}m`;
-        // letter.body.velocity.y = 0;
         if (distance <= 0 && timer.milliseconds >= 0) {
             bird.body.velocity.x = 200;
 
