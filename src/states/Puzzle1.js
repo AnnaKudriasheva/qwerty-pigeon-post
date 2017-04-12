@@ -56,17 +56,21 @@ export default class extends Phaser.State {
         circle.inputEnabled = true;
         if (name !== 'center') {
             circle.angle = this.getRandomAngle();
-            circle.events.onInputOver.add(this.mouseOver, this);
-            circle.events.onInputOut.add(this.mouseOut, this);
-            circle.tint = 0xcacaca;
+            circle.tint = 0x7b7b7b;
             if (name !== '1' && name !== '2') {
                 circle.events.onInputDown.add(this.rotateCircle, this);
+                circle.events.onInputOver.add(this.mouseOver, this);
+                circle.events.onInputOut.add(this.mouseOut, this);
             }
             if (name === '1') {
                 circle.events.onInputDown.add(this.rotateCircle1, this);
+                circle.events.onInputOver.add(this.mouseOver1, this);
+                circle.events.onInputOut.add(this.mouseOut1, this);
             }
             if (name === '2') {
                 circle.events.onInputDown.add(this.rotateCircle2, this);
+                circle.events.onInputOver.add(this.mouseOver2, this);
+                circle.events.onInputOut.add(this.mouseOut2, this);
             }
         }
         return circle;
@@ -140,7 +144,27 @@ export default class extends Phaser.State {
         sprite.tint = 0xffffff;
     }
 
+    mouseOver1 () {
+        circle1.tint = 0xffffff;
+        circle3.tint = 0xffffff;
+    }
+
+    mouseOver2 () {
+        circle2.tint = 0xffffff;
+        circle5.tint = 0xffffff;
+    }
+
     mouseOut (sprite) {
-        (sprite.angle === 0) ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+        sprite.tint = 0x7b7b7b;
+    }
+
+    mouseOut1 () {
+        circle1.tint = 0x7b7b7b;
+        circle3.tint = 0x7b7b7b;
+    }
+
+    mouseOut2 () {
+        circle2.tint = 0x7b7b7b;
+        circle5.tint = 0x7b7b7b;
     }
 }

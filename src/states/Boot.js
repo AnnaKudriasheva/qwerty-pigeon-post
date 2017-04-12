@@ -72,11 +72,23 @@ export default class extends Phaser.State {
         this.load.image('3', './assets/img/3.png');
         this.load.image('4', './assets/img/4.png');
         this.load.image('5', './assets/img/5.png');
-        this.load.image('5', './assetsimg/5.png');
         this.load.image('pigeon', './assets/img/pigeon.jpg');
-        this.load.image('decipher', './assets/img/decipher.png');
         // Puzzle2
+        this.load.spritesheet('background',
+            './assets/img/puzzle2-img/bg-playfair.jpg', 110, 110);
+        this.load.image('pigeon', './assets/img/puzzle2-img/pigeon.jpg');
+        this.load.bitmapFont('Fira', 'assets/fonts/fira-sans.png',
+            'assets/fonts/fira-sans.fnt');
+        this.load.bitmapFont('Playfair', 'assets/fonts/playfair.png',
+            'assets/fonts/playfair.fnt');
         // Puzzle3
+        this.load.image('e-center', './assets/img/e-center.png');
+        this.load.image('e1', './assets/img/e1.png');
+        this.load.image('e2', './assets/img/e2.png');
+        this.load.image('e3', './assets/img/e3.png');
+        this.load.image('e4', './assets/img/e4.png');
+        this.load.image('e5', './assets/img/e5.png');
+        this.load.image('e6', './assets/img/e6.png');
         // GameVictory
         this.load.image('flowers', './assets/img/victory-img/flowers.jpg');
         this.load.image('watch-credits',

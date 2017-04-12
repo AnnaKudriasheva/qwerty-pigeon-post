@@ -26,27 +26,29 @@ export default class extends Phaser.State {
 
         this.add.sprite(200, 300, 'pigeon');
 
-        cipheredMessage = 'Nggnpxba Zbagsnhpbaq Netbaarjvyyf gnegngunyscnf ' +
-            'gsvirczorernql';
+        cipheredMessage = 'Oauxoausw oeoine onls wdgsaaahsrirnstldtapdF' +
+            'rdotryvth rpiosgeadnreke yoyb elno oept u aonaawnealaier ' +
+            'vulgchplroi sroterlte etsftirrt';
         cipheredText = this.add.bitmapText(15, 105, 'Playfair',
             cipheredMessage, 24);
         cipheredText.maxWidth = 400;
         cipheredText.tint = 0x000000;
 
-        decipheredMessage = 'Attack on Montfaucon-d\'Argonne will start at' +
-            ' half past five pm be \nready';
+        decipheredMessage = 'We are along the road paralell to 276.4. Our ' +
+            'own artillery is dropping a barrage directly on us. ' +
+            'For heavens sake stop it.';
         decipheredText = this.add.bitmapText(15, 105, 'Playfair',
             decipheredMessage, 24);
         decipheredText.maxWidth = 400;
         decipheredText.tint = 0x000000;
         decipheredText.alpha = 0;
 
-        circle1 = this.createCircle('1');
-        circle2 = this.createCircle('2');
-        circle3 = this.createCircle('3');
-        circle4 = this.createCircle('4');
-        circle5 = this.createCircle('5');
-        center = this.createCircle('center');
+        circle1 = this.createCircle('e1');
+        circle2 = this.createCircle('e2');
+        circle3 = this.createCircle('e3');
+        circle4 = this.createCircle('e4');
+        circle5 = this.createCircle('e5');
+        center = this.createCircle('e-center');
     }
 
     createCircle (name) {
@@ -54,19 +56,23 @@ export default class extends Phaser.State {
             this.world.centerY, name);
         circle.anchor.setTo(0.5, 0.5);
         circle.inputEnabled = true;
-        if (name !== 'center') {
+        if (name !== 'e-center') {
             circle.angle = this.getRandomAngle();
-            circle.events.onInputOver.add(this.mouseOver, this);
-            circle.events.onInputOut.add(this.mouseOut, this);
-            circle.tint = 0xcacaca;
+            circle.tint = 0x7b7b7b;
             if (name !== '1' && name !== '2') {
                 circle.events.onInputDown.add(this.rotateCircle, this);
+                circle.events.onInputOver.add(this.mouseOver, this);
+                circle.events.onInputOut.add(this.mouseOut, this);
             }
             if (name === '1') {
                 circle.events.onInputDown.add(this.rotateCircle1, this);
+                circle.events.onInputOver.add(this.mouseOver1, this);
+                circle.events.onInputOut.add(this.mouseOut1, this);
             }
             if (name === '2') {
                 circle.events.onInputDown.add(this.rotateCircle2, this);
+                circle.events.onInputOver.add(this.mouseOver2, this);
+                circle.events.onInputOut.add(this.mouseOut2, this);
             }
         }
         return circle;
@@ -140,7 +146,27 @@ export default class extends Phaser.State {
         sprite.tint = 0xffffff;
     }
 
+    mouseOver1 () {
+        circle1.tint = 0xffffff;
+        circle3.tint = 0xffffff;
+    }
+
+    mouseOver2 () {
+        circle2.tint = 0xffffff;
+        circle5.tint = 0xffffff;
+    }
+
     mouseOut (sprite) {
-        (sprite.angle === 0) ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+        sprite.tint = 0x7b7b7b;
+    }
+
+    mouseOut1 () {
+        circle1.tint = 0x7b7b7b;
+        circle3.tint = 0x7b7b7b;
+    }
+
+    mouseOut2 () {
+        circle2.tint = 0x7b7b7b;
+        circle5.tint = 0x7b7b7b;
     }
 }

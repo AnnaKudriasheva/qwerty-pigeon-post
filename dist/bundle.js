@@ -4048,11 +4048,20 @@ var _class = function (_Phaser$State) {
             this.load.image('3', './assets/img/3.png');
             this.load.image('4', './assets/img/4.png');
             this.load.image('5', './assets/img/5.png');
-            this.load.image('5', './assetsimg/5.png');
             this.load.image('pigeon', './assets/img/pigeon.jpg');
-            this.load.image('decipher', './assets/img/decipher.png');
             // Puzzle2
+            this.load.spritesheet('background', './assets/img/puzzle2-img/bg-playfair.jpg', 110, 110);
+            this.load.image('pigeon', './assets/img/puzzle2-img/pigeon.jpg');
+            this.load.bitmapFont('Fira', 'assets/fonts/fira-sans.png', 'assets/fonts/fira-sans.fnt');
+            this.load.bitmapFont('Playfair', 'assets/fonts/playfair.png', 'assets/fonts/playfair.fnt');
             // Puzzle3
+            this.load.image('e-center', './assets/img/e-center.png');
+            this.load.image('e1', './assets/img/e1.png');
+            this.load.image('e2', './assets/img/e2.png');
+            this.load.image('e3', './assets/img/e3.png');
+            this.load.image('e4', './assets/img/e4.png');
+            this.load.image('e5', './assets/img/e5.png');
+            this.load.image('e6', './assets/img/e6.png');
             // GameVictory
             this.load.image('flowers', './assets/img/victory-img/flowers.jpg');
             this.load.image('watch-credits', './assets/img/victory-img/watch-credits.png');
@@ -4315,7 +4324,7 @@ var _class = function (_Phaser$State) {
         key: 'watchCredits',
         value: function watchCredits() {
             btnSound.play();
-            this.state.start('Intro');
+            this.state.start('GameCredits');
         }
     }, {
         key: 'mainMenu',
@@ -5253,17 +5262,21 @@ var _class = function (_Phaser$State) {
             circle.inputEnabled = true;
             if (name !== 'center') {
                 circle.angle = this.getRandomAngle();
-                circle.events.onInputOver.add(this.mouseOver, this);
-                circle.events.onInputOut.add(this.mouseOut, this);
-                circle.tint = 0xcacaca;
+                circle.tint = 0x7b7b7b;
                 if (name !== '1' && name !== '2') {
                     circle.events.onInputDown.add(this.rotateCircle, this);
+                    circle.events.onInputOver.add(this.mouseOver, this);
+                    circle.events.onInputOut.add(this.mouseOut, this);
                 }
                 if (name === '1') {
                     circle.events.onInputDown.add(this.rotateCircle1, this);
+                    circle.events.onInputOver.add(this.mouseOver1, this);
+                    circle.events.onInputOut.add(this.mouseOut1, this);
                 }
                 if (name === '2') {
                     circle.events.onInputDown.add(this.rotateCircle2, this);
+                    circle.events.onInputOver.add(this.mouseOver2, this);
+                    circle.events.onInputOut.add(this.mouseOut2, this);
                 }
             }
             return circle;
@@ -5339,9 +5352,33 @@ var _class = function (_Phaser$State) {
             sprite.tint = 0xffffff;
         }
     }, {
+        key: 'mouseOver1',
+        value: function mouseOver1() {
+            circle1.tint = 0xffffff;
+            circle3.tint = 0xffffff;
+        }
+    }, {
+        key: 'mouseOver2',
+        value: function mouseOver2() {
+            circle2.tint = 0xffffff;
+            circle5.tint = 0xffffff;
+        }
+    }, {
         key: 'mouseOut',
         value: function mouseOut(sprite) {
-            sprite.angle === 0 ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+            sprite.tint = 0x7b7b7b;
+        }
+    }, {
+        key: 'mouseOut1',
+        value: function mouseOut1() {
+            circle1.tint = 0x7b7b7b;
+            circle3.tint = 0x7b7b7b;
+        }
+    }, {
+        key: 'mouseOut2',
+        value: function mouseOut2() {
+            circle2.tint = 0x7b7b7b;
+            circle5.tint = 0x7b7b7b;
         }
     }]);
 
@@ -5380,18 +5417,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var circle1 = void 0;
-var circle2 = void 0;
-var circle3 = void 0;
-var circle4 = void 0;
-var circle5 = void 0;
-var center = void 0;
+var pieceWidth = 110;
+var pieceHeight = 110;
+var boardColumns = void 0;
+var boardRows = void 0;
+var piecesGroup = void 0;
+var piecesAmount = void 0;
 var title = void 0;
 var textarea = void 0;
-var cipheredMessage = void 0;
+var ciphered = void 0;
+var deciphered = void 0;
 var cipheredText = void 0;
-var decipheredMessage = void 0;
 var decipheredText = void 0;
+var shuffledIndexArray = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5406,121 +5444,105 @@ var _class = function (_Phaser$State) {
         key: 'create',
         value: function create() {
             this.stage.backgroundColor = '#f95732';
-            title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
+
+            title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 47);
             title.tint = 0x000000;
 
             textarea = this.add.graphics(0, 0);
             textarea.beginFill(0xffffff);
-            textarea.drawRect(10, 100, 420, this.world.height * 0.75);
+            textarea.drawRect(10, 100, 420, 450);
             textarea.endFill();
 
-            this.add.sprite(200, 300, 'pigeon');
+            this.add.sprite(200, 350, 'pigeon');
 
-            cipheredMessage = 'Nggnpxba Zbagsnhpbaq Netbaarjvyyf gnegngunyscnf ' + 'gsvirczorernql';
-            cipheredText = this.add.bitmapText(15, 105, 'Playfair', cipheredMessage, 24);
+            ciphered = 'U v rrvsrtscnl deiewowsgydepraapi rsdpee ldrrrefaoia ' + 'geosoro o rsidaduesro na';
+            cipheredText = this.add.bitmapText(15, 105, 'Playfair', ciphered, 24);
             cipheredText.maxWidth = 400;
             cipheredText.tint = 0x000000;
 
-            decipheredMessage = 'Attack on Montfaucon-d\'Argonne will start at' + ' half past five pm be \nready';
-            decipheredText = this.add.bitmapText(15, 105, 'Playfair', decipheredMessage, 24);
+            deciphered = 'Rearguard\'s roads are overcrowded provisions supplies' + ' are lingered for five days';
+            decipheredText = this.add.bitmapText(15, 105, 'Playfair', deciphered, 24);
             decipheredText.maxWidth = 400;
             decipheredText.tint = 0x000000;
             decipheredText.alpha = 0;
-
-            circle1 = this.createCircle('1');
-            circle2 = this.createCircle('2');
-            circle3 = this.createCircle('3');
-            circle4 = this.createCircle('4');
-            circle5 = this.createCircle('5');
-            center = this.createCircle('center');
+            this.prepareBoard();
         }
     }, {
-        key: 'createCircle',
-        value: function createCircle(name) {
-            var circle = this.add.sprite(this.world.centerX * 1.43, this.world.centerY, name);
-            circle.anchor.setTo(0.5, 0.5);
-            circle.inputEnabled = true;
-            if (name !== 'center') {
-                circle.angle = this.getRandomAngle();
-                circle.events.onInputOver.add(this.mouseOver, this);
-                circle.events.onInputOut.add(this.mouseOut, this);
-                circle.tint = 0xcacaca;
-                if (name !== '1' && name !== '2') {
-                    circle.events.onInputDown.add(this.rotateCircle, this);
-                }
-                if (name === '1') {
-                    circle.events.onInputDown.add(this.rotateCircle1, this);
-                }
-                if (name === '2') {
-                    circle.events.onInputDown.add(this.rotateCircle2, this);
+        key: 'prepareBoard',
+        value: function prepareBoard() {
+            var piecesIndex = 0;
+            var i = void 0;
+            var j = void 0;
+            var piece = void 0;
+            boardColumns = 5;
+            boardRows = 5;
+            piecesAmount = boardColumns * boardRows;
+            shuffledIndexArray = this.createIndexArray();
+
+            piecesGroup = this.add.group();
+
+            for (i = 0; i < boardRows; i++) {
+                for (j = 0; j < boardColumns; j++) {
+                    piece = piecesGroup.create(j * pieceWidth + this.world.width - 500, i * pieceHeight + 60, 'background', shuffledIndexArray[piecesIndex]);
+                    piece.inputEnabled = true;
+                    piece.tint = 0xdddddd;
+                    piece.events.onInputDown.add(this.rotatePiece, this);
+                    piece.events.onInputOver.add(this.mouseOver, this);
+                    piece.events.onInputOut.add(this.mouseOut, this);
+                    piece.anchor.setTo(0.5, 0.5);
+                    piece.angle = this.getRandomAngle();
+                    piecesIndex++;
                 }
             }
-            return circle;
+        }
+    }, {
+        key: 'createIndexArray',
+        value: function createIndexArray() {
+            var indexArray = [];
+            for (var i = 0; i < piecesAmount; i++) {
+                indexArray.push(i);
+            }
+            return indexArray;
         }
     }, {
         key: 'getRandomAngle',
         value: function getRandomAngle() {
-            var possiblePositions = [30, 60, 90, 120, 150, -180, -150, -120, -90, -60, -30];
+            var possiblePositions = [0, 90, -180, -90];
             var randomPosition = Math.floor(Math.random() * possiblePositions.length);
             return possiblePositions[randomPosition];
+        }
+    }, {
+        key: 'rotatePiece',
+        value: function rotatePiece(piece) {
+            if (!this.isFinished()) {
+                piece.angle = Math.round(piece.angle + 90);
+                this.isFinished();
+            }
         }
     }, {
         key: 'isFinished',
         value: function isFinished() {
             var _this2 = this;
 
-            if (circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0) {
-                this.add.tween(decipheredMessage).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
-                this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
-                this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+            var isFinished = true;
+            piecesGroup.children.forEach(function (piece) {
+                if (piece.angle !== 0) {
+                    isFinished = false;
+                    return false;
+                }
+            });
+            if (isFinished) {
+                console.log('finish');
                 setTimeout(function () {
                     _this2.state.start('IntroLVL3');
-                }, 9000);
+                }, 7000);
+                this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                piecesGroup.children.forEach(function (piece) {
+                    return piece.tint = 0xffffff;
+                });
             }
-            return circle1.angle === 0 && circle2.angle === 0 && circle3.angle === 0 && circle4.angle === 0 && circle5.angle === 0;
-        }
-    }, {
-        key: 'rotateCircle',
-        value: function rotateCircle(circle) {
-            if (!this.isFinished()) {
-                this.input.mouse.capture = true;
-                if (this.input.activePointer.leftButton.isDown === true) {
-                    circle.angle = Math.round(circle.angle + 30);
-                } else {
-                    circle.angle = Math.round(circle.angle - 30);
-                }
-                this.isFinished();
-            }
-        }
-    }, {
-        key: 'rotateCircle1',
-        value: function rotateCircle1(circle) {
-            if (!this.isFinished()) {
-                this.input.mouse.capture = true;
-                if (this.input.activePointer.leftButton.isDown) {
-                    circle1.angle = Math.round(circle1.angle + 30);
-                    circle3.angle = Math.round(circle3.angle - 30);
-                } else {
-                    circle1.angle = Math.round(circle1.angle - 30);
-                    circle3.angle = Math.round(circle3.angle + 30);
-                }
-                this.isFinished();
-            }
-        }
-    }, {
-        key: 'rotateCircle2',
-        value: function rotateCircle2(circle) {
-            if (!this.isFinished()) {
-                this.input.mouse.capture = true;
-                if (this.input.activePointer.leftButton.isDown) {
-                    circle2.angle = Math.round(circle2.angle + 30);
-                    circle5.angle = Math.round(circle5.angle - 30);
-                } else {
-                    circle2.angle = Math.round(circle2.angle - 30);
-                    circle5.angle = Math.round(circle5.angle + 30);
-                }
-                this.isFinished();
-            }
+            return isFinished;
         }
     }, {
         key: 'mouseOver',
@@ -5530,7 +5552,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'mouseOut',
         value: function mouseOut(sprite) {
-            sprite.angle === 0 ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+            sprite.tint = 0xdddddd;
         }
     }]);
 
@@ -5605,23 +5627,23 @@ var _class = function (_Phaser$State) {
 
             this.add.sprite(200, 300, 'pigeon');
 
-            cipheredMessage = 'Nggnpxba Zbagsnhpbaq Netbaarjvyyf gnegngunyscnf ' + 'gsvirczorernql';
+            cipheredMessage = 'Oauxoausw oeoine onls wdgsaaahsrirnstldtapdF' + 'rdotryvth rpiosgeadnreke yoyb elno oept u aonaawnealaier ' + 'vulgchplroi sroterlte etsftirrt';
             cipheredText = this.add.bitmapText(15, 105, 'Playfair', cipheredMessage, 24);
             cipheredText.maxWidth = 400;
             cipheredText.tint = 0x000000;
 
-            decipheredMessage = 'Attack on Montfaucon-d\'Argonne will start at' + ' half past five pm be \nready';
+            decipheredMessage = 'We are along the road paralell to 276.4. Our ' + 'own artillery is dropping a barrage directly on us. ' + 'For heavens sake stop it.';
             decipheredText = this.add.bitmapText(15, 105, 'Playfair', decipheredMessage, 24);
             decipheredText.maxWidth = 400;
             decipheredText.tint = 0x000000;
             decipheredText.alpha = 0;
 
-            circle1 = this.createCircle('1');
-            circle2 = this.createCircle('2');
-            circle3 = this.createCircle('3');
-            circle4 = this.createCircle('4');
-            circle5 = this.createCircle('5');
-            center = this.createCircle('center');
+            circle1 = this.createCircle('e1');
+            circle2 = this.createCircle('e2');
+            circle3 = this.createCircle('e3');
+            circle4 = this.createCircle('e4');
+            circle5 = this.createCircle('e5');
+            center = this.createCircle('e-center');
         }
     }, {
         key: 'createCircle',
@@ -5629,19 +5651,23 @@ var _class = function (_Phaser$State) {
             var circle = this.add.sprite(this.world.centerX * 1.43, this.world.centerY, name);
             circle.anchor.setTo(0.5, 0.5);
             circle.inputEnabled = true;
-            if (name !== 'center') {
+            if (name !== 'e-center') {
                 circle.angle = this.getRandomAngle();
-                circle.events.onInputOver.add(this.mouseOver, this);
-                circle.events.onInputOut.add(this.mouseOut, this);
-                circle.tint = 0xcacaca;
+                circle.tint = 0x7b7b7b;
                 if (name !== '1' && name !== '2') {
                     circle.events.onInputDown.add(this.rotateCircle, this);
+                    circle.events.onInputOver.add(this.mouseOver, this);
+                    circle.events.onInputOut.add(this.mouseOut, this);
                 }
                 if (name === '1') {
                     circle.events.onInputDown.add(this.rotateCircle1, this);
+                    circle.events.onInputOver.add(this.mouseOver1, this);
+                    circle.events.onInputOut.add(this.mouseOut1, this);
                 }
                 if (name === '2') {
                     circle.events.onInputDown.add(this.rotateCircle2, this);
+                    circle.events.onInputOver.add(this.mouseOver2, this);
+                    circle.events.onInputOut.add(this.mouseOut2, this);
                 }
             }
             return circle;
@@ -5717,9 +5743,33 @@ var _class = function (_Phaser$State) {
             sprite.tint = 0xffffff;
         }
     }, {
+        key: 'mouseOver1',
+        value: function mouseOver1() {
+            circle1.tint = 0xffffff;
+            circle3.tint = 0xffffff;
+        }
+    }, {
+        key: 'mouseOver2',
+        value: function mouseOver2() {
+            circle2.tint = 0xffffff;
+            circle5.tint = 0xffffff;
+        }
+    }, {
         key: 'mouseOut',
         value: function mouseOut(sprite) {
-            sprite.angle === 0 ? sprite.tint = 0xffffff : sprite.tint = 0xcacaca;
+            sprite.tint = 0x7b7b7b;
+        }
+    }, {
+        key: 'mouseOut1',
+        value: function mouseOut1() {
+            circle1.tint = 0x7b7b7b;
+            circle3.tint = 0x7b7b7b;
+        }
+    }, {
+        key: 'mouseOut2',
+        value: function mouseOut2() {
+            circle2.tint = 0x7b7b7b;
+            circle5.tint = 0x7b7b7b;
         }
     }]);
 
@@ -11499,7 +11549,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */119);
-module.exports = __webpack_require__(/*! C:\Users\Filipochka\Desktop\qwerty-pigeon-post\src\main.js */118);
+module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
 
 
 /***/ })

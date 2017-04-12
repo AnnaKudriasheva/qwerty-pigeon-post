@@ -46,7 +46,7 @@ export default class extends Phaser.State {
     }
     watchCredits () {
         btnSound.play();
-        this.state.start('Intro');
+        this.state.start('GameCredits');
     }
     mainMenu () {
         btnSound.play();
