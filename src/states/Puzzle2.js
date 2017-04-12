@@ -13,9 +13,16 @@ let deciphered;
 let cipheredText;
 let decipheredText;
 let shuffledIndexArray;
+let puzzleSound;
+let puzzleSuccess;
 
 export default class extends Phaser.State {
     create () {
+        puzzleSound = this.add.audio('level-win');
+        puzzleSound.volume = 0.1;
+        puzzleSound.play();
+        puzzleSuccess = this.add.audio('puzzle-success');
+        puzzleSuccess.volume = 0.2;
         this.stage.backgroundColor = '#f95732';
 
         title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 47);
@@ -98,15 +105,15 @@ export default class extends Phaser.State {
             }
         });
         if (isFinished) {
-            console.log('finish');
-            setTimeout(() => {
-                this.state.start('IntroLVL3');
-            }, 7000);
             this.add.tween(cipheredText).to({ alpha: 0 }, 2000,
                 Phaser.Easing.Linear.None, true);
             this.add.tween(decipheredText).to({ alpha: 1 }, 2000,
                 Phaser.Easing.Linear.None, true);
             piecesGroup.children.forEach((piece) => piece.tint = 0xffffff);
+            puzzleSuccess.play();
+            setTimeout(() => {
+                this.state.start('IntroLVL3');
+            }, 7000);
         }
         return isFinished;
     }

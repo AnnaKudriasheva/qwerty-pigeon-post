@@ -28,6 +28,7 @@ export default class extends Phaser.State {
         this.load.image('map', './assets/img/intro-1-img/map.png');
         this.load.image('next-button', './assets/img/intro-1-img/next-button.png');
         this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+        this.load.audio('intro-1-sound', './assets/sounds/intro1.mp3');
         // Intro LVL 2
         this.load.image('cher-ami', './assets/img/intro-2-img/cher-ami.png');
         // Intro LVL 3
@@ -40,6 +41,7 @@ export default class extends Phaser.State {
         // level 2
         this.load.image(`parallax-back2`, './assets/img/parallax-back2.png');
         this.load.image(`parallax-front2`, './assets/img/parallax-front2.png');
+        this.load.audio('rain-sound', './assets/sounds/rain-sound.mp3');
         // level 3
         this.load.image(`parallax-back3`, './assets/img/parallax-back3.png');
         this.load.image(`parallax-front3`, './assets/img/parallax-front3.png');
@@ -59,6 +61,7 @@ export default class extends Phaser.State {
         this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
         this.load.audio('hawk-sound', './assets/sounds/hawk.mp3');
         this.load.audio('bullet-sound', './assets/sounds/bullet-sound.mp3');
+        this.load.audio('level-sound', './assets/sounds/level-sound.mp3');
         // GameOver
         this.load.image('forest', './assets/img/game-over-img/forest.jpg');
         this.load.image('play-again',
@@ -73,6 +76,8 @@ export default class extends Phaser.State {
         this.load.image('4', './assets/img/4.png');
         this.load.image('5', './assets/img/5.png');
         this.load.image('pigeon', './assets/img/pigeon.jpg');
+        this.load.audio('level-win', './assets/sounds/level-victory.mp3');
+        this.load.audio('puzzle-success', './assets/sounds/puzzle-success.mp3');
         // Puzzle2
         this.load.spritesheet('background',
             './assets/img/puzzle2-img/bg-playfair.jpg', 110, 110);
@@ -94,6 +99,7 @@ export default class extends Phaser.State {
         this.load.image('watch-credits',
             './assets/img/victory-img/watch-credits.png');
         this.load.image('to-menu', './assets/img/victory-img/to-menu.png');
+        this.load.audio('win-game', './assets/sounds/win-game.mp3');
         // GameCredits
         this.load.image('flowers', './assets/img/credits-img/flowers.jpg');
         this.load.image('credits', './assets/img/credits-img/credits.png');

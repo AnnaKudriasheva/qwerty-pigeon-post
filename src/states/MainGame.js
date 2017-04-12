@@ -6,11 +6,13 @@ let loadingWidth;
 let collectSound;
 let eventsMemory = [];
 let bulletSound;
+let levelSound;
 let spaceValue;
 let spacefield;
 let firstaids;
 let hawkSound;
 let birdSpeed;
+let rainSound;
 let timerText;
 let progress;
 let distance;
@@ -64,6 +66,9 @@ export default class extends Phaser.State {
         // audio
         bulletSound = this.add.audio('bullet-sound');
         bulletSound.volume = 0.2;
+        levelSound = this.add.audio('level-sound');
+        levelSound.volume = 0.1;
+        levelSound.loopFull();
         startBtnSound = this.add.audio('wings-sound');
         startBtnSound.loopFull();
         collectSound = this.add.audio('collect-sound');
@@ -116,6 +121,9 @@ export default class extends Phaser.State {
 
         if (level === 2) {
             // create rain emitter
+            rainSound = this.add.audio('rain-sound');
+            rainSound.volume = 0.2;
+            rainSound.loopFull();
             emitter = this.add.emitter(this.world.centerX, 0, 400);
             emitter.width = this.world.width;
             emitter.makeParticles('rain');
@@ -235,6 +243,10 @@ export default class extends Phaser.State {
 
     pigeonDeath () {
         bird.kill();
+        if (rainSound) {
+            rainSound.stop();
+        }
+        levelSound.stop();
         startBtnSound.stop();
         if (!spaceValue) {
             this.state.start('GameOver', true, false, level);
@@ -313,6 +325,7 @@ export default class extends Phaser.State {
         distance -= (birdSpeed / 5);
         distanceText.text = `${parseInt(distance)}m`;
         if (distance <= 0 && timer.milliseconds >= 0) {
+            levelSound.stop();
             bird.body.velocity.x = 200;
 
             let that = this;
@@ -331,6 +344,9 @@ export default class extends Phaser.State {
                     this.state.start('Puzzle2');
                 } else {
                     this.state.start('Puzzle3');
+                }
+                if (rainSound) {
+                    rainSound.stop();
                 }
                 startBtnSound.stop();
             }, 3000);

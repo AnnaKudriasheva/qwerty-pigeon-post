@@ -7,9 +7,13 @@ let introText;
 let credits;
 let menu;
 let btnSound;
+let winGameSound;
 
 export default class extends Phaser.State {
     create () {
+        winGameSound = this.add.audio('win-game');
+        winGameSound.volume = 0.2;
+        winGameSound.play();
         btnSound = this.add.audio('button-sound');
         this.stage.backgroundColor = '#f95732';
         this.add.sprite(0, this.world.height - 400, 'flowers');

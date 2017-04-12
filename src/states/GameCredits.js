@@ -4,9 +4,13 @@ let btnSound;
 let credits;
 let tween;
 let menu;
+let creditSound;
 
 export default class extends Phaser.State {
     create () {
+        creditSound = this.add.audio('intro-sound');
+        creditSound.loopFull();
+        creditSound.volume = 0.1;
         btnSound = this.add.audio('button-sound');
         this.stage.backgroundColor = '#f95732';
         this.add.sprite(0, this.world.height - 600, 'cher-ami');
@@ -22,6 +26,7 @@ export default class extends Phaser.State {
         menu.anchor.setTo(0.5, 0.5);
     }
     mainMenu () {
+        creditSound.stop();
         btnSound.play();
         this.state.start('Intro');
     }

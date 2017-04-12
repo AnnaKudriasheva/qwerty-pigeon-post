@@ -12,9 +12,16 @@ let cipheredMessage;
 let cipheredText;
 let decipheredMessage;
 let decipheredText;
+let puzzleSound;
+let puzzleSuccess;
 
 export default class extends Phaser.State {
     create () {
+        puzzleSound = this.add.audio('level-win');
+        puzzleSound.volume = 0.1;
+        puzzleSound.play();
+        puzzleSuccess = this.add.audio('puzzle-success');
+        puzzleSuccess.volume = 0.2;
         this.stage.backgroundColor = '#f95732';
         title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
         title.tint = 0x000000;
@@ -94,6 +101,7 @@ export default class extends Phaser.State {
                 Phaser.Easing.Linear.None, true);
             this.add.tween(decipheredText).to({alpha: 1}, 2000,
                 Phaser.Easing.Linear.None, true);
+            puzzleSuccess.play();
             setTimeout(() => {
                 this.state.start('GameVictory');
             }, 9000);

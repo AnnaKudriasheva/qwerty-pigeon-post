@@ -4005,6 +4005,7 @@ var _class = function (_Phaser$State) {
             this.load.image('map', './assets/img/intro-1-img/map.png');
             this.load.image('next-button', './assets/img/intro-1-img/next-button.png');
             this.load.audio('button-sound', './assets/sounds/button-sound.mp3');
+            this.load.audio('intro-1-sound', './assets/sounds/intro1.mp3');
             // Intro LVL 2
             this.load.image('cher-ami', './assets/img/intro-2-img/cher-ami.png');
             // Intro LVL 3
@@ -4017,6 +4018,7 @@ var _class = function (_Phaser$State) {
             // level 2
             this.load.image('parallax-back2', './assets/img/parallax-back2.png');
             this.load.image('parallax-front2', './assets/img/parallax-front2.png');
+            this.load.audio('rain-sound', './assets/sounds/rain-sound.mp3');
             // level 3
             this.load.image('parallax-back3', './assets/img/parallax-back3.png');
             this.load.image('parallax-front3', './assets/img/parallax-front3.png');
@@ -4036,6 +4038,7 @@ var _class = function (_Phaser$State) {
             this.load.audio('wings-sound', './assets/sounds/wings-sound.mp3');
             this.load.audio('hawk-sound', './assets/sounds/hawk.mp3');
             this.load.audio('bullet-sound', './assets/sounds/bullet-sound.mp3');
+            this.load.audio('level-sound', './assets/sounds/level-sound.mp3');
             // GameOver
             this.load.image('forest', './assets/img/game-over-img/forest.jpg');
             this.load.image('play-again', './assets/img/game-over-img/play-again.png');
@@ -4049,6 +4052,8 @@ var _class = function (_Phaser$State) {
             this.load.image('4', './assets/img/4.png');
             this.load.image('5', './assets/img/5.png');
             this.load.image('pigeon', './assets/img/pigeon.jpg');
+            this.load.audio('level-win', './assets/sounds/level-victory.mp3');
+            this.load.audio('puzzle-success', './assets/sounds/puzzle-success.mp3');
             // Puzzle2
             this.load.spritesheet('background', './assets/img/puzzle2-img/bg-playfair.jpg', 110, 110);
             this.load.image('pigeon', './assets/img/puzzle2-img/pigeon.jpg');
@@ -4066,6 +4071,7 @@ var _class = function (_Phaser$State) {
             this.load.image('flowers', './assets/img/victory-img/flowers.jpg');
             this.load.image('watch-credits', './assets/img/victory-img/watch-credits.png');
             this.load.image('to-menu', './assets/img/victory-img/to-menu.png');
+            this.load.audio('win-game', './assets/sounds/win-game.mp3');
             // GameCredits
             this.load.image('flowers', './assets/img/credits-img/flowers.jpg');
             this.load.image('credits', './assets/img/credits-img/credits.png');
@@ -4121,6 +4127,7 @@ var btnSound = void 0;
 var credits = void 0;
 var tween = void 0;
 var menu = void 0;
+var creditSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4134,6 +4141,9 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
+            creditSound = this.add.audio('intro-sound');
+            creditSound.loopFull();
+            creditSound.volume = 0.1;
             btnSound = this.add.audio('button-sound');
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(0, this.world.height - 600, 'cher-ami');
@@ -4149,6 +4159,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'mainMenu',
         value: function mainMenu() {
+            creditSound.stop();
             btnSound.play();
             this.state.start('Intro');
         }
@@ -4284,6 +4295,7 @@ var introText = void 0;
 var credits = void 0;
 var menu = void 0;
 var btnSound = void 0;
+var winGameSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4297,6 +4309,9 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
+            winGameSound = this.add.audio('win-game');
+            winGameSound.volume = 0.2;
+            winGameSound.play();
             btnSound = this.add.audio('button-sound');
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(0, this.world.height - 400, 'flowers');
@@ -4555,6 +4570,7 @@ var intro = void 0;
 var title = void 0;
 var textarea = void 0;
 var introText = void 0;
+var introSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4569,6 +4585,9 @@ var _class = function (_Phaser$State) {
         key: 'create',
         value: function create() {
             startBtnSound = this.add.audio('button-sound');
+            introSound = this.add.audio('intro-1-sound');
+            introSound.play();
+            introSound.volume = 0.1;
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(this.world.width - 450, 0, 'pigeon-right');
             this.add.sprite(this.world.width - 450, this.world.height - 300, 'map');
@@ -4591,6 +4610,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'startInstructions',
         value: function startInstructions() {
+            introSound.stop();
             startBtnSound.play();
             this.state.start('HowToPlay');
         }
@@ -4635,6 +4655,7 @@ var intro = void 0;
 var title = void 0;
 var startBtnSound = void 0;
 var textarea = void 0;
+var introSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4649,6 +4670,8 @@ var _class = function (_Phaser$State) {
         key: 'create',
         value: function create() {
             startBtnSound = this.add.audio('button-sound');
+            introSound = this.add.audio('intro-1-sound');
+            introSound.play();
             this.stage.backgroundColor = '#f95732';
 
             this.add.sprite(350, 10, 'cher-ami');
@@ -4670,6 +4693,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'startLVL2',
         value: function startLVL2() {
+            introSound.stop();
             startBtnSound.play();
             this.state.start('MainGame', true, false, 2);
         }
@@ -4714,6 +4738,7 @@ var intro = void 0;
 var title = void 0;
 var textarea = void 0;
 var startBtnSound = void 0;
+var introSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4728,6 +4753,8 @@ var _class = function (_Phaser$State) {
         key: 'create',
         value: function create() {
             startBtnSound = this.add.audio('button-sound');
+            introSound = this.add.audio('intro-1-sound');
+            introSound.play();
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(540, 50, 'lost');
 
@@ -4748,6 +4775,7 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'startLVL3',
         value: function startLVL3() {
+            introSound.stop();
             startBtnSound.play();
             this.state.start('MainGame', true, false, 3);
         }
@@ -4794,11 +4822,13 @@ var loadingWidth = void 0;
 var collectSound = void 0;
 var eventsMemory = [];
 var bulletSound = void 0;
+var levelSound = void 0;
 var spaceValue = void 0;
 var spacefield = void 0;
 var firstaids = void 0;
 var hawkSound = void 0;
 var birdSpeed = void 0;
+var rainSound = void 0;
 var timerText = void 0;
 var progress = void 0;
 var distance = void 0;
@@ -4867,6 +4897,9 @@ var _class = function (_Phaser$State) {
             // audio
             bulletSound = this.add.audio('bullet-sound');
             bulletSound.volume = 0.2;
+            levelSound = this.add.audio('level-sound');
+            levelSound.volume = 0.1;
+            levelSound.loopFull();
             startBtnSound = this.add.audio('wings-sound');
             startBtnSound.loopFull();
             collectSound = this.add.audio('collect-sound');
@@ -4917,6 +4950,9 @@ var _class = function (_Phaser$State) {
 
             if (level === 2) {
                 // create rain emitter
+                rainSound = this.add.audio('rain-sound');
+                rainSound.volume = 0.2;
+                rainSound.loopFull();
                 emitter = this.add.emitter(this.world.centerX, 0, 400);
                 emitter.width = this.world.width;
                 emitter.makeParticles('rain');
@@ -5041,6 +5077,10 @@ var _class = function (_Phaser$State) {
         key: 'pigeonDeath',
         value: function pigeonDeath() {
             bird.kill();
+            if (rainSound) {
+                rainSound.stop();
+            }
+            levelSound.stop();
             startBtnSound.stop();
             if (!spaceValue) {
                 this.state.start('GameOver', true, false, level);
@@ -5126,6 +5166,7 @@ var _class = function (_Phaser$State) {
             distance -= birdSpeed / 5;
             distanceText.text = parseInt(distance) + 'm';
             if (distance <= 0 && timer.milliseconds >= 0) {
+                levelSound.stop();
                 bird.body.velocity.x = 200;
 
                 var that = this;
@@ -5146,6 +5187,9 @@ var _class = function (_Phaser$State) {
                         _this3.state.start('Puzzle2');
                     } else {
                         _this3.state.start('Puzzle3');
+                    }
+                    if (rainSound) {
+                        rainSound.stop();
                     }
                     startBtnSound.stop();
                 }, 3000);
@@ -5208,6 +5252,8 @@ var cipheredMessage = void 0;
 var cipheredText = void 0;
 var decipheredMessage = void 0;
 var decipheredText = void 0;
+var puzzleSound = void 0;
+var puzzleSuccess = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5221,6 +5267,11 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
+            puzzleSound = this.add.audio('level-win');
+            puzzleSound.volume = 0.1;
+            puzzleSound.play();
+            puzzleSuccess = this.add.audio('puzzle-success');
+            puzzleSuccess.volume = 0.2;
             this.stage.backgroundColor = '#f95732';
             title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
             title.tint = 0x000000;
@@ -5293,6 +5344,7 @@ var _class = function (_Phaser$State) {
                 this.add.tween(decipheredMessage).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                puzzleSuccess.play();
                 setTimeout(function () {
                     _this2.state.start('IntroLVL2');
                 }, 9000);
@@ -5426,6 +5478,8 @@ var deciphered = void 0;
 var cipheredText = void 0;
 var decipheredText = void 0;
 var shuffledIndexArray = void 0;
+var puzzleSound = void 0;
+var puzzleSuccess = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5439,6 +5493,11 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
+            puzzleSound = this.add.audio('level-win');
+            puzzleSound.volume = 0.1;
+            puzzleSound.play();
+            puzzleSuccess = this.add.audio('puzzle-success');
+            puzzleSuccess.volume = 0.2;
             this.stage.backgroundColor = '#f95732';
 
             title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 47);
@@ -5528,15 +5587,15 @@ var _class = function (_Phaser$State) {
                 }
             });
             if (isFinished) {
-                console.log('finish');
-                setTimeout(function () {
-                    _this2.state.start('IntroLVL3');
-                }, 7000);
                 this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 piecesGroup.children.forEach(function (piece) {
                     return piece.tint = 0xffffff;
                 });
+                puzzleSuccess.play();
+                setTimeout(function () {
+                    _this2.state.start('IntroLVL3');
+                }, 7000);
             }
             return isFinished;
         }
@@ -5599,6 +5658,8 @@ var cipheredMessage = void 0;
 var cipheredText = void 0;
 var decipheredMessage = void 0;
 var decipheredText = void 0;
+var puzzleSound = void 0;
+var puzzleSuccess = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5612,6 +5673,11 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
+            puzzleSound = this.add.audio('level-win');
+            puzzleSound.volume = 0.1;
+            puzzleSound.play();
+            puzzleSuccess = this.add.audio('puzzle-success');
+            puzzleSuccess.volume = 0.2;
             this.stage.backgroundColor = '#f95732';
             title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
             title.tint = 0x000000;
@@ -5684,6 +5750,7 @@ var _class = function (_Phaser$State) {
                 this.add.tween(decipheredMessage).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(cipheredText).to({ alpha: 0 }, 2000, _phaser2.default.Easing.Linear.None, true);
                 this.add.tween(decipheredText).to({ alpha: 1 }, 2000, _phaser2.default.Easing.Linear.None, true);
+                puzzleSuccess.play();
                 setTimeout(function () {
                     _this2.state.start('GameVictory');
                 }, 9000);
@@ -11545,7 +11612,7 @@ module.exports = __webpack_require__(/*! ./modules/_core */ 25);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */119);
-module.exports = __webpack_require__(/*! C:\Users\Filipochka\Desktop\qwerty-pigeon-post\src\main.js */118);
+module.exports = __webpack_require__(/*! /Users/anna_kudriasheva/Documents/qwerty-pigeon-post/src/main.js */118);
 
 
 /***/ })
