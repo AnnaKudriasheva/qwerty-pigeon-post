@@ -1,17 +1,16 @@
 import Phaser from 'phaser';
 
 let arrow;
-let playButton;
-let circleOuter;
-let circleMiddle;
-let circleInner;
-let imageCenter;
 let btnSound;
 let introSound;
+let playButton;
+let circleInner;
+let imageCenter;
+let circleOuter;
+let circleMiddle;
 
 export default class extends Phaser.State {
     create () {
-        // sounds
         btnSound = this.add.audio('button-sound');
         introSound = this.add.audio('intro-sound');
         introSound.loopFull();
@@ -20,7 +19,6 @@ export default class extends Phaser.State {
         this.add.sprite(this.world.width - 400, 0, 'right-corner');
         this.add.sprite(0, this.world.height - 226, 'left-corner');
 
-        // add title and button
         this.add.bitmapText(270, 40, 'Fira', 'PIGEON POST', 45);
         arrow = this.add.graphics(0, 0);
         arrow.beginFill(0xffffff);
@@ -31,7 +29,6 @@ export default class extends Phaser.State {
             this.startMainPage, this);
         playButton.anchor.setTo(0.5, 0.5);
 
-        // add center circles
         circleOuter = this.add.graphics(0, 0);
         circleOuter.beginFill(0x618a8c, 1);
         circleOuter.drawCircle(this.world.centerX, this.world.centerY,
@@ -50,6 +47,7 @@ export default class extends Phaser.State {
         circleInner.drawCircle(this.world.centerX, this.world.centerY, 170);
         imageCenter.mask = circleInner;
     }
+
     startMainPage () {
         btnSound.play();
         introSound.stop();

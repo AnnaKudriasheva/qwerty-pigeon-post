@@ -1,38 +1,38 @@
 import Phaser from 'phaser';
 
-let startBtnSound;
-let distanceText;
-let loadingWidth;
-let collectSound;
-let eventsMemory = [];
-let bulletSound;
-let levelSound;
-let spaceValue;
-let spacefield;
-let firstaids;
-let hawkSound;
-let birdSpeed;
-let rainSound;
-let timerText;
-let progress;
-let distance;
-let emitter;
-let cursors;
-let grapes;
-let weapon;
-let apples;
-let memory;
-let letter;
+let bird;
+let keys;
+let level;
+let timer = {};
 let plums;
 let pears;
 let hawks;
 let heart;
 let trees;
-let bird;
-let keys;
-let level;
 let factor;
-let timer = {};
+let grapes;
+let weapon;
+let apples;
+let memory;
+let letter;
+let emitter;
+let cursors;
+let progress;
+let distance;
+let timerText;
+let firstaids;
+let hawkSound;
+let birdSpeed;
+let rainSound;
+let levelSound;
+let spaceValue;
+let spacefield;
+let eventsMemory = [];
+let bulletSound;
+let distanceText;
+let loadingWidth;
+let collectSound;
+let startBtnSound;
 
 export default class extends Phaser.State {
     init (levelNumber) {
@@ -63,7 +63,7 @@ export default class extends Phaser.State {
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.input.onDown.add(() => this.scale.startFullScreen());
-        // audio
+
         bulletSound = this.add.audio('bullet-sound');
         bulletSound.volume = 0.2;
         levelSound = this.add.audio('level-sound');
@@ -75,7 +75,7 @@ export default class extends Phaser.State {
         collectSound.volume = 0.2;
         hawkSound = this.add.audio('hawk-sound');
         hawkSound.volume = 0.2;
-        // level background
+
         spacefield = this.add.tileSprite(0, 0, 1000, 560, `parallax-back${level}`);
         trees = this.add.tileSprite(0, 0, 1000, 560, `parallax-front${level}`);
 
@@ -120,7 +120,6 @@ export default class extends Phaser.State {
             this.fallingSubjects, this, memory));
 
         if (level === 2) {
-            // create rain emitter
             rainSound = this.add.audio('rain-sound');
             rainSound.volume = 0.2;
             rainSound.loopFull();
@@ -147,7 +146,6 @@ export default class extends Phaser.State {
         heart = this.add.sprite(this.world.width - 275, 33, 'heart');
         heart.scale.set(0.06);
 
-        // add progress bar
         progress = this.add.graphics(0, 0);
         progress.lineStyle(2, '0xffffff');
         progress.drawRoundedRect(this.world.width - 229, 38, 198, 20, 9);
@@ -169,8 +167,10 @@ export default class extends Phaser.State {
             fill: '#85983c'
         });
 
-        eventsMemory.push(this.time.events.repeat(1000, 200, this.changeTimer, this, timer));
-        eventsMemory.push(this.time.events.repeat(200, 2000, this.changeDistance, this));
+        eventsMemory.push(this.time.events.repeat(1000, 200,
+            this.changeTimer, this, timer));
+        eventsMemory.push(this.time.events.repeat(200, 2000,
+            this.changeDistance, this));
     }
 
     update () {
@@ -197,6 +197,7 @@ export default class extends Phaser.State {
         this.physics.arcade.collide(bird, hawks, (first, second) => {
             loadingWidth = 0;
         });
+
         bird.body.velocity.y = 0;
 
         bird.animations.play('fly');

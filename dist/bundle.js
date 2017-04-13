@@ -4122,10 +4122,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var btnSound = void 0;
-var credits = void 0;
-var tween = void 0;
 var menu = void 0;
+var tween = void 0;
+var credits = void 0;
+var btnSound = void 0;
 var creditSound = void 0;
 
 var _class = function (_Phaser$State) {
@@ -4144,9 +4144,9 @@ var _class = function (_Phaser$State) {
             creditSound.loopFull();
             creditSound.volume = 0.1;
             btnSound = this.add.audio('button-sound');
+
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(0, this.world.height - 600, 'cher-ami');
-
             credits = this.add.sprite(this.world.centerX, this.world.height + 550, 'credits');
             credits.anchor.setTo(0.5, 0.5);
             tween = this.add.tween(credits);
@@ -4158,8 +4158,8 @@ var _class = function (_Phaser$State) {
     }, {
         key: 'mainMenu',
         value: function mainMenu() {
-            creditSound.stop();
             btnSound.play();
+            creditSound.stop();
             this.state.start('Intro');
         }
     }]);
@@ -4199,12 +4199,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var gameOverSound = void 0;
-var level = void 0;
-var title = void 0;
 var play = void 0;
 var menu = void 0;
+var level = void 0;
+var title = void 0;
 var btnSound = void 0;
+var gameOverSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4227,9 +4227,9 @@ var _class = function (_Phaser$State) {
             gameOverSound = this.add.audio('game-over-sound');
             gameOverSound.volume = 0.2;
             gameOverSound.play();
+
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(0, 0, 'forest');
-
             title = this.add.bitmapText(this.world.centerX, this.world.centerY - 120, 'Playfair', 'Oh, no! Messenger died. Try again?', 35);
             title.anchor.setTo(0.5, 0.5);
 
@@ -4287,13 +4287,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var menu = void 0;
 var intro = void 0;
 var title = void 0;
+var credits = void 0;
+var btnSound = void 0;
 var textarea = void 0;
 var introText = void 0;
-var credits = void 0;
-var menu = void 0;
-var btnSound = void 0;
 var winGameSound = void 0;
 
 var _class = function (_Phaser$State) {
@@ -4312,6 +4312,7 @@ var _class = function (_Phaser$State) {
             winGameSound.volume = 0.2;
             winGameSound.play();
             btnSound = this.add.audio('button-sound');
+
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(0, this.world.height - 400, 'flowers');
 
@@ -4383,11 +4384,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var startBtnSound = void 0;
 var intro = void 0;
 var title = void 0;
 var textarea = void 0;
 var introText = void 0;
+var startBtnSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4402,6 +4403,7 @@ var _class = function (_Phaser$State) {
         key: 'create',
         value: function create() {
             startBtnSound = this.add.audio('button-sound');
+
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(this.world.width - 450, 0, 'pigeon-right');
             this.add.sprite(this.world.width - 450, this.world.height - 300, 'map');
@@ -4465,13 +4467,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var arrow = void 0;
-var playButton = void 0;
-var circleOuter = void 0;
-var circleMiddle = void 0;
-var circleInner = void 0;
-var imageCenter = void 0;
 var btnSound = void 0;
 var introSound = void 0;
+var playButton = void 0;
+var circleInner = void 0;
+var imageCenter = void 0;
+var circleOuter = void 0;
+var circleMiddle = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4485,7 +4487,6 @@ var _class = function (_Phaser$State) {
     _createClass(_class, [{
         key: 'create',
         value: function create() {
-            // sounds
             btnSound = this.add.audio('button-sound');
             introSound = this.add.audio('intro-sound');
             introSound.loopFull();
@@ -4494,7 +4495,6 @@ var _class = function (_Phaser$State) {
             this.add.sprite(this.world.width - 400, 0, 'right-corner');
             this.add.sprite(0, this.world.height - 226, 'left-corner');
 
-            // add title and button
             this.add.bitmapText(270, 40, 'Fira', 'PIGEON POST', 45);
             arrow = this.add.graphics(0, 0);
             arrow.beginFill(0xffffff);
@@ -4504,7 +4504,6 @@ var _class = function (_Phaser$State) {
             playButton = this.add.button(270, this.world.centerY + 100, 'play-button', this.startMainPage, this);
             playButton.anchor.setTo(0.5, 0.5);
 
-            // add center circles
             circleOuter = this.add.graphics(0, 0);
             circleOuter.beginFill(0x618a8c, 1);
             circleOuter.drawCircle(this.world.centerX, this.world.centerY, this.world.height * 0.64);
@@ -4564,12 +4563,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var startBtnSound = void 0;
 var intro = void 0;
 var title = void 0;
 var textarea = void 0;
 var introText = void 0;
 var introSound = void 0;
+var startBtnSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4587,6 +4586,7 @@ var _class = function (_Phaser$State) {
             introSound = this.add.audio('intro-1-sound');
             introSound.play();
             introSound.volume = 0.1;
+
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(this.world.width - 450, 0, 'pigeon-right');
             this.add.sprite(this.world.width - 450, this.world.height - 300, 'map');
@@ -4652,9 +4652,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var intro = void 0;
 var title = void 0;
-var startBtnSound = void 0;
 var textarea = void 0;
 var introSound = void 0;
+var startBtnSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4671,6 +4671,7 @@ var _class = function (_Phaser$State) {
             startBtnSound = this.add.audio('button-sound');
             introSound = this.add.audio('intro-1-sound');
             introSound.play();
+
             this.stage.backgroundColor = '#f95732';
 
             this.add.sprite(350, 10, 'cher-ami');
@@ -4736,8 +4737,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var intro = void 0;
 var title = void 0;
 var textarea = void 0;
-var startBtnSound = void 0;
 var introSound = void 0;
+var startBtnSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4754,6 +4755,7 @@ var _class = function (_Phaser$State) {
             startBtnSound = this.add.audio('button-sound');
             introSound = this.add.audio('intro-1-sound');
             introSound.play();
+
             this.stage.backgroundColor = '#f95732';
             this.add.sprite(540, 50, 'lost');
 
@@ -4765,7 +4767,7 @@ var _class = function (_Phaser$State) {
             textarea.drawRect(10, 80, 540, 300);
             textarea.endFill();
 
-            intro = 'Oh, no! The 77th batallion Cher Ami served have trapped in the Argon forest behind enemy lines without food and ammunition. Moreover, they are starting to receive friendly fire from allied troops who did not know their location.\n77th batallion have already sent two pigeons, but all messengers were shooted, and now Cher Ami is their last hope to receive help.';
+            intro = 'Oh, no! The 77th batallion Cher Ami served have trapped in' + ' the Argon forest behind enemy lines without food and ammunition.' + ' Moreover, they are starting to receive friendly fire from allied ' + 'troops who did not know their location.\n77th batallion have' + ' already sent two pigeons, but all messengers were shooted, ' + 'and now Cher Ami is their last hope to receive help.';
             intro = this.add.bitmapText(15, 85, 'Playfair', intro, 24);
             intro.maxWidth = 530;
             intro.tint = 0x000000;
@@ -4815,39 +4817,39 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var startBtnSound = void 0;
-var distanceText = void 0;
-var loadingWidth = void 0;
-var collectSound = void 0;
-var eventsMemory = [];
-var bulletSound = void 0;
-var levelSound = void 0;
-var spaceValue = void 0;
-var spacefield = void 0;
-var firstaids = void 0;
-var hawkSound = void 0;
-var birdSpeed = void 0;
-var rainSound = void 0;
-var timerText = void 0;
-var progress = void 0;
-var distance = void 0;
-var emitter = void 0;
-var cursors = void 0;
-var grapes = void 0;
-var weapon = void 0;
-var apples = void 0;
-var memory = void 0;
-var letter = void 0;
+var bird = void 0;
+var keys = void 0;
+var level = void 0;
+var timer = {};
 var plums = void 0;
 var pears = void 0;
 var hawks = void 0;
 var heart = void 0;
 var trees = void 0;
-var bird = void 0;
-var keys = void 0;
-var level = void 0;
 var factor = void 0;
-var timer = {};
+var grapes = void 0;
+var weapon = void 0;
+var apples = void 0;
+var memory = void 0;
+var letter = void 0;
+var emitter = void 0;
+var cursors = void 0;
+var progress = void 0;
+var distance = void 0;
+var timerText = void 0;
+var firstaids = void 0;
+var hawkSound = void 0;
+var birdSpeed = void 0;
+var rainSound = void 0;
+var levelSound = void 0;
+var spaceValue = void 0;
+var spacefield = void 0;
+var eventsMemory = [];
+var bulletSound = void 0;
+var distanceText = void 0;
+var loadingWidth = void 0;
+var collectSound = void 0;
+var startBtnSound = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -4893,7 +4895,7 @@ var _class = function (_Phaser$State) {
             this.input.onDown.add(function () {
                 return _this2.scale.startFullScreen();
             });
-            // audio
+
             bulletSound = this.add.audio('bullet-sound');
             bulletSound.volume = 0.2;
             levelSound = this.add.audio('level-sound');
@@ -4905,7 +4907,7 @@ var _class = function (_Phaser$State) {
             collectSound.volume = 0.2;
             hawkSound = this.add.audio('hawk-sound');
             hawkSound.volume = 0.2;
-            // level background
+
             spacefield = this.add.tileSprite(0, 0, 1000, 560, 'parallax-back' + level);
             trees = this.add.tileSprite(0, 0, 1000, 560, 'parallax-front' + level);
 
@@ -4948,7 +4950,6 @@ var _class = function (_Phaser$State) {
             eventsMemory.push(this.time.events.repeat(3000 * level, 100, this.fallingSubjects, this, memory));
 
             if (level === 2) {
-                // create rain emitter
                 rainSound = this.add.audio('rain-sound');
                 rainSound.volume = 0.2;
                 rainSound.loopFull();
@@ -4975,7 +4976,6 @@ var _class = function (_Phaser$State) {
             heart = this.add.sprite(this.world.width - 275, 33, 'heart');
             heart.scale.set(0.06);
 
-            // add progress bar
             progress = this.add.graphics(0, 0);
             progress.lineStyle(2, '0xffffff');
             progress.drawRoundedRect(this.world.width - 229, 38, 198, 20, 9);
@@ -5029,6 +5029,7 @@ var _class = function (_Phaser$State) {
             this.physics.arcade.collide(bird, hawks, function (first, second) {
                 loadingWidth = 0;
             });
+
             bird.body.velocity.y = 0;
 
             bird.animations.play('fly');
@@ -5239,20 +5240,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var title = void 0;
+var center = void 0;
 var circle1 = void 0;
 var circle2 = void 0;
 var circle3 = void 0;
 var circle4 = void 0;
 var circle5 = void 0;
-var center = void 0;
-var title = void 0;
 var textarea = void 0;
-var cipheredMessage = void 0;
-var cipheredText = void 0;
-var decipheredMessage = void 0;
-var decipheredText = void 0;
 var puzzleSound = void 0;
+var cipheredText = void 0;
 var puzzleSuccess = void 0;
+var decipheredText = void 0;
+var cipheredMessage = void 0;
+var decipheredMessage = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5271,6 +5272,7 @@ var _class = function (_Phaser$State) {
             puzzleSound.play();
             puzzleSuccess = this.add.audio('puzzle-success');
             puzzleSuccess.volume = 0.2;
+
             this.stage.backgroundColor = '#f95732';
             title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
             title.tint = 0x000000;
@@ -5464,21 +5466,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var pieceWidth = 110;
-var pieceHeight = 110;
-var boardColumns = void 0;
-var boardRows = void 0;
-var piecesGroup = void 0;
-var piecesAmount = void 0;
 var title = void 0;
 var textarea = void 0;
 var ciphered = void 0;
+var boardRows = void 0;
+var pieceWidth = 110;
+var pieceHeight = 110;
 var deciphered = void 0;
+var piecesGroup = void 0;
+var puzzleSound = void 0;
+var boardColumns = void 0;
+var piecesAmount = void 0;
 var cipheredText = void 0;
+var puzzleSuccess = void 0;
 var decipheredText = void 0;
 var shuffledIndexArray = void 0;
-var puzzleSound = void 0;
-var puzzleSuccess = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5497,8 +5499,8 @@ var _class = function (_Phaser$State) {
             puzzleSound.play();
             puzzleSuccess = this.add.audio('puzzle-success');
             puzzleSuccess.volume = 0.2;
-            this.stage.backgroundColor = '#f95732';
 
+            this.stage.backgroundColor = '#f95732';
             title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 47);
             title.tint = 0x000000;
 
@@ -5645,20 +5647,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var title = void 0;
+var center = void 0;
 var circle1 = void 0;
 var circle2 = void 0;
 var circle3 = void 0;
 var circle4 = void 0;
 var circle5 = void 0;
-var center = void 0;
-var title = void 0;
 var textarea = void 0;
-var cipheredMessage = void 0;
-var cipheredText = void 0;
-var decipheredMessage = void 0;
-var decipheredText = void 0;
 var puzzleSound = void 0;
+var cipheredText = void 0;
 var puzzleSuccess = void 0;
+var decipheredText = void 0;
+var cipheredMessage = void 0;
+var decipheredMessage = void 0;
 
 var _class = function (_Phaser$State) {
     _inherits(_class, _Phaser$State);
@@ -5677,6 +5679,7 @@ var _class = function (_Phaser$State) {
             puzzleSound.play();
             puzzleSuccess = this.add.audio('puzzle-success');
             puzzleSuccess.volume = 0.2;
+
             this.stage.backgroundColor = '#f95732';
             title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
             title.tint = 0x000000;

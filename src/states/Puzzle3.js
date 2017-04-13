@@ -1,19 +1,19 @@
 import Phaser from 'phaser';
 
+let title;
+let center;
 let circle1;
 let circle2;
 let circle3;
 let circle4;
 let circle5;
-let center;
-let title;
 let textarea;
-let cipheredMessage;
-let cipheredText;
-let decipheredMessage;
-let decipheredText;
 let puzzleSound;
+let cipheredText;
 let puzzleSuccess;
+let decipheredText;
+let cipheredMessage;
+let decipheredMessage;
 
 export default class extends Phaser.State {
     create () {
@@ -22,6 +22,7 @@ export default class extends Phaser.State {
         puzzleSound.play();
         puzzleSuccess = this.add.audio('puzzle-success');
         puzzleSuccess.volume = 0.2;
+
         this.stage.backgroundColor = '#f95732';
         title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 50);
         title.tint = 0x000000;

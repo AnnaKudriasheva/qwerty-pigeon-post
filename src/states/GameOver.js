@@ -1,24 +1,25 @@
 import Phaser from 'phaser';
 
-let gameOverSound;
-let level;
-let title;
 let play;
 let menu;
+let level;
+let title;
 let btnSound;
+let gameOverSound;
 
 export default class extends Phaser.State {
     init (levelNumber) {
         level = levelNumber;
     }
+
     create () {
         btnSound = this.add.audio('button-sound');
         gameOverSound = this.add.audio('game-over-sound');
         gameOverSound.volume = 0.2;
         gameOverSound.play();
+
         this.stage.backgroundColor = '#f95732';
         this.add.sprite(0, 0, 'forest');
-
         title = this.add.bitmapText(this.world.centerX, this.world.centerY - 120,
             'Playfair', 'Oh, no! Messenger died. Try again?', 35);
         title.anchor.setTo(0.5, 0.5);

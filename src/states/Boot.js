@@ -102,7 +102,8 @@ export default class extends Phaser.State {
         // GameCredits
         this.load.image('flowers', './assets/img/credits-img/flowers.jpg');
         this.load.image('credits', './assets/img/credits-img/credits.png');
-        this.load.image('cher-ami', './assets/img/credits-img/flower-cher-ami.jpg');
+        this.load.image('cher-ami',
+            './assets/img/credits-img/flower-cher-ami.jpg');
         this.load.image('to-menu', './assets/img/credits-img/to-menu.png');
         // Fonts
         this.load.bitmapFont('Fira', './assets/fonts/fira-sans.png',
@@ -110,6 +111,7 @@ export default class extends Phaser.State {
         this.load.bitmapFont('Playfair', './assets/fonts/playfair.png',
             'assets/fonts/playfair.fnt');
     }
+
     create () {
         this.state.start('Intro');
     }

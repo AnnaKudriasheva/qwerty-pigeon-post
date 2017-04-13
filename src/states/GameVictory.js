@@ -1,12 +1,12 @@
 import Phaser from 'phaser';
 
+let menu;
 let intro;
 let title;
+let credits;
+let btnSound;
 let textarea;
 let introText;
-let credits;
-let menu;
-let btnSound;
 let winGameSound;
 
 export default class extends Phaser.State {
@@ -15,6 +15,7 @@ export default class extends Phaser.State {
         winGameSound.volume = 0.2;
         winGameSound.play();
         btnSound = this.add.audio('button-sound');
+
         this.stage.backgroundColor = '#f95732';
         this.add.sprite(0, this.world.height - 400, 'flowers');
 
@@ -48,10 +49,12 @@ export default class extends Phaser.State {
         credits.anchor.setTo(0.5, 0.5);
         menu.anchor.setTo(0.5, 0.5);
     }
+
     watchCredits () {
         btnSound.play();
         this.state.start('GameCredits');
     }
+
     mainMenu () {
         btnSound.play();
         this.state.start('Intro');

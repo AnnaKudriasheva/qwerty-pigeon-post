@@ -1,14 +1,15 @@
 import Phaser from 'phaser';
 
-let startBtnSound;
 let intro;
 let title;
 let textarea;
 let introText;
+let startBtnSound;
 
 export default class extends Phaser.State {
     create () {
         startBtnSound = this.add.audio('button-sound');
+
         this.stage.backgroundColor = '#f95732';
         this.add.sprite(this.world.width - 450, 0, 'pigeon-right');
         this.add.sprite(this.world.width - 450, this.world.height - 300, 'map');
@@ -34,6 +35,7 @@ export default class extends Phaser.State {
 
         this.add.button(322, 350, 'next-button', this.startGame, this);
     }
+
     startGame () {
         startBtnSound.play();
         this.state.start('MainGame', true, false, 1);

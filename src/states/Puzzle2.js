@@ -1,20 +1,20 @@
 import Phaser from 'phaser';
 
-let pieceWidth = 110;
-let pieceHeight = 110;
-let boardColumns;
-let boardRows;
-let piecesGroup;
-let piecesAmount;
 let title;
 let textarea;
 let ciphered;
+let boardRows;
+let pieceWidth = 110;
+let pieceHeight = 110;
 let deciphered;
+let piecesGroup;
+let puzzleSound;
+let boardColumns;
+let piecesAmount;
 let cipheredText;
+let puzzleSuccess;
 let decipheredText;
 let shuffledIndexArray;
-let puzzleSound;
-let puzzleSuccess;
 
 export default class extends Phaser.State {
     create () {
@@ -23,8 +23,8 @@ export default class extends Phaser.State {
         puzzleSound.play();
         puzzleSuccess = this.add.audio('puzzle-success');
         puzzleSuccess.volume = 0.2;
-        this.stage.backgroundColor = '#f95732';
 
+        this.stage.backgroundColor = '#f95732';
         title = this.add.bitmapText(10, 10, 'Fira', 'CIPHERED MESSAGE', 47);
         title.tint = 0x000000;
 
@@ -49,6 +49,7 @@ export default class extends Phaser.State {
         decipheredText.alpha = 0;
         this.prepareBoard();
     }
+
     prepareBoard () {
         let piecesIndex = 0;
         let i;
@@ -77,6 +78,7 @@ export default class extends Phaser.State {
             }
         }
     }
+
     createIndexArray () {
         let indexArray = [];
         for (let i = 0; i < piecesAmount; i++)  {
@@ -84,18 +86,21 @@ export default class extends Phaser.State {
         }
         return indexArray;
     }
+
     getRandomAngle () {
         let possiblePositions = [0, 90, -180, -90];
         let randomPosition = Math.floor(Math.random() *
             possiblePositions.length);
         return possiblePositions[randomPosition];
     }
+
     rotatePiece (piece) {
         if (!this.isFinished()) {
             piece.angle = Math.round(piece.angle + 90);
             this.isFinished();
         }
     }
+
     isFinished () {
         let isFinished = true;
         piecesGroup.children.forEach((piece) => {
@@ -117,9 +122,11 @@ export default class extends Phaser.State {
         }
         return isFinished;
     }
+
     mouseOver (sprite) {
         sprite.tint = 0xffffff;
     }
+
     mouseOut (sprite) {
         sprite.tint = 0xdddddd;
     }
